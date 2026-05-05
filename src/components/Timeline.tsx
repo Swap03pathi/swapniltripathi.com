@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { experiences } from '../data/experiences';
+import { experiences } from '../data';
 
 export default function Timeline() {
   return (

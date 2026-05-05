@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { getProjectBySlug, getExperienceForProject } from '../data/experiences';
+import { getProjectBySlug, getExperienceForProject } from '../data';
 import Footer from '../components/Footer';
 
 export default function ProjectPage() {

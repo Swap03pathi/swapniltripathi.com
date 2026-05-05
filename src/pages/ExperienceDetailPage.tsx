@@ -1,11 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
-import { experiences } from '../data/experiences';
+import { experiences, getProjectsForExperience } from '../data';
 import ProjectHighlightCard from '../components/ProjectHighlightCard';
 import Footer from '../components/Footer';
 
 export default function ExperienceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const experience = experiences.find((e) => e.slug === slug);
+  const projects = experience ? getProjectsForExperience(experience) : [];
 
   if (!experience) {
     return (
@@ -59,13 +60,14 @@ export default function ExperienceDetailPage() {
         </div>
 
         {/* Projects */}
-        {experience.projects.length > 0 && (
+        {/* Experience page always shows all projects for the selected company. */}
+        {projects.length > 0 && (
           <div>
             <h2 className="text-xs font-medium text-accent/60 uppercase tracking-widest mb-6">
               Projects / Systems Built
             </h2>
             <div className="space-y-3">
-              {experience.projects.map((project) => (
+              {projects.map((project) => (
                 <ProjectHighlightCard
                   key={project.slug}
                   project={project}

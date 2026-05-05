@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import type { Experience } from '../data/experiences';
+import type { Experience } from '../data';
 
 export default function ExperienceCard({ experience }: { experience: Experience }) {
   return (

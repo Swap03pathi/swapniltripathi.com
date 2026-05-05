@@ -1,4 +1,4 @@
-import { socials } from '../data/experiences';
+import { socials } from '../data';
 
 function SocialIcon({ icon }: { icon: string }) {
   switch (icon) {

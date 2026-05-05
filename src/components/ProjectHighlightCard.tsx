@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import type { Project } from '../data/experiences';
+import type { Project } from '../data';
 
 export default function ProjectHighlightCard({ project }: { project: Project }) {
   return (

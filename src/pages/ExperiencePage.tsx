@@ -1,6 +1,6 @@
 import ExperienceCard from '../components/ExperienceCard';
 import Footer from '../components/Footer';
-import { experiences } from '../data/experiences';
+import { experiences } from '../data';
 
 export default function ExperiencePage() {
   return (

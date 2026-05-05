@@ -3,10 +3,11 @@ import AboutBlurb from '../components/AboutBlurb';
 import Timeline from '../components/Timeline';
 import ProjectHighlightCard from '../components/ProjectHighlightCard';
 import Footer from '../components/Footer';
-import { allProjects, thoughts } from '../data/experiences';
+import { getHighlightedProjects, thoughts } from '../data';
 
 export default function HomePage() {
-  const highlighted = allProjects.slice(0, 6);
+  // Home highlights are controlled purely by data/sections.ts.
+  const highlighted = getHighlightedProjects();
 
   return (
     <div className="relative z-10">
