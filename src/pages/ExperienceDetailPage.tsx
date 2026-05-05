@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { experiences } from '../data/experiences';
-import ProjectCard from '../components/ProjectCard';
+import ProjectHighlightCard from '../components/ProjectHighlightCard';
 import Footer from '../components/Footer';
 
 export default function ExperienceDetailPage() {
@@ -59,16 +59,21 @@ export default function ExperienceDetailPage() {
         </div>
 
         {/* Projects */}
-        <div>
-          <h2 className="text-xs font-medium text-accent/60 uppercase tracking-widest mb-6">
-            Projects / Systems Built
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {experience.projects.map((project) => (
-              <ProjectCard key={project.name} project={project} />
-            ))}
+        {experience.projects.length > 0 && (
+          <div>
+            <h2 className="text-xs font-medium text-accent/60 uppercase tracking-widest mb-6">
+              Projects / Systems Built
+            </h2>
+            <div className="space-y-3">
+              {experience.projects.map((project) => (
+                <ProjectHighlightCard
+                  key={project.slug}
+                  project={project}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <Footer />

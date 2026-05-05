@@ -6,6 +6,7 @@ import StarField from './components/StarField';
 import HomePage from './pages/HomePage';
 import ExperiencePage from './pages/ExperiencePage';
 import ExperienceDetailPage from './pages/ExperienceDetailPage';
+import ProjectPage from './pages/ProjectPage';
 import ComingSoonPage from './pages/ComingSoonPage';
 
 function ScrollToTop() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/experience/:slug" element={<ExperienceDetailPage />} />
+          <Route path="/project/:slug" element={<ProjectPage />} />
           <Route path="/thoughts" element={<ComingSoonPage title="Thoughts" />} />
           <Route path="/me" element={<ComingSoonPage title="Me" />} />
         </Routes>

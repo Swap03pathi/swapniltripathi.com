@@ -1,12 +1,12 @@
 import Hero from '../components/Hero';
 import AboutBlurb from '../components/AboutBlurb';
 import Timeline from '../components/Timeline';
-import ExperienceCard from '../components/ExperienceCard';
+import ProjectHighlightCard from '../components/ProjectHighlightCard';
 import Footer from '../components/Footer';
-import { experiences, thoughts } from '../data/experiences';
+import { allProjects, thoughts } from '../data/experiences';
 
 export default function HomePage() {
-  const highlighted = experiences.slice(0, 3);
+  const highlighted = allProjects.slice(0, 6);
 
   return (
     <div className="relative z-10">
@@ -14,15 +14,15 @@ export default function HomePage() {
       <AboutBlurb />
       <Timeline />
 
-      {/* Experience Preview */}
+      {/* Project Highlights */}
       <section className="py-24 px-6">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-xs font-medium text-accent/60 uppercase tracking-widest mb-8">
-            Experience
+            Project Highlights
           </h2>
-          <div className="space-y-4">
-            {highlighted.map((exp) => (
-              <ExperienceCard key={exp.slug} experience={exp} />
+          <div className="space-y-3">
+            {highlighted.map((project) => (
+              <ProjectHighlightCard key={project.slug} project={project} />
             ))}
           </div>
         </div>
