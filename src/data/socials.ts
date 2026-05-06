@@ -3,7 +3,7 @@ import type { SocialLink } from './types';
 export const socials: SocialLink[] = [
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/swapniltripathi',
+    url: 'https://www.linkedin.com/in/swapnil-neeraj-tripathi-310019122/',
     icon: 'linkedin',
   },
   {
