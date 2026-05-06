@@ -8,17 +8,17 @@ export const socials: SocialLink[] = [
   },
   {
     name: 'WhatsApp',
-    url: 'https://wa.me/919999999999',
+    url: 'https://wa.me/918879153323',
     icon: 'whatsapp',
   },
   {
     name: 'Email',
-    url: 'mailto:hello@swapniltripathi.com',
+    url: 'mailto:swapniltripathi2905@gmail.com',
     icon: 'email',
   },
   {
     name: 'Instagram',
-    url: 'https://instagram.com/swapniltripathi',
+    url: 'https://instagram.com/swap0_3pathi',
     icon: 'instagram',
   },
 ];
