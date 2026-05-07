@@ -7,23 +7,26 @@ export const experiences: Experience[] = [
     slug: 'saras',
     title: 'Saras',
     role: 'CTO, Co-Founder',
-    period: 'Mar 2022 — Present',
+    period: 'Sept 2024 — Present',
     shortDescription:
-      'Built and scaled the core platform from scratch. 150K+ downloads, 200K+ daily signals, 99.9% uptime.',
+    'Built a signal intelligence platform that captures, parses, and virtually executes trading recommendations across multiple sources. 150K+ downloads, 200K+ daily signals, 99.9% uptime.',
     fullDescription:
-      'As CTO and Co-Founder, I architected and built the entire technical platform from zero. We launched in 3 months, scaled to 150,000+ downloads, and processed 200K+ daily signals with high-concurrency backend systems and custom execution logic. Maintained 99.9% uptime while optimizing for cost and scale.',
+    'Saras (formerly Finosauras) is a signal intelligence platform designed to capture trading recommendations from multiple unstructured sources and convert them into structured, trackable, and virtually executed trades.\n\nAs CTO and Co-Founder, I built the system from scratch — covering ingestion, processing, execution, and infrastructure — with a focus on reliability, speed, and cost efficiency.\n\nThe platform ingests signals from Telegram, PDFs, news articles, YouTube live streams, and Twitter, normalizes them using LLM-based parsing, and executes them virtually using real-time price feeds. Trades remain active until exit conditions such as target, stoploss, expiry, or time-based rules are met.\n\nWe launched the platform within 3 months and scaled to over 150,000 downloads, processing 200K+ signals daily while maintaining 99.9% uptime.\n\nThe company raised $500K+ in pre-seed funding and was featured on Shark Tank India.',
     logoUrl: 'https://cdn.simpleicons.org/gnubash/4EAA25',
     projectSlugs: [
-      'trading-execution-engine',
+      'signal-ingestion-system',
       'signal-processing-pipeline',
-      'mobile-platform-backend',
+      'virtual-execution-engine',
+      'analytics-aggregation-system',
+      'backend-infrastructure',
+      'admin-platform',
     ],
   },
   {
     slug: 'apple',
     title: 'Apple',
     role: 'Data Engineer → Data Scientist',
-    period: 'Jun 2019 — Dec 2022',
+    period: 'Jan 2022 — July 2024',
     shortDescription:
       'Worked across Data Engineering and Data Science, building systems that handled production-scale data workflows.',
     fullDescription:
