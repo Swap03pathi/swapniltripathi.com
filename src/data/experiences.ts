@@ -12,7 +12,7 @@ export const experiences: Experience[] = [
     'Built a signal intelligence platform that captures, parses, and virtually executes trading recommendations across multiple sources. 150K+ downloads, 200K+ daily signals, 99.9% uptime.',
     fullDescription:
     'Saras (formerly Finosauras) is a signal intelligence platform designed to capture trading recommendations from multiple unstructured sources and convert them into structured, trackable, and virtually executed trades.\n\nAs CTO and Co-Founder, I built the system from scratch — covering ingestion, processing, execution, and infrastructure — with a focus on reliability, speed, and cost efficiency.\n\nThe platform ingests signals from Telegram, PDFs, news articles, YouTube live streams, and Twitter, normalizes them using LLM-based parsing, and executes them virtually using real-time price feeds. Trades remain active until exit conditions such as target, stoploss, expiry, or time-based rules are met.\n\nWe launched the platform within 3 months and scaled to over 150,000 downloads, processing 200K+ signals daily while maintaining 99.9% uptime.\n\nThe company raised $500K+ in pre-seed funding and was featured on Shark Tank India.',
-    logoUrl: 'https://cdn.simpleicons.org/gnubash/4EAA25',
+    logoUrl: '/logos/saras.png',
     projectSlugs: [
       'signal-ingestion-system',
       'signal-processing-pipeline',
@@ -42,7 +42,7 @@ export const experiences: Experience[] = [
     slug: 'testbook',
     title: 'Testbook',
     role: 'Analyst',
-    period: 'Jun 2018 — Mar 2019',
+    period: 'Aug 2020 — Jan 2022',
     shortDescription:
       'Data analysis and building internal tools to support product decisions at scale.',
     fullDescription:

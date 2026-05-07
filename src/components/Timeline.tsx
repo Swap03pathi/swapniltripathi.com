@@ -24,7 +24,15 @@ export default function Timeline() {
                 <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-white/20 group-hover:bg-accent group-hover:shadow-[0_0_8px_rgba(0,212,255,0.4)] transition-all" />
 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-3 flex-wrap">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <img
+                      src={exp.logoUrl}
+                      alt={exp.title}
+                      className="w-5 h-5 rounded-sm opacity-60 group-hover:opacity-100 transition-opacity"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
                     <h3 className="text-base font-semibold text-white group-hover:text-accent transition-colors">
                       {exp.title}
                     </h3>

@@ -10,6 +10,14 @@ export default function ExperienceCard({ experience }: { experience: Experience 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex items-baseline gap-3 flex-wrap">
+            <img
+              src={experience.logoUrl}
+              alt={experience.title}
+              className="w-5 h-5 rounded-sm opacity-60 group-hover:opacity-100 transition-opacity"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
             <h3 className="text-lg font-semibold text-white group-hover:text-accent transition-colors">
               {experience.title}
             </h3>
