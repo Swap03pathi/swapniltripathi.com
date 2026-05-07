@@ -47,7 +47,7 @@ export const experiences: Experience[] = [
       'Data analysis and building internal tools to support product decisions at scale.',
     fullDescription:
       'Worked as an analyst building data-driven tools and reports that directly influenced product strategy. Developed internal systems that automated reporting and provided actionable insights for the team.',
-    logoUrl: 'https://cdn.simpleicons.org/gnubash/4EAA25',
+    logoUrl: '/logos/testbook.png',
     projectSlugs: [
       'analytics-dashboard',
       'automated-reporting-system',
@@ -55,15 +55,31 @@ export const experiences: Experience[] = [
     ],
   },
   {
-    slug: 'first-system',
-    title: 'First System',
-    role: 'Early Project',
-    period: 'Jan 2017 — Sep 2017',
+    slug: 'oyo',
+    title: 'OYO',
+    role: 'Summer Analyst',
+    period: 'Jun 2019 — Jul 2019',
     shortDescription:
-      'The first real system I built — where the obsession with making things work started.',
+    'Built data scraping and analysis systems to improve OTA rankings and pricing strategy across 2500+ listings.',
     fullDescription:
-      'The project that started it all. Before the titles and the companies, there was a system I built from scratch that actually worked. This is where I learned that building things that run reliably in the real world is fundamentally different from building things that just run.',
-    logoUrl: 'https://cdn.simpleicons.org/gnubash/4EAA25',
-    projectSlugs: ['core-application', 'automation-toolkit', 'monitoring-setup'],
+    'As a Summer Analyst in Global OTA Operations at OYO, I worked on improving search ranking and pricing strategy across online travel platforms.\n\nI built a Python-based scraping system to collect data from multiple Online Travel Agents and used statistical modeling to understand factors affecting hotel ranking.\n\nThe analysis was used to identify opportunities for improving customer experience and retention, with proposed strategies expected to increase online reviews by ~12%.\n\nI also designed dashboards to monitor performance across 2500+ properties and analyzed discounting strategies across platforms to maintain pricing consistency.\n\nThis was my first exposure to real-world data problems, combining scraping, analysis, and business decision-making.',
+    logoUrl: 'https://cdn.simpleicons.org/OYO/EE2E24',
+    projectSlugs: [ 'oyo-data-scraping',
+      'oyo-ranking-analysis'],
+  },
+  {
+    slug: 'ey',
+    title: 'Ernst&Young',
+    role: 'Summer Associate',
+    period: 'May 2018 — Jul 2018',
+    shortDescription:
+    'Built my first working system without prior coding experience as part of a national-scale education platform initiative.',
+    fullDescription:
+    'As a Summer Associate in Business Advisory Services at EY, I worked on an MHRD initiative to build a national platform for teachers and students.\n\nDuring this project, I was asked to build a system without having prior coding experience. Instead of declining, I learned the required concepts on the fly and delivered a working solution.\n\nI built an automated system to detect broken or blocked YouTube videos in the platform’s content repository and trigger replacement workflows. This was my first end-to-end system built under real constraints.\n\nBeyond this, I worked on assembling and structuring educational content across multiple states, collaborated with large instructor networks for content tagging, and built tools to collect structured feedback from educators.\n\nThis experience shaped my approach to problem solving — focusing on figuring things out under uncertainty rather than relying on prior knowledge.',
+    logoUrl: '/logos/ey.png',
+    projectSlugs: [
+      'ey-video-validation-system',
+      'ey-content-platform-ops',
+    ],
   },
 ];

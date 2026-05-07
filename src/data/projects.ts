@@ -272,4 +272,50 @@ description:
       { name: 'Linux', logoUrl: 'https://cdn.simpleicons.org/linux/FCC624', homepageUrl: 'https://kernel.org' },
     ],
   },
+  {
+    slug: 'ey-content-platform-ops',
+    name: 'Content & Operations System',
+    highlight: 'Structured large-scale educational content and workflows across multiple states.',
+    description: 'Worked on assembling and organizing a catalogue of 700+ educational videos across multiple states.\n\nCollaborated with a large network of instructors to tag and structure content using SEO-optimized keywords.\n\nBuilt tools (including VBA-based systems) to collect structured data from educators and support platform operations.',
+    tools: [
+      { name: 'Excel', logoUrl: 'https://cdn.simpleicons.org/microsoftexcel/217346', homepageUrl: 'https://microsoft.com/excel' },
+      { name: 'VBA', logoUrl: 'https://cdn.simpleicons.org/microsoft/5E5E5E', homepageUrl: 'https://learn.microsoft.com/en-us/office/vba/' },
+    ],
+    period: 'May 2018 — Jul 2018'
+  },
+  {
+    slug: 'ey-video-validation-system',
+    name: 'Automated Video Validation System',
+    highlight:
+      'First working system built without prior coding experience to detect broken content links.',
+    description:
+      'Built an automated system to identify broken or blocked YouTube videos within a large educational content repository.\n\nThe system scanned submitted links and flagged unavailable content, enabling replacement workflows.\n\nThis was developed without prior coding experience, relying on self-learning and problem-solving under real constraints.',
+    tools: [
+      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
+      { name: 'YouTube', logoUrl: 'https://cdn.simpleicons.org/youtube/FF0000', homepageUrl: 'https://youtube.com' },
+    ],period: 'May 2018 — Jul 2018'
+  },
+  {
+    slug: 'oyo-ranking-analysis',
+    name: 'Ranking & Pricing Analysis System',
+    highlight:
+      'Regression-based analysis to improve search ranking and pricing consistency.',
+    description:
+      'Applied statistical models to analyze dependencies between different variables affecting hotel ranking.\n\nEvaluated discount strategies across platforms to ensure pricing parity and prevent price masking.\n\nDesigned dashboards for monitoring performance across 2500+ listings and proposed improvements for customer retention.',
+    tools: [
+      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
+      { name: 'Excel', logoUrl: 'https://cdn.simpleicons.org/microsoftexcel/217346', homepageUrl: 'https://microsoft.com/excel' },
+    ],
+    period: 'Jun 2019 — Jul 2019'
+  },{
+    slug: 'oyo-data-scraping',
+    name: 'OTA Data Scraping System',
+    highlight:
+      'Python-based scraper to collect data across multiple travel platforms.',
+    description:
+      'Built a data scraping system to collect hotel listing data from multiple Online Travel Agents.\n\nEnabled structured data collection across platforms for downstream analysis and performance tracking.\n\nThis was one of my first hands-on systems involving real-world data extraction.',
+    tools: [
+      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
+    ],period: 'Jun 2019 — Jul 2019'
+  }
 ];
