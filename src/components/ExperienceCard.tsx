@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Experience } from '../data';
+import { resolveAssetUrl } from '../utils/assetUrl';
 
 export default function ExperienceCard({ experience }: { experience: Experience }) {
   return (
@@ -11,7 +12,7 @@ export default function ExperienceCard({ experience }: { experience: Experience 
         <div className="min-w-0">
           <div className="flex items-baseline gap-3 flex-wrap">
             <img
-              src={experience.logoUrl}
+              src={resolveAssetUrl(experience.logoUrl)}
               alt={experience.title}
               className="w-5 h-5 rounded-sm opacity-60 group-hover:opacity-100 transition-opacity"
               onError={(e) => {

@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { getProjectBySlug, getExperienceForProject } from '../data';
 import Footer from '../components/Footer';
+import { resolveAssetUrl } from '../utils/assetUrl';
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -57,7 +58,7 @@ export default function ProjectPage() {
               className="inline-flex items-center gap-2 mt-4 group"
             >
               <img
-                src={experience.logoUrl}
+                src={resolveAssetUrl(experience.logoUrl)}
                 alt={experience.title}
                 className="w-5 h-5 rounded-sm opacity-60 group-hover:opacity-100 transition-opacity"
                 onError={(e) => {
