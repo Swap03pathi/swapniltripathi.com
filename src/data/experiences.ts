@@ -31,7 +31,7 @@ export const experiences: Experience[] = [
       'Worked across Data Engineering and Data Science, building systems that handled production-scale data workflows.',
     fullDescription:
       'Started in Data Engineering building robust pipeline infrastructure, then transitioned to Data Science where I developed analytical systems and models. Worked on systems that needed to be reliable at Apple scale — handling massive data volumes with strict correctness requirements.',
-    logoUrl: 'https://cdn.simpleicons.org/apple/000000',
+    logoUrl: 'https://simpleicons.org/icons/apple.svg',
     projectSlugs: [
       'data-pipeline-system',
       'anomaly-detection-system',

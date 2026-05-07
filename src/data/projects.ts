@@ -15,8 +15,7 @@ export const projects: Project[] = [
       { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
       { name: 'MongoDB', logoUrl: 'https://cdn.simpleicons.org/mongodb/47A248', homepageUrl: 'https://mongodb.com' },
       { name: 'OpenAI API', logoUrl: 'https://cdn.simpleicons.org/openai/412991', homepageUrl: 'https://openai.com' },
-      { name: 'Telegram', logoUrl: 'https://cdn.simpleicons.org/telegram/26A5E4', homepageUrl: 'https://telegram.org' },
-      { name: 'YouTube', logoUrl: 'https://cdn.simpleicons.org/youtube/FF0000', homepageUrl: 'https://youtube.com' },      
+      { name: 'Telethon', logoUrl: 'https://cdn.simpleicons.org/telegram/26A5E4', homepageUrl: 'https://docs.telethon.dev/en/stable/' }      
     ],
   },
   {
