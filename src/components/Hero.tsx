@@ -4,12 +4,16 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center px-6 py-24 md:py-0">
       <div className="flex w-full max-w-4xl flex-col items-center gap-10 md:flex-row md:items-center md:gap-14 md:text-left">
-        <img
-          src={resolveAssetUrl('/swapnil-profile.jpg')}
-          alt="Swapnil Tripathi"
-          className="h-36 w-36 shrink-0 rounded-full border border-white/10 object-cover shadow-[0_0_48px_rgba(0,212,255,0.12)] ring-4 ring-accent/15 animate-fade-in sm:h-44 sm:w-44"
+        <div
+          className="relative h-36 w-36 shrink-0 overflow-hidden rounded-full border border-white/10 shadow-[0_0_48px_rgba(0,212,255,0.12)] ring-4 ring-accent/15 animate-fade-in sm:h-44 sm:w-44"
           style={{ animationDelay: '0.05s' }}
-        />
+        >
+          <img
+            src={resolveAssetUrl('/swapnil-profile.png')}
+            alt="Swapnil Tripathi"
+            className="h-full w-full min-h-full min-w-full object-cover object-[50%_18%]"
+          />
+        </div>
 
         <div className="max-w-2xl flex-1 text-center md:text-left">
           <h1

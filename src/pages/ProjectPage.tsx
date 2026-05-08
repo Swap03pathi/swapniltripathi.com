@@ -105,27 +105,44 @@ export default function ProjectPage() {
             <h2 className="text-xs font-medium text-accent/60 uppercase tracking-widest mb-6">
               Tools & Technologies
             </h2>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {project.tools.map((tool) => (
-                <a
+                <div
                   key={tool.name}
-                  href={tool.homepageUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-2 px-3 py-2 rounded-md border border-white/5 bg-white/[0.02] hover:border-accent/20 hover:bg-white/[0.04] transition-all"
+                  className="group relative inline-flex flex-col items-center pb-3"
                 >
-                  <img
-                    src={tool.logoUrl}
-                    alt={tool.name}
-                    className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
-                  <span className="text-xs text-white/40 group-hover:text-white/70 transition-colors">
-                    {tool.name}
-                  </span>
-                </a>
+                  <a
+                    href={tool.homepageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-11 w-11 items-center justify-center rounded-md border border-white/5 bg-white/[0.02] transition-all hover:border-accent/20 hover:bg-white/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/40"
+                    aria-label={`${tool.name} — open homepage`}
+                  >
+                    <img
+                      src={tool.logoUrl}
+                      alt=""
+                      className="h-6 w-6 object-contain opacity-50 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                  </a>
+                  <div
+                    className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex -translate-x-1/2 translate-y-1 scale-95 items-center gap-2 whitespace-nowrap rounded-md border border-white/5 bg-dark px-3 py-2 opacity-0 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.06] transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:scale-100 group-focus-within:opacity-100"
+                  >
+                    <img
+                      src={tool.logoUrl}
+                      alt=""
+                      className="h-4 w-4 object-contain opacity-80"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                    <span className="text-xs text-white/40 group-hover:text-white/70">
+                      {tool.name}
+                    </span>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
