@@ -16,17 +16,24 @@ Navigation scrolls back to home + `#timeline` when “Timeline” is used from n
 
 ## Background logic
 
-Background animation is implemented in `src/components/StarField.tsx` and mounted globally from `src/App.tsx`.
+### Layering (`src/components/BackgroundLayer.tsx`, used from `src/App.tsx`)
 
-- Uses a fixed full-screen `<canvas>` (`className="fixed inset-0 pointer-events-none"`) so content remains clickable.
-- Creates `STAR_COUNT = 150` stars with random position, size, speed, and phase.
-- On each animation frame:
-  - clears the canvas
-  - computes twinkle opacity with `Math.sin(time * 0.001 + phase)`
-  - draws stars
-  - moves stars downward and wraps stars back to the top when they leave the viewport
-- Handles resize by recalculating canvas dimensions and regenerating star positions.
-- Runs with `requestAnimationFrame` and cleans up on unmount.
+- **Viewports wider than 768px**: React tries to load **Stellarium Web Engine** (`src/components/RealSkyBackground.tsx`): the official global is `window.StelWebEngine` (some samples call it `StellariumWebEngine`; the loader tries both).
+- **Narrow screens (≤768px)** or **if the WASM bundle is missing / init fails**: falls back to the lightweight **canvas starfield** below.
+
+### Starfield fallback (`src/components/StarField.tsx`)
+
+- Fixed full-screen `<canvas>` with `pointer-events-none` so clicks pass through to content.
+- Twinkling drifting stars via `requestAnimationFrame` (same behavior as before).
+
+### Stellarium bundle (`public/stellarium/`)
+
+- **`stellarium-web-engine.js`** and **`stellarium-web-engine.wasm`** must be copied from upstream `make js` build output (they are **not** on npm — see `public/stellarium/README.md`).
+- **`static/`** (Roboto fonts, demo assets) is already committed and matches upstream `apps/simple-html/static`.
+- Optional env: **`VITE_STELLARIUM_SKYDATA_BASE_URLS`** — comma-separated URL prefixes hosting the same catalog layout as upstream `test-skydata/` (large; usually self-hosted). Without it, WASM may run with an empty sky until you add data URLs.
+- Optional dev env: **`VITE_STELLARIUM_DEBUG_PICK=1`** — experimental click → `pickObject` / console logging.
+
+**AGPL:** the Stellarium Web Engine is AGPL-licensed — respect terms if you redistribute engine builds or covered assets.
 
 ## Tech stack
 
@@ -114,7 +121,9 @@ Each path below describes what that file exists for.
 | File | Purpose |
 | --- | --- |
 | `src/components/Navbar.tsx` | Fixed top navigation: branding link, Experience link, Timeline scroll/jump handler, disabled “Thoughts”/“Me” with “Soon” labels, mail CTA (`hello@swapnil.dev`), responsive hamburger drawer. |
-| `src/components/StarField.tsx` | Full-viewport `<canvas>` background: drifting, twinkling stars via `requestAnimationFrame` (non-interactive, `pointer-events-none`). |
+| `src/components/BackgroundLayer.tsx` | Chooses Stellarium (desktop) vs `StarField` fallback (mobile or failed WASM). |
+| `src/components/RealSkyBackground.tsx` | Dynamically loads `/stellarium/*.js` + WASM, quiet UI, Bangalore observer defaults, optional sky-data URLs and dev pick debug. |
+| `src/components/StarField.tsx` | Full-viewport `<canvas>` fallback stars (`requestAnimationFrame`, `pointer-events-none`). |
 | `src/components/Hero.tsx` | Above-the-fold headline tagline (systems builder), subtitle, credential line, primary mail CTA, staggered Tailwind animations. |
 | `src/components/AboutBlurb.tsx` | Narrative “About” section introducing background and interests. |
 | `src/components/Timeline.tsx` | Vertical timeline keyed off `experiences`: each row links to `/experience/:slug`; section `id="timeline"` for navbar anchor scrolling. |

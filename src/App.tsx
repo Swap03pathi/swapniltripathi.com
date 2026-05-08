@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import StarField from './components/StarField';
+import BackgroundLayer from './components/BackgroundLayer';
 import HomePage from './pages/HomePage';
 import ExperiencePage from './pages/ExperiencePage';
 import ExperienceDetailPage from './pages/ExperienceDetailPage';
@@ -22,7 +22,7 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <div className="min-h-screen bg-dark text-white font-sans">
-        <StarField />
+        <BackgroundLayer />
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
