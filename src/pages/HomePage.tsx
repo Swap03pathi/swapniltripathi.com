@@ -15,15 +15,19 @@ export default function HomePage() {
       <AboutBlurb />
       <Timeline />
 
-      {/* Project Highlights */}
+      {/* Project Highlights — 2-column grid; hover scales card + reveals short summary */}
       <section className="py-24 px-6">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-xs font-medium text-accent/60 uppercase tracking-widest mb-8">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-8 text-xs font-medium uppercase tracking-widest text-accent/60">
             Project Highlights
           </h2>
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
             {highlighted.map((project) => (
-              <ProjectHighlightCard key={project.slug} project={project} />
+              <ProjectHighlightCard
+                key={project.slug}
+                project={project}
+                variant="featured"
+              />
             ))}
           </div>
         </div>
