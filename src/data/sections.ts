@@ -1,10 +1,11 @@
 // Home-page controlled content sections.
 // Update these arrays to change what is featured without editing UI files.
 export const thoughts: string[] = [
-  "The best system is the one you don't have to think about.",
-  'Scale is a consequence of getting the fundamentals right.',
+  'I’d rather undercommit and surprise people than explain why something slipped.',
+  "I’ve never seen a “quick fix” stay quick.",
+  'Good systems are boring. That’s how you know they work.',
   'If it works in production, it works. Everything else is theory.',
-  'Build for the real world, not the demo.',
+  "AI can generate answers. It doesn’t take responsibility for them."
 ];
 
 // Only these project slugs appear in "Project Highlights" on home.
