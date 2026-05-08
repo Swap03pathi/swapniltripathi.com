@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
+import { getStellariumSkyDataPrefixes } from '../config/stellariumSkyData';
 
 /** Script tag id — avoids injecting duplicate loaders on StrictMode remount */
 const SCRIPT_ID = 'stellarium-web-engine-script';
@@ -32,17 +33,6 @@ declare global {
   }
 }
 
-/** Optional comma-separated prefixes to try loading remote sky datasets after build. */
-function skyDataPrefixes(): string[] {
-  const raw = import.meta.env.VITE_STELLARIUM_SKYDATA_BASE_URLS;
-  if (!raw?.trim()) return [];
-  return raw
-    .split(',')
-    .map((u) => u.trim().replace(/\/?$/, ''))
-    .filter(Boolean)
-    .map((u) => `${u}/`);
-}
-
 /** Use engine `setValue` when present so WASM-backed props actually stick. */
 function setCoreValue(
   stel: Record<string, unknown>,
@@ -72,6 +62,8 @@ function applyQuietSkyUi(stel: Record<string, unknown>) {
     'constellations.images_visible',
     'stars.labels_visible',
     'stars.names_visible',
+    /** Bright-star proper names (e.g. Alioth, Dubhe) use a separate hints layer. */
+    'stars.hints_visible',
     'planets.labels_visible',
     'planets.names_visible',
     'dsos.labels_visible',
@@ -92,7 +84,11 @@ function applyQuietSkyUi(stel: Record<string, unknown>) {
       landscapes?: { visible?: boolean };
       labels?: { visible?: boolean };
       names?: { visible?: boolean };
-      stars?: { labels_visible?: boolean; names_visible?: boolean };
+      stars?: {
+        labels_visible?: boolean;
+        names_visible?: boolean;
+        hints_visible?: boolean;
+      };
       planets?: { labels_visible?: boolean; names_visible?: boolean };
       dsos?: { labels_visible?: boolean; names_visible?: boolean };
       satellites?: { labels_visible?: boolean; names_visible?: boolean };
@@ -118,6 +114,7 @@ function applyQuietSkyUi(stel: Record<string, unknown>) {
     if (c?.stars) {
       c.stars.labels_visible = false;
       c.stars.names_visible = false;
+      c.stars.hints_visible = false;
     }
     if (c?.planets) {
       c.planets.labels_visible = false;
@@ -368,7 +365,7 @@ export default function RealSkyBackground({
             const mod = stel as StellariumModule;
             moduleRef.current = mod;
 
-            wireSkyData(stel, skyDataPrefixes());
+            wireSkyData(stel, getStellariumSkyDataPrefixes());
             applyQuietSkyUi(stel);
             /** Data sources can toggle label/name flags after attach — re-sync a few times. */
             [50, 400, 1500].forEach((ms) => {

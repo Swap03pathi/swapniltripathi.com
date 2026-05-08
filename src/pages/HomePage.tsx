@@ -15,7 +15,7 @@ export default function HomePage() {
       <AboutBlurb />
       <Timeline />
 
-      {/* Project Highlights — 2-column grid; hover scales card + reveals short summary */}
+      {/* Project Highlights — 2-column grid; hover scales card slightly */}
       <section className="py-24 px-6">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-8 text-xs font-medium uppercase tracking-widest text-accent/60">

@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
+import { hasStellariumSkyDataConfigured } from '../config/stellariumSkyData';
 import StarField from './StarField';
 import RealSkyBackground from './RealSkyBackground';
 
 const MOBILE_MAX_PX = 768;
-const HAS_SKYDATA_CONFIG = Boolean(
-  import.meta.env.VITE_STELLARIUM_SKYDATA_BASE_URLS?.trim()
-);
+const HAS_SKYDATA_CONFIG = hasStellariumSkyDataConfigured();
 
 /**
  * Desktop (`>768px`): tries Stellarium WASM; on success hides the lightweight canvas stars.
