@@ -2,6 +2,8 @@ export interface Tool {
   name: string;
   logoUrl: string;
   homepageUrl: string;
+  /** Tailwind size classes for the tool logo (e.g. raster marks). Default h-6 w-6. */
+  logoImgClassName?: string;
 }
 
 export interface Project {

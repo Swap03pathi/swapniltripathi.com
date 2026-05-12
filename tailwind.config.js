@@ -18,6 +18,7 @@ export default {
         'fade-in': 'fadeIn 0.6s ease-out forwards',
         'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
         'slide-in': 'slideIn 0.4s ease-out forwards',
+        'border-shine': 'borderShine 5s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -32,6 +33,13 @@ export default {
           '0%': { opacity: '0', transform: 'translateX(-10px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
+        borderShine: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '200% 50%' },
+        },
+      },
+      backgroundSize: {
+        '200': '200% 100%',
       },
     },
   },

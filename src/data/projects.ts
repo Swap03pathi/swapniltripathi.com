@@ -35,22 +35,52 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'virtual-execution-engine',
-  name: 'Virtual Trade Execution Engine',
-  period: 'Sept 2024 — Present',
-  highlight:
-    'Stateful execution system that tracks trades using real-time price feeds and dynamic exit conditions.',
-  description:
-    'Built a virtual execution engine that tracks trades in real time based on live market prices.\n\nThe system consumes structured signals and continuously matches them against live price feeds using sockets and APIs. Trades remain active until exit conditions such as target, stoploss, time constraints, or expiry are triggered.\n\nHandles dynamic updates, maintains trade state, and ensures accurate PnL calculation without actual order placement.',
-
-  tools: [
-    { name: 'Node.js', logoUrl: 'https://cdn.simpleicons.org/nodedotjs/339933', homepageUrl: 'https://nodejs.org' },
-    { name: 'MongoDB', logoUrl: 'https://cdn.simpleicons.org/mongodb/47A248', homepageUrl: 'https://mongodb.com' },
-    { name: 'WebSocket', logoUrl: 'https://cdn.simpleicons.org/socketdotio/010101', homepageUrl: 'https://socket.io' },
-    { name: 'Redis', logoUrl: 'https://cdn.simpleicons.org/redis/DC382D', homepageUrl: 'https://redis.io' },
-  
-    
-  ],
+    slug: 'real-time-virtual-execution-system',
+    name: 'Real-Time Virtual Execution System',
+    period: 'Sept 2024 — Present',
+    highlight:
+      'Persistent real-time virtual trade execution and state tracking against live websocket prices.',
+    description:
+      'Designed and built a persistent real-time virtual execution system that continuously tracked advisor recommendations against live websocket market prices.\n\nThe architecture replaced an interval-based cron/Lambda pipeline with a stateful worker-driven system powered by Redis, MongoDB, websocket subscriptions, and automated recovery workflows.\n\nThe system dynamically managed active ticker pools, processed high-frequency tick streams, minimized execution latency, and maintained strong consistency between real-time state and long-term persistence layers.',
+    tools: [
+      {
+        name: 'Node.js',
+        logoUrl: 'https://cdn.simpleicons.org/nodedotjs/5FA04E',
+        homepageUrl: 'https://nodejs.org',
+      },
+      {
+        name: 'Redis',
+        logoUrl: 'https://cdn.simpleicons.org/redis/DC382D',
+        homepageUrl: 'https://redis.io',
+      },
+      {
+        name: 'MongoDB',
+        logoUrl: 'https://cdn.simpleicons.org/mongodb/47A248',
+        homepageUrl: 'https://mongodb.com',
+      },
+      {
+        name: 'AWS EC2',
+        logoUrl: '/logos/ec2.png',
+        homepageUrl: 'https://aws.amazon.com/ec2/',
+        logoImgClassName: 'h-7 w-7',
+      },
+      {
+        name: 'WebSocket',
+        logoUrl: 'https://cdn.simpleicons.org/socketdotio/ffffff',
+        homepageUrl:
+          'https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API',
+      },
+      {
+        name: 'Grafana',
+        logoUrl: 'https://cdn.simpleicons.org/grafana/F46800',
+        homepageUrl: 'https://grafana.com',
+      },
+      {
+        name: 'Prometheus',
+        logoUrl: 'https://cdn.simpleicons.org/prometheus/E6522C',
+        homepageUrl: 'https://prometheus.io',
+      },
+    ],
   },
   {
     slug: 'analytics-aggregation-system',

@@ -120,7 +120,7 @@ Each path below describes what that file exists for.
 
 | File | Purpose |
 | --- | --- |
-| `src/components/Navbar.tsx` | Fixed top navigation: branding link, Experience link, Timeline scroll/jump handler, disabled “Thoughts”/“Me” with “Soon” labels, mail CTA (`hello@swapnil.dev`), responsive hamburger drawer. |
+| `src/components/Navbar.tsx` | Fixed top navigation: branding link, Experience link, Timeline scroll/jump handler, disabled “Thoughts”/“Me” with “Soon” labels, mail CTA (`swapniltripathi2905@gmail.com`), responsive hamburger drawer. |
 | `src/components/BackgroundLayer.tsx` | Chooses Stellarium (desktop) vs `StarField` fallback (mobile or failed WASM). |
 | `src/components/RealSkyBackground.tsx` | Dynamically loads `/stellarium/*.js` + WASM, quiet UI, Bangalore observer defaults, optional sky-data URLs and dev pick debug. |
 | `src/components/StarField.tsx` | Full-viewport `<canvas>` fallback stars (`requestAnimationFrame`, `pointer-events-none`). |

@@ -45,7 +45,7 @@ export default function Hero() {
             style={{ animationDelay: '0.7s' }}
           >
             <a
-              href="mailto:hello@swapnil.dev"
+              href="mailto:swapniltripathi2905@gmail.com"
               className="inline-block rounded-md border border-accent/20 bg-accent/10 px-6 py-2.5 text-sm font-medium text-accent transition-all hover:border-accent/40 hover:bg-accent/20 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]"
             >
               Let's talk

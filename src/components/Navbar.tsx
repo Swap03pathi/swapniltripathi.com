@@ -67,7 +67,7 @@ export default function Navbar() {
             )
           )}
           <a
-            href="mailto:hello@swapnil.dev"
+            href="mailto:swapniltripathi2905@gmail.com"
             className="ml-2 px-4 py-1.5 text-sm font-medium bg-accent/10 text-accent border border-accent/20 rounded-md hover:bg-accent/20 hover:border-accent/40 transition-all"
           >
             Let's talk
@@ -125,7 +125,7 @@ export default function Navbar() {
             )
           )}
           <a
-            href="mailto:hello@swapnil.dev"
+            href="mailto:swapniltripathi2905@gmail.com"
             className="inline-block mt-2 px-4 py-1.5 text-sm font-medium bg-accent/10 text-accent border border-accent/20 rounded-md"
           >
             Let's talk

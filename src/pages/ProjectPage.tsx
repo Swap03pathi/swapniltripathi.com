@@ -2,6 +2,8 @@ import { useParams, Link } from 'react-router-dom';
 import { getProjectBySlug, getExperienceForProject } from '../data';
 import Footer from '../components/Footer';
 import { resolveAssetUrl } from '../utils/assetUrl';
+import { RTE_PROJECT_SLUG } from '../constants/realTimeVirtualExecution';
+import RealTimeVirtualExecutionSections from '../components/project/RealTimeVirtualExecutionSections';
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -24,9 +26,11 @@ export default function ProjectPage() {
     );
   }
 
+  const isRte = project.slug === RTE_PROJECT_SLUG;
+
   return (
     <div className="relative z-10 pt-24 pb-16 px-6">
-      <div className="max-w-2xl mx-auto">
+      <div className={`mx-auto ${isRte ? 'max-w-4xl' : 'max-w-2xl'}`}>
         {/* Back link */}
         <Link
           to="/"
@@ -46,10 +50,16 @@ export default function ProjectPage() {
 
         {/* Header */}
         <div className="mb-10">
-          <div className="flex items-baseline gap-3 flex-wrap">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:flex-wrap sm:gap-3">
             <h1 className="text-3xl font-bold text-white">{project.name}</h1>
             <span className="text-xs text-white/25">{project.period}</span>
           </div>
+          {isRte ? (
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/40">
+              Persistent low-latency trade state tracking for a trading signal
+              intelligence platform.
+            </p>
+          ) : null}
 
           {/* Company logo + link */}
           {experience && (
@@ -75,12 +85,28 @@ export default function ProjectPage() {
           )}
         </div>
 
-        {/* Description */}
-        <div className="mb-12">
-          <p className="text-sm text-white/50 leading-relaxed">
-            {project.description}
-          </p>
+        <div className="mb-12 space-y-4">
+          {isRte ? (
+            project.description.split('\n\n').map((para) => (
+              <p
+                key={para.slice(0, 48)}
+                className="text-sm text-white/50 leading-relaxed"
+              >
+                {para}
+              </p>
+            ))
+          ) : (
+            <p className="text-sm text-white/50 leading-relaxed">
+              {project.description}
+            </p>
+          )}
         </div>
+
+        {isRte ? (
+          <div className="mb-16">
+            <RealTimeVirtualExecutionSections />
+          </div>
+        ) : null}
 
         {/* GitHub link */}
         {project.githubUrl && (
@@ -121,7 +147,7 @@ export default function ProjectPage() {
                     <img
                       src={tool.logoUrl}
                       alt=""
-                      className="h-6 w-6 object-contain opacity-50 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+                      className={`object-contain opacity-50 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 ${tool.logoImgClassName ?? 'h-6 w-6'}`}
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
                       }}
