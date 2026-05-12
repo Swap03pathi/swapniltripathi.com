@@ -34,6 +34,7 @@ export const experiences: Experience[] = [
     logoUrl: 'https://cdn.simpleicons.org/apple/ffffff',
     projectSlugs: [
       'data-pipeline-system',
+      'distributed-signal-pipeline',
       'anomaly-detection-system',
       'data-quality-framework',
     ],

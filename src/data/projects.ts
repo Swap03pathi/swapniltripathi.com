@@ -150,7 +150,7 @@ description:
     ],
   },
   {
-    slug: 'signal-processing-pipeline',
+    slug: 'distributed-signal-pipeline',
     name: 'Signal Processing Pipeline',
     period: 'Aug 2022 — Present',
     highlight:
