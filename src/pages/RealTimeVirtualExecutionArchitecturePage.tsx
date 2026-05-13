@@ -1,14 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import RteArchitectureCanvas from '../components/architecture/rte/RteArchitectureCanvas';
 import { rteProjectPath } from '../constants/realTimeVirtualExecution';
 
 export default function RealTimeVirtualExecutionArchitecturePage() {
+  const location = useLocation();
   return (
     <div className="relative z-10 pt-24 pb-8 px-4 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <Link
           to={rteProjectPath()}
+          state={{ from: location.pathname }}
           className="mb-10 inline-flex items-center gap-1.5 text-xs text-white/35 transition-colors hover:text-accent/80"
         >
           <svg

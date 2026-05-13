@@ -1,15 +1,24 @@
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { RTE_PROJECT_SLUG } from '../constants/realTimeVirtualExecution';
+import { RRIS_PROJECT_SLUG } from '../constants/realtimeRecommendationIngestion';
 import RealTimeVirtualExecutionArchitecturePage from './RealTimeVirtualExecutionArchitecturePage';
+import RealtimeRecommendationIngestionArchitecturePage from './RealtimeRecommendationIngestionArchitecturePage';
 
 export default function ProjectArchitecturePage() {
   const { slug } = useParams<{ slug: string }>();
 
-  if (slug !== RTE_PROJECT_SLUG) {
-    return (
-      <div className="relative z-10 min-h-[55vh] pt-24 pb-16 px-6">
-        <div className="mx-auto max-w-md text-center">
+  if (slug === RTE_PROJECT_SLUG) {
+    return <RealTimeVirtualExecutionArchitecturePage />;
+  }
+
+  if (slug === RRIS_PROJECT_SLUG) {
+    return <RealtimeRecommendationIngestionArchitecturePage />;
+  }
+
+  return (
+    <div className="relative z-10 min-h-[55vh] px-6 pb-16 pt-24">
+      <div className="mx-auto max-w-md text-center">
           <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-accent/45">
             Architecture
           </p>
@@ -27,8 +36,5 @@ export default function ProjectArchitecturePage() {
         </div>
         <Footer />
       </div>
-    );
-  }
-
-  return <RealTimeVirtualExecutionArchitecturePage />;
+  );
 }

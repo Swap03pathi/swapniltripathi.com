@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import type { Project } from '../data';
 
 type Variant = 'inline' | 'featured';
@@ -10,10 +10,14 @@ export default function ProjectHighlightCard({
   project: Project;
   variant?: Variant;
 }) {
+  const location = useLocation();
+  const projectLinkState = { from: location.pathname };
+
   if (variant === 'featured') {
     return (
       <Link
         to={`/project/${project.slug}`}
+        state={projectLinkState}
         className="group block h-full origin-center rounded-lg border border-white/5 bg-white/[0.02] p-5 transition-all duration-300 ease-out hover:z-10 hover:scale-[1.03] hover:border-accent/25 hover:bg-white/[0.06] hover:shadow-[0_14px_44px_-14px_rgba(0,212,255,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/40"
       >
         <div className="flex h-full min-h-[108px] flex-col">
@@ -48,6 +52,7 @@ export default function ProjectHighlightCard({
   return (
     <Link
       to={`/project/${project.slug}`}
+      state={projectLinkState}
       className="group block rounded-lg border border-white/5 bg-white/[0.02] p-5 transition-all hover:border-accent/20 hover:bg-white/[0.04]"
     >
       <div className="flex items-start justify-between gap-3">

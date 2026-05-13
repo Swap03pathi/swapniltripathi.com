@@ -15,6 +15,7 @@ export const experiences: Experience[] = [
     logoUrl: '/logos/saras.png',
     projectSlugs: [
       'signal-ingestion-system',
+      'realtime-recommendation-ingestion-system',
       'signal-processing-pipeline',
       'real-time-virtual-execution-system',
       'analytics-aggregation-system',
@@ -34,7 +35,6 @@ export const experiences: Experience[] = [
     logoUrl: 'https://cdn.simpleicons.org/apple/ffffff',
     projectSlugs: [
       'data-pipeline-system',
-      'distributed-signal-pipeline',
       'anomaly-detection-system',
       'data-quality-framework',
     ],

@@ -35,6 +35,64 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'realtime-recommendation-ingestion-system',
+    name: 'Realtime Recommendation Ingestion System',
+    period: 'Sept 2024 — Present',
+    highlight:
+      'Multi-source realtime ingestion with AI classification, extraction, normalization, and human-in-the-loop verification.',
+    description:
+      'Built realtime and batch ingestion paths across Telegram, PDF reports, YouTube livestreams, Twitter/X, news APIs, and Perplexity-augmented discovery.\n\nEach connector applied source-specific reliability patterns — deduplication, rate limits, OCR and frame pipelines, and queue-backed processing — before converging on a shared LLM classification and extraction stack.\n\nThe platform minimized irrelevant API spend via a two-stage model workflow, normalized inconsistent advisor language into a single trade schema, and gated publication through operational moderation for downstream execution readiness.',
+    tools: [
+      {
+        name: 'Python',
+        logoUrl: 'https://cdn.simpleicons.org/python/3776AB',
+        homepageUrl: 'https://python.org',
+      },
+      {
+        name: 'MongoDB',
+        logoUrl: 'https://cdn.simpleicons.org/mongodb/47A248',
+        homepageUrl: 'https://mongodb.com',
+      },
+      {
+        name: 'Redis',
+        logoUrl: 'https://cdn.simpleicons.org/redis/DC382D',
+        homepageUrl: 'https://redis.io',
+      },
+      {
+        name: 'OpenAI',
+        logoUrl: 'https://cdn.simpleicons.org/openai/412991',
+        homepageUrl: 'https://openai.com',
+      },
+      {
+        name: 'Celery',
+        logoUrl: 'https://cdn.simpleicons.org/celery/37814A',
+        homepageUrl: 'https://docs.celeryq.dev',
+      },
+      {
+        name: 'Telethon',
+        logoUrl: 'https://cdn.simpleicons.org/telegram/26A5E4',
+        homepageUrl: 'https://docs.telethon.dev/en/stable/',
+      },
+      {
+        name: 'OpenCV',
+        logoUrl: 'https://cdn.simpleicons.org/opencv/5C3EE8',
+        homepageUrl: 'https://opencv.org',
+      },
+      {
+        name: 'AWS S3',
+        logoUrl: '/logos/aws-s3.png',
+        homepageUrl: 'https://aws.amazon.com/s3/',
+        logoImgClassName: 'h-7 w-7 object-contain',
+      },
+      {
+        name: 'AWS EC2',
+        logoUrl: '/logos/ec2.png',
+        homepageUrl: 'https://aws.amazon.com/ec2/',
+        logoImgClassName: 'h-7 w-7',
+      },
+    ],
+  },
+  {
     slug: 'real-time-virtual-execution-system',
     name: 'Real-Time Virtual Execution System',
     period: 'Sept 2024 — Present',
@@ -150,7 +208,7 @@ description:
     ],
   },
   {
-    slug: 'distributed-signal-pipeline',
+    slug: 'signal-processing-pipeline',
     name: 'Signal Processing Pipeline',
     period: 'Aug 2022 — Present',
     highlight:

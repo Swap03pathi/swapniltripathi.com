@@ -1,9 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
 import { getProjectBySlug, getExperienceForProject } from '../data';
 import Footer from '../components/Footer';
+import ProjectPageBackNav from '../components/ProjectPageBackNav';
 import { resolveAssetUrl } from '../utils/assetUrl';
 import { RTE_PROJECT_SLUG } from '../constants/realTimeVirtualExecution';
+import { RRIS_PROJECT_SLUG } from '../constants/realtimeRecommendationIngestion';
 import RealTimeVirtualExecutionSections from '../components/project/RealTimeVirtualExecutionSections';
+import RealtimeRecommendationIngestionSections from '../components/project/RealtimeRecommendationIngestionSections';
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -27,26 +30,13 @@ export default function ProjectPage() {
   }
 
   const isRte = project.slug === RTE_PROJECT_SLUG;
+  const isRris = project.slug === RRIS_PROJECT_SLUG;
+  const wideLayout = isRte || isRris;
 
   return (
     <div className="relative z-10 pt-24 pb-16 px-6">
-      <div className={`mx-auto ${isRte ? 'max-w-4xl' : 'max-w-2xl'}`}>
-        {/* Back link */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors mb-8"
-        >
-          <svg
-            className="w-3 h-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M15 19l-7-7 7-7" />
-          </svg>
-          Projects
-        </Link>
+      <div className={`mx-auto ${wideLayout ? 'max-w-4xl' : 'max-w-2xl'}`}>
+        <ProjectPageBackNav project={project} />
 
         {/* Header */}
         <div className="mb-10">
@@ -58,6 +48,12 @@ export default function ProjectPage() {
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/40">
               Persistent low-latency trade state tracking for a trading signal
               intelligence platform.
+            </p>
+          ) : null}
+          {isRris ? (
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/40">
+              Convergent multi-source ingestion with AI orchestration and
+              human-in-the-loop verification before execution-ready trade state.
             </p>
           ) : null}
 
@@ -86,7 +82,7 @@ export default function ProjectPage() {
         </div>
 
         <div className="mb-12 space-y-4">
-          {isRte ? (
+          {isRte || isRris ? (
             project.description.split('\n\n').map((para) => (
               <p
                 key={para.slice(0, 48)}
@@ -105,6 +101,12 @@ export default function ProjectPage() {
         {isRte ? (
           <div className="mb-16">
             <RealTimeVirtualExecutionSections />
+          </div>
+        ) : null}
+
+        {isRris ? (
+          <div className="mb-16">
+            <RealtimeRecommendationIngestionSections />
           </div>
         ) : null}
 
