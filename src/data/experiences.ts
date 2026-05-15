@@ -16,6 +16,7 @@ export const experiences: Experience[] = [
     projectSlugs: [
       'signal-ingestion-system',
       'realtime-recommendation-ingestion-system',
+      'multidimensional-market-intelligence-engine',
       'signal-processing-pipeline',
       'real-time-virtual-execution-system',
       'analytics-aggregation-system',

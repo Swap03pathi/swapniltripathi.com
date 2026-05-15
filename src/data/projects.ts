@@ -80,9 +80,8 @@ export const projects: Project[] = [
       },
       {
         name: 'AWS S3',
-        logoUrl: '/logos/aws-s3.png',
+        logoUrl: 'https://cdn.simpleicons.org/amazons3/569A31',
         homepageUrl: 'https://aws.amazon.com/s3/',
-        logoImgClassName: 'h-7 w-7 object-contain',
       },
       {
         name: 'AWS EC2',
@@ -90,6 +89,29 @@ export const projects: Project[] = [
         homepageUrl: 'https://aws.amazon.com/ec2/',
         logoImgClassName: 'h-7 w-7',
       },
+    ],
+  },
+  {
+    slug: 'multidimensional-market-intelligence-engine',
+    name: 'Multidimensional Market Intelligence Engine',
+    period: 'Sept 2024 — Present',
+    highlight:
+      'Realtime multidimensional computation infrastructure for filtering, ranking, scoring, and serving continuously mutating market intelligence.',
+    description:
+      'Designed and built a realtime multidimensional intelligence computation engine capable of dynamically filtering, ranking, scoring, and serving continuously mutating market trade intelligence at scale.\n\nThe system powered advisor rankings, trade discovery, live profit-potential sorting, multidimensional filtering, and realtime analytics across thousands of active market signals while avoiding expensive aggregation bottlenecks.\n\nTraditional caching approaches became ineffective due to combinatorial filter permutations combined with continuously changing live market prices. To solve this, the architecture evolved from database-centric aggregation into a Redis-powered distributed computation layer using sorted sets, incremental ranking systems, ID-first filtering, partial hydration strategies, and event-driven state synchronization.\n\nThe engine transformed Redis from a simple caching layer into a realtime market intelligence orchestration system capable of handling dynamic ranking, live recomputation, rolling advisor scoring, and multidimensional query execution under constantly changing market state.',
+    tools: [
+      { name: 'Redis', logoUrl: 'https://cdn.simpleicons.org/redis/DC382D', homepageUrl: 'https://redis.io' },
+      { name: 'MongoDB', logoUrl: 'https://cdn.simpleicons.org/mongodb/47A248', homepageUrl: 'https://mongodb.com' },
+      { name: 'Node.js', logoUrl: 'https://cdn.simpleicons.org/nodedotjs/5FA04E', homepageUrl: 'https://nodejs.org' },
+      { name: 'AWS ECS', logoUrl: '/logos/ECS.png', homepageUrl: 'https://aws.amazon.com/ecs/' },
+      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
+      {
+        name: 'Apache Airflow',
+        logoUrl: 'https://cdn.simpleicons.org/apacheairflow/017CEE',
+        homepageUrl: 'https://airflow.apache.org',
+      },
+      { name: 'Grafana', logoUrl: 'https://cdn.simpleicons.org/grafana/F46800', homepageUrl: 'https://grafana.com' },
+      { name: 'Prometheus', logoUrl: 'https://cdn.simpleicons.org/prometheus/E6522C', homepageUrl: 'https://prometheus.io' },
     ],
   },
   {
