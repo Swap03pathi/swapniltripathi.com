@@ -18,9 +18,10 @@ export default function TestbookWorkAreas() {
             const pillTone = area.accent;
 
             return (
-              <motion.div
-                key={area.id}
-                initial={{ opacity: 0, y: 10 }}
+            <motion.div
+              id={area.id}
+              key={area.id}
+              initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}

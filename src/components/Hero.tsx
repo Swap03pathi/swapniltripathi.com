@@ -1,3 +1,4 @@
+import { WHATSAPP_URL } from '../constants/contact';
 import { resolveAssetUrl } from '../utils/assetUrl';
 
 export default function Hero() {
@@ -20,17 +21,17 @@ export default function Hero() {
             className="animate-fade-in text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl"
             style={{ animationDelay: '0.1s' }}
           >
-            I build systems from scratch
+            Building operational systems
             <br />
-            <span className="text-accent">that actually work.</span>
+            <span className="text-accent">across data, infrastructure, and realtime platforms.</span>
           </h1>
 
           <p
             className="animate-fade-in-up mt-6 text-base leading-relaxed text-white/50 sm:text-lg"
             style={{ animationDelay: '0.3s' }}
           >
-            From messy inputs to real-world execution — I take ideas from zero to
-            working systems.
+            Focused on building reliable systems across realtime ingestion, analytics
+            infrastructure, automation workflows, and production-scale data operations.
           </p>
 
           <p
@@ -45,10 +46,12 @@ export default function Hero() {
             style={{ animationDelay: '0.7s' }}
           >
             <a
-              href="mailto:swapniltripathi2905@gmail.com"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block rounded-md border border-accent/20 bg-accent/10 px-6 py-2.5 text-sm font-medium text-accent transition-all hover:border-accent/40 hover:bg-accent/20 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]"
             >
-              Let's talk
+              Let&apos;s Talk
             </a>
           </div>
         </div>

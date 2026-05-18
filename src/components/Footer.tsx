@@ -1,3 +1,4 @@
+import { WHATSAPP_URL } from '../constants/contact';
 import { socials } from '../data';
 
 function SocialIcon({ icon }: { icon: string }) {
@@ -39,10 +40,12 @@ export default function Footer() {
           Want to build something that works?
         </p>
         <a
-          href="mailto:hello@swapniltripathi.com"
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-block mt-4 px-6 py-2.5 text-sm font-medium bg-accent/10 text-accent border border-accent/20 rounded-md hover:bg-accent/20 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)] transition-all"
         >
-          Let's talk
+          Let&apos;s Talk
         </a>
 
         {/* Socials */}
