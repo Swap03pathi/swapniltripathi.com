@@ -25,7 +25,11 @@ export function RrisTechStackBar() {
             <img
               src={t.logoUrl}
               alt=""
-              className={t.logoClassName ?? 'h-7 w-7 object-contain opacity-90'}
+              className={
+                'logoClassName' in t && t.logoClassName
+                  ? t.logoClassName
+                  : 'h-7 w-7 object-contain opacity-90'
+              }
             />
           </motion.a>
         ))}

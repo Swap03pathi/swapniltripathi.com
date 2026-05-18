@@ -3,9 +3,9 @@ import {
   ArrowUpRight,
   Award,
   Building2,
-  Instagram,
   Mic2,
   Newspaper,
+  Radio,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { SARAS_SECTION_IDS } from '../../constants/sarasExperience';
@@ -17,7 +17,7 @@ const pressIcons: Record<(typeof sarasPress)[number]['id'], LucideIcon> = {
   antler: Building2,
   podcast: Mic2,
   sharktank: Award,
-  instagram: Instagram,
+  signal: Radio,
 };
 
 function isPressLink(href: string) {

@@ -48,7 +48,11 @@ function ScrollPlatformCard({
   );
 }
 
-function PlatformCard({ card }: { card: (typeof sarasPlatformCards.left)[number] }) {
+type PlatformCardData =
+  | (typeof sarasPlatformCards.left)[number]
+  | (typeof sarasPlatformCards.right)[number];
+
+function PlatformCard({ card }: { card: PlatformCardData }) {
   if ('scrollTo' in card && card.scrollTo) {
     return <ScrollPlatformCard title={card.title} items={card.items} scrollTo={card.scrollTo} />;
   }
