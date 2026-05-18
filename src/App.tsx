@@ -10,6 +10,8 @@ import ProjectPage from './pages/ProjectPage';
 import ProjectArchitecturePage from './pages/ProjectArchitecturePage';
 import ComingSoonPage from './pages/ComingSoonPage';
 import AppleExperiencePage from './pages/AppleExperiencePage';
+import EyExperiencePage from './pages/EyExperiencePage';
+import OyoExperiencePage from './pages/OyoExperiencePage';
 import TestbookExperiencePage from './pages/TestbookExperiencePage';
 import SarasExperiencePage from './pages/SarasExperiencePage';
 import SarasSystemArchitecturePage from './pages/saras/SarasSystemArchitecturePage';
@@ -37,6 +39,8 @@ function App() {
           <Route path="/experience/saras" element={<SarasExperiencePage />} />
           <Route path="/experience/apple" element={<AppleExperiencePage />} />
           <Route path="/experience/testbook" element={<TestbookExperiencePage />} />
+          <Route path="/experience/oyo" element={<OyoExperiencePage />} />
+          <Route path="/experience/ey" element={<EyExperiencePage />} />
           <Route path="/experience/:slug" element={<ExperienceDetailPage />} />
           <Route
             path="/saras/systems/realtime-ingestion"

@@ -3,6 +3,8 @@ const DEDICATED_EXPERIENCE_PATHS: Record<string, string> = {
   saras: '/experience/saras',
   apple: '/experience/apple',
   testbook: '/experience/testbook',
+  oyo: '/experience/oyo',
+  ey: '/experience/ey',
 };
 
 export function getExperiencePath(slug: string): string {
