@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { experiences } from '../data';
 import { resolveAssetUrl } from '../utils/assetUrl';
+import { getExperiencePath } from '../utils/experienceRoutes';
 
 export default function Timeline() {
   return (
@@ -18,7 +19,7 @@ export default function Timeline() {
             {experiences.map((exp) => (
               <Link
                 key={exp.slug}
-                to={exp.slug === 'saras' ? '/experience/saras' : `/experience/${exp.slug}`}
+                to={getExperiencePath(exp.slug)}
                 className="group relative flex items-start gap-6 py-6 pl-6 hover:pl-8 transition-all"
               >
                 {/* Dot on the line */}

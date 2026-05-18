@@ -26,7 +26,7 @@ export const sarasSectionNav = [
   { id: SARAS_SECTION_IDS.platform, label: 'Platform' },
   { id: SARAS_SECTION_IDS.product, label: 'Product' },
   { id: SARAS_SECTION_IDS.evolution, label: 'Evolution' },
-  { id: SARAS_SECTION_IDS.reliability, label: 'Impact' },
+  { id: SARAS_SECTION_IDS.reliability, label: 'Reliability' },
   { id: SARAS_SECTION_IDS.press, label: 'Press' },
   { id: SARAS_SECTION_IDS.ownership, label: 'Ownership' },
 ] as const;

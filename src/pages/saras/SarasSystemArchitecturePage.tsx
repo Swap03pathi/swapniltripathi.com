@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import MmieArchitectureCanvas from '../../components/architecture/mmie/MmieArchitectureCanvas';
 import RrisArchitectureCanvas from '../../components/architecture/rris/RrisArchitectureCanvas';
 import RteArchitectureCanvas from '../../components/architecture/rte/RteArchitectureCanvas';
-import { SARAS_EXPERIENCE_PATH, SARAS_SECTION_IDS } from '../../constants/sarasExperience';
-import { saveSarasReturnSection } from '../../utils/sarasScrollRestore';
+import SarasArchitectureBridge from '../../components/saras/SarasArchitectureBridge';
+import type { SarasSystemKey } from '../../constants/sarasExperience';
 
 const SYSTEM_META = {
   'realtime-ingestion': {
@@ -21,27 +20,16 @@ const SYSTEM_META = {
   },
 } as const;
 
-export type SarasSystemKey = keyof typeof SYSTEM_META;
-
 export default function SarasSystemArchitecturePage({ system }: { system: SarasSystemKey }) {
-  const meta = SYSTEM_META[system];
-  const Canvas = meta.Canvas;
+  const Canvas = SYSTEM_META[system].Canvas;
 
   return (
-    <div className="relative z-10 min-h-screen bg-[#020617] px-4 pb-8 pt-24 text-slate-300 sm:px-6">
-      <div className="mx-auto max-w-7xl">
-        <Link
-          to={SARAS_EXPERIENCE_PATH}
-          state={{ scrollSection: SARAS_SECTION_IDS.coreSystems }}
-          onClick={() => saveSarasReturnSection(SARAS_SECTION_IDS.coreSystems)}
-          className="mb-8 inline-flex items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-accent/90"
-        >
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-            <path d="M15 19l-7-7 7-7" />
-          </svg>
-          Saras Experience
-        </Link>
-        <Canvas />
+    <div className="relative z-10 min-h-screen bg-dark text-white">
+      <SarasArchitectureBridge system={system} />
+      <div className="bg-[#020617] text-slate-300">
+        <div className="mx-auto max-w-7xl px-4 pb-8 pt-10 sm:px-6 md:pt-12">
+          <Canvas />
+        </div>
       </div>
       <Footer />
     </div>

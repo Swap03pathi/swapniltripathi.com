@@ -67,10 +67,12 @@ export function SarasCard({
   children,
   className = '',
   hover = false,
+  subtle = false,
 }: {
   children: ReactNode;
   className?: string;
   hover?: boolean;
+  subtle?: boolean;
 }) {
   return (
     <div
@@ -79,7 +81,9 @@ export function SarasCard({
       } ${className}`}
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/[0.02] via-transparent to-emerald-500/[0.02]"
+        className={`pointer-events-none absolute inset-0 bg-gradient-to-br via-transparent ${
+          subtle ? 'from-accent/[0.01] to-transparent' : 'from-accent/[0.02] to-emerald-500/[0.02]'
+        }`}
         aria-hidden
       />
       <div className="relative">{children}</div>

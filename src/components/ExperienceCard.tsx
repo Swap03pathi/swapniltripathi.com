@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import type { Experience } from '../data';
 import { resolveAssetUrl } from '../utils/assetUrl';
+import { getExperiencePath } from '../utils/experienceRoutes';
 
 export default function ExperienceCard({ experience }: { experience: Experience }) {
   return (
     <Link
-      to={experience.slug === 'saras' ? '/experience/saras' : `/experience/${experience.slug}`}
+      to={getExperiencePath(experience.slug)}
       className="group block p-6 rounded-lg border border-white/5 bg-white/[0.02] hover:border-accent/20 hover:bg-white/[0.04] transition-all"
     >
       <div className="flex items-start justify-between gap-4">

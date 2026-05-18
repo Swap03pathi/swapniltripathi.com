@@ -26,3 +26,5 @@ export const SARAS_PLATFORM_ROUTES = {
 } as const;
 
 export type SarasPlatformSlug = keyof typeof SARAS_PLATFORM_ROUTES;
+
+export type SarasSystemKey = 'realtime-ingestion' | 'realtime-execution' | 'market-intelligence';

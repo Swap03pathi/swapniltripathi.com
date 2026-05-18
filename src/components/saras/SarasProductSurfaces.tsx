@@ -23,20 +23,20 @@ function SurfaceFrame({
   const src = imageUrl ? resolveAssetUrl(imageUrl) : null;
 
   return (
-    <div className="group p-1 transition-transform duration-200 hover:-translate-y-1">
-      <div className="mx-auto w-[148px] rounded-[1.2rem] border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-1.5 sm:w-[160px]">
-        <div className="aspect-[9/18] overflow-hidden rounded-[0.95rem] border border-white/[0.06] bg-[#0a0a0a]">
+    <div className="group flex flex-col items-center">
+      <div className="w-full max-w-[200px] rounded-[1.25rem] border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-1.5 sm:max-w-[220px] lg:max-w-[260px]">
+        <div className="aspect-[9/19] overflow-hidden rounded-[1rem] border border-white/[0.06] bg-[#0a0a0a]">
           {src ? (
             <button
               type="button"
               onClick={() => onOpen({ src, label })}
-              className="block h-full w-full cursor-zoom-in text-left transition-opacity hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+              className="flex h-full w-full cursor-zoom-in items-start justify-center transition-opacity hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
               aria-label={`View ${label} screenshot`}
             >
               <img
                 src={src}
                 alt={label}
-                className="h-full w-full object-cover object-top"
+                className="h-full w-full object-contain object-top"
                 loading="lazy"
               />
             </button>
@@ -46,14 +46,14 @@ function SurfaceFrame({
               <div className="mt-2 space-y-1.5">
                 <div className="h-6 rounded border border-white/[0.05] bg-white/[0.02]" />
                 <div className="h-6 rounded border border-white/[0.05] bg-white/[0.02]" />
-                <div className="h-10 rounded border border-emerald-500/15 bg-emerald-500/[0.06]" />
+                <div className="h-10 rounded border border-white/[0.05] bg-white/[0.02]" />
               </div>
             </div>
           )}
         </div>
       </div>
-      <p className="mt-3 text-center text-sm font-semibold text-white/80">{label}</p>
-      <p className="mt-1 text-center text-xs leading-snug text-white/35">{caption}</p>
+      <p className="mt-4 text-center text-sm font-semibold text-white/75">{label}</p>
+      <p className="mt-1 max-w-[240px] text-center text-xs leading-snug text-white/35">{caption}</p>
     </div>
   );
 }
@@ -108,9 +108,8 @@ export default function SarasProductSurfaces() {
       eyebrow="Product"
       title="Product Surfaces"
       description="The mobile and web experiences that make advisor intelligence tangible for retail traders."
-      className="relative z-10 -mt-px border-t border-white/[0.08] bg-dark pt-20 md:pt-24"
     >
-      <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-x-14 lg:gap-y-16">
         {sarasProductSurfaces.map((s) => (
           <SurfaceFrame
             key={s.id}
@@ -126,8 +125,8 @@ export default function SarasProductSurfaces() {
         {lightbox ? <SurfaceImageLightbox key="surface-lightbox" image={lightbox} onClose={closeLightbox} /> : null}
       </AnimatePresence>
 
-      <SarasCard className="mt-16 p-5 md:p-8">
-        <h3 className="text-lg font-semibold text-white">Tutorial video</h3>
+      <SarasCard className="mt-14 border-white/[0.06] bg-white/[0.015] p-5 md:mt-16 md:p-8">
+        <h3 className="text-base font-semibold text-white/90">Tutorial video</h3>
         {videoId ? (
           <TutorialVideoPlayer videoId={videoId} />
         ) : (
