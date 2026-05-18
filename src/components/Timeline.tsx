@@ -18,7 +18,7 @@ export default function Timeline() {
             {experiences.map((exp) => (
               <Link
                 key={exp.slug}
-                to={`/experience/${exp.slug}`}
+                to={exp.slug === 'saras' ? '/experience/saras' : `/experience/${exp.slug}`}
                 className="group relative flex items-start gap-6 py-6 pl-6 hover:pl-8 transition-all"
               >
                 {/* Dot on the line */}

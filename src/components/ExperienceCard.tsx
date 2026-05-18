@@ -5,7 +5,7 @@ import { resolveAssetUrl } from '../utils/assetUrl';
 export default function ExperienceCard({ experience }: { experience: Experience }) {
   return (
     <Link
-      to={`/experience/${experience.slug}`}
+      to={experience.slug === 'saras' ? '/experience/saras' : `/experience/${experience.slug}`}
       className="group block p-6 rounded-lg border border-white/5 bg-white/[0.02] hover:border-accent/20 hover:bg-white/[0.04] transition-all"
     >
       <div className="flex items-start justify-between gap-4">

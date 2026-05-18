@@ -9,12 +9,16 @@ import ExperienceDetailPage from './pages/ExperienceDetailPage';
 import ProjectPage from './pages/ProjectPage';
 import ProjectArchitecturePage from './pages/ProjectArchitecturePage';
 import ComingSoonPage from './pages/ComingSoonPage';
+import SarasExperiencePage from './pages/SarasExperiencePage';
+import SarasSystemArchitecturePage from './pages/saras/SarasSystemArchitecturePage';
+import { hasPendingSarasScrollRestore } from './utils/sarasScrollRestore';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const location = useLocation();
   useEffect(() => {
+    if (hasPendingSarasScrollRestore(location.pathname, location.state)) return;
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [location.pathname, location.state]);
   return null;
 }
 
@@ -28,7 +32,20 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/experience/saras" element={<SarasExperiencePage />} />
           <Route path="/experience/:slug" element={<ExperienceDetailPage />} />
+          <Route
+            path="/saras/systems/realtime-ingestion"
+            element={<SarasSystemArchitecturePage system="realtime-ingestion" />}
+          />
+          <Route
+            path="/saras/systems/realtime-execution"
+            element={<SarasSystemArchitecturePage system="realtime-execution" />}
+          />
+          <Route
+            path="/saras/systems/market-intelligence"
+            element={<SarasSystemArchitecturePage system="market-intelligence" />}
+          />
           <Route
             path="/project/:slug/architecture"
             element={<ProjectArchitecturePage />}
