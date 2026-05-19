@@ -1,6 +1,5 @@
 import { APPLE_SECTION_IDS } from '../../constants/appleExperience';
-import { appleOperationalStats, appleTooling } from '../../data/appleExperienceCopy';
-import { appleStatIcons } from './AppleIconMap';
+import { appleTooling } from '../../data/appleExperienceCopy';
 import { AppleSection, AppleSectionLabel } from './ApplePrimitives';
 import AppleTechLogoGrid from './AppleTechLogoGrid';
 
@@ -10,6 +9,7 @@ export default function AppleScaleTooling() {
       <AppleSectionLabel>Scale & Tooling</AppleSectionLabel>
       <AppleTechLogoGrid tools={appleTooling} />
 
+      {/*
       <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
         {appleOperationalStats.map((stat) => {
           const Icon = appleStatIcons[stat.icon];
@@ -27,6 +27,7 @@ export default function AppleScaleTooling() {
           );
         })}
       </div>
+      */}
     </AppleSection>
   );
 }

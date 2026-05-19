@@ -125,12 +125,42 @@ export default function SarasProductSurfaces() {
         {lightbox ? <SurfaceImageLightbox key="surface-lightbox" image={lightbox} onClose={closeLightbox} /> : null}
       </AnimatePresence>
 
-      <SarasCard className="mt-14 border-white/[0.06] bg-white/[0.015] p-5 md:mt-16 md:p-8">
-        <h3 className="text-base font-semibold text-white/90">Tutorial video</h3>
+      <SarasCard className="mt-14 border-white/[0.06] bg-white/[0.015] px-5 py-8 text-center md:mt-16 md:px-8 md:py-10">
+        <h3 className="text-base font-semibold text-white/90">Product Walkthrough</h3>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white/42">
+          A short walkthrough of the Saras product experience, advisor discovery flows, and realtime
+          recommendation surfaces.
+        </p>
         {videoId ? (
-          <TutorialVideoPlayer videoId={videoId} />
+          <div className="mx-auto mt-8 flex max-w-2xl flex-col items-center justify-center gap-5 md:flex-row md:items-stretch md:gap-6">
+            <div className="flex shrink-0 items-center justify-center">
+              <TutorialVideoPlayer videoId={videoId} title="Saras product walkthrough" />
+            </div>
+            <div className="flex w-full max-w-md flex-col justify-center rounded-2xl border border-white/[0.06] bg-white/[0.012] p-5 text-left backdrop-blur-sm md:p-6">
+              <h4 className="text-sm font-medium text-white/80">Localized Product Experience</h4>
+              <div className="mt-3 space-y-3 text-xs leading-relaxed text-white/42">
+                <p>
+                  The Saras product experience was designed to support multilingual expansion from
+                  the beginning using structured localization workflows inside the Flutter
+                  application.
+                </p>
+                <p>
+                  UI copy, labels, notifications, and interaction surfaces were mapped through
+                  JSON-based language key systems, allowing product surfaces to scale across
+                  multiple regional languages without changing application logic.
+                </p>
+                <p>
+                  This enabled faster iteration across bilingual experiences while keeping delivery
+                  workflows operationally consistent across platforms.
+                </p>
+              </div>
+              <p className="mt-4 text-[11px] leading-relaxed text-white/25">
+                Designed for scalable regional rollout.
+              </p>
+            </div>
+          </div>
         ) : (
-          <p className="mt-4 text-sm text-white/40">
+          <p className="mx-auto mt-6 max-w-xl text-sm text-white/40">
             Add your YouTube URL in{' '}
             <code className="rounded bg-white/[0.06] px-1.5 py-0.5 text-xs text-accent/80">
               sarasTutorialVideoUrl
