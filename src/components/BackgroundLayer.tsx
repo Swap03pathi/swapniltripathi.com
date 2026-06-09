@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { hasStellariumSkyDataConfigured } from '../config/stellariumSkyData';
+import { isHighEndDevice } from '../utils/deviceCapability';
 import PremiumToast from './PremiumToast';
 import StarField from './StarField';
 import RealSkyBackground from './RealSkyBackground';
@@ -11,13 +12,16 @@ const IDENTIFY_TOAST_MESSAGE =
   'Select any celestial body in the background to explore the system.';
 
 /**
- * Desktop (`>768px`): tries Stellarium WASM; on success hides the lightweight canvas stars.
- * Narrow viewports: canvas `StarField` only (performance guard from your spec).
+ * Smart hybrid: desktop (`>768px`) always tries the Stellarium WASM engine; mobile
+ * tries it only on capable devices (see `isHighEndDevice`). When the engine isn't
+ * used or fails, the lightweight 2D `StarField` renders as the fallback everywhere.
  */
 export default function BackgroundLayer() {
   const [wideScreen, setWideScreen] = useState(
     () => typeof window !== 'undefined' && window.innerWidth > MOBILE_MAX_PX
   );
+  /** Capability is fixed for the session — evaluate once. */
+  const [capableDevice] = useState(() => isHighEndDevice());
   const [stellariumActive, setStellariumActive] = useState(false);
   const [skyIdentifyMode, setSkyIdentifyMode] = useState(false);
   const [showIdentifyToast, setShowIdentifyToast] = useState(false);
@@ -30,13 +34,16 @@ export default function BackgroundLayer() {
     return () => mq.removeEventListener?.('change', sync);
   }, []);
 
-  useEffect(() => {
-    if (!wideScreen) setStellariumActive(false);
-  }, [wideScreen]);
+  /** Desktop always; mobile only when the device can handle the engine. */
+  const shouldTryStellarium = HAS_SKYDATA_CONFIG && (wideScreen || capableDevice);
 
   useEffect(() => {
-    if (!wideScreen || !stellariumActive) setSkyIdentifyMode(false);
-  }, [wideScreen, stellariumActive]);
+    if (!shouldTryStellarium) setStellariumActive(false);
+  }, [shouldTryStellarium]);
+
+  useEffect(() => {
+    if (!shouldTryStellarium || !stellariumActive) setSkyIdentifyMode(false);
+  }, [shouldTryStellarium, stellariumActive]);
 
   useEffect(() => {
     if (!skyIdentifyMode) return undefined;
@@ -61,8 +68,6 @@ export default function BackgroundLayer() {
       return next;
     });
   };
-
-  const shouldTryStellarium = wideScreen && HAS_SKYDATA_CONFIG;
 
   return (
     <>

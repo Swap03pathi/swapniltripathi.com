@@ -494,6 +494,22 @@ export default function RealSkyBackground({
     };
   }, []);
 
+  /**
+   * If the GPU drops the WebGL context (common on mobile when the tab is
+   * backgrounded or under memory pressure), report failure so BackgroundLayer
+   * swaps in the lightweight StarField instead of leaving a blank canvas.
+   */
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const onLost = (e: Event) => {
+      e.preventDefault();
+      report(false);
+    };
+    canvas.addEventListener('webglcontextlost', onLost);
+    return () => canvas.removeEventListener('webglcontextlost', onLost);
+  }, [report]);
+
   return (
     <div
       className={`fixed inset-0 overflow-hidden pointer-events-none ${identifyMode ? 'z-[40]' : 'z-0'}`}
@@ -501,12 +517,18 @@ export default function RealSkyBackground({
       <div
         ref={containerRef}
         className="pointer-events-none absolute inset-0 h-full w-full"
-        style={{
-          opacity: 0.12,
-          filter: 'brightness(0.55) contrast(1.05) saturate(0.9)',
-        }}
       >
+        {/* Canvas is kept at full opacity with NO filter/opacity on any ancestor:
+            a CSS filter/opacity ancestor can make Chrome composite a WebGL canvas
+            to solid black on some GPUs even though the context is healthy. */}
         <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+        {/* Dimming is done with a black overlay on TOP of the canvas instead.
+            Identify mode → no dim (full sky); ambient → ~55% sky visible. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-dark transition-opacity duration-500"
+          style={{ opacity: identifyMode ? 0 : 0.85 }}
+        />
       </div>
       {identifyMode ? (
         <>

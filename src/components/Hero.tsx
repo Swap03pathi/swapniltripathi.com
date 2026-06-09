@@ -16,7 +16,7 @@ export default function Hero() {
           />
         </div>
 
-        <div className="max-w-2xl flex-1 text-center md:text-left">
+        <div className="w-full min-w-0 max-w-2xl flex-1 text-center md:text-left">
           <h1
             className="animate-fade-in text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl"
             style={{ animationDelay: '0.1s' }}
