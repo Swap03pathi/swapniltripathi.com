@@ -1,21 +1,25 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import BackgroundLayer from './components/BackgroundLayer';
-import HomePage from './pages/HomePage';
-import ExperiencePage from './pages/ExperiencePage';
-import ExperienceDetailPage from './pages/ExperienceDetailPage';
-import ProjectPage from './pages/ProjectPage';
-import ProjectArchitecturePage from './pages/ProjectArchitecturePage';
-import ComingSoonPage from './pages/ComingSoonPage';
-import AppleExperiencePage from './pages/AppleExperiencePage';
-import EyExperiencePage from './pages/EyExperiencePage';
-import OyoExperiencePage from './pages/OyoExperiencePage';
-import TestbookExperiencePage from './pages/TestbookExperiencePage';
-import SarasExperiencePage from './pages/SarasExperiencePage';
-import SarasSystemArchitecturePage from './pages/saras/SarasSystemArchitecturePage';
 import { hasPendingSarasScrollRestore } from './utils/sarasScrollRestore';
+
+// Route pages are code-split so each chunk loads only when its route is visited.
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ExperiencePage = lazy(() => import('./pages/ExperiencePage'));
+const ExperienceDetailPage = lazy(() => import('./pages/ExperienceDetailPage'));
+const ProjectPage = lazy(() => import('./pages/ProjectPage'));
+const ProjectArchitecturePage = lazy(() => import('./pages/ProjectArchitecturePage'));
+const ComingSoonPage = lazy(() => import('./pages/ComingSoonPage'));
+const AppleExperiencePage = lazy(() => import('./pages/AppleExperiencePage'));
+const EyExperiencePage = lazy(() => import('./pages/EyExperiencePage'));
+const OyoExperiencePage = lazy(() => import('./pages/OyoExperiencePage'));
+const TestbookExperiencePage = lazy(() => import('./pages/TestbookExperiencePage'));
+const SarasExperiencePage = lazy(() => import('./pages/SarasExperiencePage'));
+const SarasSystemArchitecturePage = lazy(
+  () => import('./pages/saras/SarasSystemArchitecturePage')
+);
 
 function ScrollToTop() {
   const location = useLocation();
@@ -33,6 +37,7 @@ function App() {
       <div className="min-h-screen bg-dark text-white font-sans">
         <BackgroundLayer />
         <Navbar />
+        <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/experience" element={<ExperiencePage />} />
@@ -62,6 +67,7 @@ function App() {
           <Route path="/thoughts" element={<ComingSoonPage title="Thoughts" />} />
           <Route path="/me" element={<ComingSoonPage title="Me" />} />
         </Routes>
+        </Suspense>
       </div>
     </BrowserRouter>
   );

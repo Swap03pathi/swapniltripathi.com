@@ -2,7 +2,8 @@ import { motion } from 'framer-motion';
 import { TESTBOOK_SECTION_IDS } from '../../constants/testbookExperience';
 import { testbookWorkAreas } from '../../data/testbookExperienceCopy';
 import { testbookWorkIcons } from './TestbookIconMap';
-import { TestbookCard, TestbookPill, testbookAccentStyles } from './TestbookPrimitives';
+import { TestbookCard, TestbookPill } from './TestbookPrimitives';
+import { testbookAccentStyles } from './testbookStyles';
 
 export default function TestbookWorkAreas() {
   return (

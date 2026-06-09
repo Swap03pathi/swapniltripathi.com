@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 export function OyoBackdrop() {
@@ -22,7 +23,7 @@ export function OyoSection({
 }: {
   id: string;
   title?: string;
-  titleIcon?: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  titleIcon?: LucideIcon;
   children: ReactNode;
   className?: string;
 }) {
@@ -77,7 +78,7 @@ export function OyoNoteBox({
   icon: Icon,
   children,
 }: {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  icon: LucideIcon;
   children: ReactNode;
 }) {
   return (

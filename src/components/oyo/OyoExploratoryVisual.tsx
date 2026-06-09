@@ -1,4 +1,4 @@
-import { BarChart3, Code2, Database, ImageIcon, Table } from 'lucide-react';
+import { BarChart3, Code2, Database, ImageIcon, Table, type LucideIcon } from 'lucide-react';
 
 export default function OyoExploratoryVisual() {
   return (
@@ -63,7 +63,7 @@ function NodeIcon({
   icon: Icon,
   label,
 }: {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  icon: LucideIcon;
   label: string;
 }) {
   return (

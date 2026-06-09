@@ -49,100 +49,83 @@ function setCoreValue(
   }
 }
 
+/**
+ * Engine paths we force to `false` to keep the ambient sky uncluttered: atmosphere,
+ * ground/landscape, grids, constellation art, and every layer's floating labels/names.
+ * `stars.hints_visible` covers bright-star proper names (Alioth, Dubhe) drawn separately.
+ */
+const QUIET_SKY_PATHS = [
+  'atmosphere.visible',
+  'landscapes.visible',
+  'labels.visible',
+  'names.visible',
+  'lines.azimuthal.visible',
+  'lines.equatorial.visible',
+  'constellations.lines_visible',
+  'constellations.images_visible',
+  'stars.labels_visible',
+  'stars.names_visible',
+  'stars.hints_visible',
+  'planets.labels_visible',
+  'planets.names_visible',
+  'dsos.labels_visible',
+  'dsos.names_visible',
+  'satellites.labels_visible',
+  'satellites.names_visible',
+  'minor_planets.labels_visible',
+  'minor_planets.names_visible',
+  'comets.labels_visible',
+  'comets.names_visible',
+  'skycultures.labels_visible',
+  'skycultures.names_visible',
+] as const;
+
+/** Walk a dotted path on an object and assign the final key, ignoring missing intermediates. */
+function setNestedValue(root: unknown, path: string, value: unknown) {
+  const keys = path.split('.');
+  let node = root as Record<string, unknown> | undefined;
+  for (let i = 0; i < keys.length - 1; i += 1) {
+    if (!node || typeof node !== 'object') return;
+    node = node[keys[i]] as Record<string, unknown> | undefined;
+  }
+  if (node && typeof node === 'object') node[keys[keys.length - 1]] = value;
+}
+
 /** Hide atmosphere, ground-ish layers, grids, constellation art, and floating labels/names on bodies. */
 function applyQuietSkyUi(stel: Record<string, unknown>) {
-  const pathsFalse: string[] = [
-    'atmosphere.visible',
-    'landscapes.visible',
-    'labels.visible',
-    'names.visible',
-    'lines.azimuthal.visible',
-    'lines.equatorial.visible',
-    'constellations.lines_visible',
-    'constellations.images_visible',
-    'stars.labels_visible',
-    'stars.names_visible',
-    /** Bright-star proper names (e.g. Alioth, Dubhe) use a separate hints layer. */
-    'stars.hints_visible',
-    'planets.labels_visible',
-    'planets.names_visible',
-    'dsos.labels_visible',
-    'dsos.names_visible',
-    'satellites.labels_visible',
-    'satellites.names_visible',
-    'minor_planets.labels_visible',
-    'minor_planets.names_visible',
-    'comets.labels_visible',
-    'comets.names_visible',
-    'skycultures.labels_visible',
-    'skycultures.names_visible',
-  ];
   try {
-    for (const path of pathsFalse) setCoreValue(stel, path, false);
-    const c = stel.core as {
-      atmosphere?: { visible?: boolean };
-      landscapes?: { visible?: boolean };
-      labels?: { visible?: boolean };
-      names?: { visible?: boolean };
-      stars?: {
-        labels_visible?: boolean;
-        names_visible?: boolean;
-        hints_visible?: boolean;
-      };
-      planets?: { labels_visible?: boolean; names_visible?: boolean };
-      dsos?: { labels_visible?: boolean; names_visible?: boolean };
-      satellites?: { labels_visible?: boolean; names_visible?: boolean };
-      minor_planets?: { labels_visible?: boolean; names_visible?: boolean };
-      comets?: { labels_visible?: boolean; names_visible?: boolean };
-      skycultures?: { labels_visible?: boolean; names_visible?: boolean };
-      lines?: {
-        azimuthal?: { visible?: boolean };
-        equatorial?: { visible?: boolean };
-      };
-      constellations?: { lines_visible?: boolean; images_visible?: boolean };
-    };
-    if (c?.atmosphere) c.atmosphere.visible = false;
-    if (c?.landscapes) c.landscapes.visible = false;
-    if (c?.lines?.azimuthal) c.lines.azimuthal.visible = false;
-    if (c?.lines?.equatorial) c.lines.equatorial.visible = false;
-    if (c?.constellations) {
-      c.constellations.lines_visible = false;
-      c.constellations.images_visible = false;
-    }
-    if (c?.labels) c.labels.visible = false;
-    if (c?.names) c.names.visible = false;
-    if (c?.stars) {
-      c.stars.labels_visible = false;
-      c.stars.names_visible = false;
-      c.stars.hints_visible = false;
-    }
-    if (c?.planets) {
-      c.planets.labels_visible = false;
-      c.planets.names_visible = false;
-    }
-    if (c?.dsos) {
-      c.dsos.labels_visible = false;
-      c.dsos.names_visible = false;
-    }
-    if (c?.satellites) {
-      c.satellites.labels_visible = false;
-      c.satellites.names_visible = false;
-    }
-    if (c?.minor_planets) {
-      c.minor_planets.labels_visible = false;
-      c.minor_planets.names_visible = false;
-    }
-    if (c?.comets) {
-      c.comets.labels_visible = false;
-      c.comets.names_visible = false;
-    }
-    if (c?.skycultures) {
-      c.skycultures.labels_visible = false;
-      c.skycultures.names_visible = false;
+    for (const path of QUIET_SKY_PATHS) {
+      /** `setValue` makes WASM-backed props stick; the direct write covers plain JS mirrors. */
+      setCoreValue(stel, path, false);
+      setNestedValue(stel.core, path, false);
     }
   } catch {
     /* optional */
   }
+}
+
+/**
+ * Stellarium `designations()` returns several names for an object, e.g.
+ * `["NAME Vega", "* alf Lyr", "HIP 91262", "HD 172167"]`. The engine draws the
+ * friendly proper name (here "Vega") next to the body, but the first array entry
+ * is often a terse catalog code — so showing `[0]` made the bottom label disagree
+ * with what's on screen. Prefer the `NAME …` proper name and strip catalog prefixes
+ * (Bayer/variable/cluster markers) so the label matches the on-screen text.
+ */
+function cleanDesignation(raw: string): string {
+  return raw
+    .replace(/^NAME\s+/i, '')
+    .replace(/^(V\*|\*\*|Cl\*|\*)\s+/i, '')
+    .trim();
+}
+
+function bestDesignation(designations: string[]): string | null {
+  const cleaned = designations.map(cleanDesignation).filter(Boolean);
+  if (!cleaned.length) return null;
+  /** A `NAME …` entry is the human-readable proper name the engine labels with. */
+  const proper = designations.find((d) => /^NAME\s+/i.test(d));
+  if (proper) return cleanDesignation(proper);
+  return cleaned[0];
 }
 
 function designationFromSelection(sel: unknown): string | null {
@@ -153,7 +136,7 @@ function designationFromSelection(sel: unknown): string | null {
   };
   if (typeof o.designations === 'function') {
     const ds = o.designations();
-    if (Array.isArray(ds) && ds.length) return ds.filter(Boolean)[0] ?? null;
+    if (Array.isArray(ds) && ds.length) return bestDesignation(ds.filter(Boolean));
   }
   if (typeof o.id === 'string' && o.id) return o.id;
   return null;
@@ -547,7 +530,7 @@ export default function RealSkyBackground({
             className="pointer-events-none absolute inset-x-0 bottom-28 z-30 mx-auto flex max-w-xl justify-center px-4"
             aria-live="polite"
           >
-            <div className="min-h-[38px] w-full truncate rounded-xl border border-white/10 bg-black/65 px-4 py-2.5 text-center text-sm tracking-wide text-white/95 shadow-xl backdrop-blur-sm">
+            <div className="min-h-[38px] w-full break-words rounded-xl border border-white/10 bg-black/65 px-4 py-2.5 text-center text-sm tracking-wide text-white/95 shadow-xl backdrop-blur-sm">
               {pickedLabel ? (
                 <span className="font-medium">{pickedLabel}</span>
               ) : (
