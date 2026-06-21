@@ -16,10 +16,15 @@ export default function Navbar() {
     setMobileOpen(false);
   };
 
-  const navItems = [
+  const navItems: {
+    label: string;
+    to?: string;
+    action?: () => void;
+    disabled?: boolean;
+  }[] = [
     { label: 'Experience', to: '/experience' },
     { label: 'Timeline', action: scrollToTimeline },
-    { label: 'Me', disabled: true },
+    { label: 'Me', to: '/me' },
   ];
 
   const ctaClass =

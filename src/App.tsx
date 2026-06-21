@@ -12,6 +12,7 @@ const ExperienceDetailPage = lazy(() => import('./pages/ExperienceDetailPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const ProjectArchitecturePage = lazy(() => import('./pages/ProjectArchitecturePage'));
 const ComingSoonPage = lazy(() => import('./pages/ComingSoonPage'));
+const MePage = lazy(() => import('./pages/MePage'));
 const AppleExperiencePage = lazy(() => import('./pages/AppleExperiencePage'));
 const EyExperiencePage = lazy(() => import('./pages/EyExperiencePage'));
 const OyoExperiencePage = lazy(() => import('./pages/OyoExperiencePage'));
@@ -65,7 +66,7 @@ function App() {
           />
           <Route path="/project/:slug" element={<ProjectPage />} />
           <Route path="/thoughts" element={<ComingSoonPage title="Thoughts" />} />
-          <Route path="/me" element={<ComingSoonPage title="Me" />} />
+          <Route path="/me" element={<MePage />} />
         </Routes>
         </Suspense>
       </div>
