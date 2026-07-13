@@ -7,12 +7,3 @@ export const thoughts: string[] = [
   'If it works in production, it works. Everything else is theory.',
   "AI can generate answers. It doesn’t take responsibility for them."
 ];
-
-// Only these project slugs appear in "Project Highlights" on home.
-export const highlightedProjectSlugs: string[] = [
-  'trading-execution-engine',
-  'signal-processing-pipeline',
-  'mobile-platform-backend',
-  'data-pipeline-system',
-  'anomaly-detection-system',
-];

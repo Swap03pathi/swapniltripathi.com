@@ -12,7 +12,6 @@ export interface Project {
   period: string;
   highlight: string;
   description: string;
-  githubUrl?: string;
   tools: Tool[];
 }
 
@@ -22,7 +21,6 @@ export interface Experience {
   role: string;
   period: string;
   shortDescription: string;
-  fullDescription: string;
   logoUrl: string;
   projectSlugs: string[];
 }
