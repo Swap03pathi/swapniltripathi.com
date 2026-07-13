@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 
 // Personal sandbox page. Rough work — expect this to change often.
 const SURVEILLANCE_URL = 'https://swapniltripathi.com/app/surveillance';
@@ -20,6 +21,12 @@ export default function MePage() {
 
   return (
     <div className="relative z-10 pt-24 pb-16 px-6">
+      <Seo
+        title="Me — Swapnil Tripathi"
+        description="A corner for the things I build for fun."
+        path="/me"
+        noindex
+      />
       {/* Header */}
       <div className="mx-auto max-w-4xl">
         <h1 className="text-3xl font-bold text-white">Me</h1>

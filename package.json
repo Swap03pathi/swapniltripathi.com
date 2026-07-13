@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "dev:ssr": "vite-react-ssg dev",
+    "build": "vite-react-ssg build && node scripts/postbuild.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
@@ -15,10 +16,14 @@
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.14.2"
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^6.30.4",
+    "remark-gfm": "^4.0.1",
+    "vite-react-ssg": "^0.9.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

@@ -21,17 +21,20 @@ export default function Hero() {
             className="animate-fade-in text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl"
             style={{ animationDelay: '0.1s' }}
           >
-            Building operational systems
+            Swapnil Tripathi
             <br />
-            <span className="text-accent">across data, infrastructure, and realtime platforms.</span>
+            <span className="text-accent">
+              Systems builder — data, infrastructure, and realtime platforms.
+            </span>
           </h1>
 
           <p
             className="animate-fade-in-up mt-6 text-base leading-relaxed text-white/50 sm:text-lg"
             style={{ animationDelay: '0.3s' }}
           >
-            Focused on building reliable systems across realtime ingestion, analytics
-            infrastructure, automation workflows, and production-scale data operations.
+            I step into problems before I&apos;m &quot;qualified&quot; for them, learn exactly
+            what each one needs, and ship systems that work in production — fast, and cheap to
+            run.
           </p>
 
           <p

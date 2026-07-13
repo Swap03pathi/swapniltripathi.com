@@ -1,17 +1,19 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { WHATSAPP_URL } from '../constants/contact';
 import SiteLogo from './SiteLogo';
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const scrollToTimeline = () => {
     if (location.pathname === '/') {
       document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      window.location.href = '/#timeline';
+      // Client-side navigation; Layout's ScrollHandler scrolls to the hash target.
+      navigate('/#timeline');
     }
     setMobileOpen(false);
   };
@@ -24,6 +26,8 @@ export default function Navbar() {
   }[] = [
     { label: 'Experience', to: '/experience' },
     { label: 'Timeline', action: scrollToTimeline },
+    { label: 'Thoughts', to: '/thoughts' },
+    { label: 'About', to: '/about' },
     { label: 'Me', to: '/me' },
   ];
 
