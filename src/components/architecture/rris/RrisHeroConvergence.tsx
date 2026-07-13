@@ -47,7 +47,7 @@ const ops: {
 }[] = [
   {
     title: 'Human Moderation & Verification',
-    sub: 'Approve · Edit · Reject · Fino Pick — human-supervised intelligence, not schema-only checks.',
+    sub: 'Approve · Edit · Reject · Editorial pick — human-supervised intelligence, not schema-only checks.',
     Icon: UserCheck,
   },
   {

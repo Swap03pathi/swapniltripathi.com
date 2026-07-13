@@ -1,6 +1,6 @@
 /** Long-form copy for the architecture canvas (tooltips / expand). */
 export const rteNarrativeDescription =
-  'Designed and built a persistent real-time virtual execution system that continuously tracked advisor recommendations against live websocket market prices.\n\nThe architecture replaced an interval-based cron/Lambda pipeline with a stateful worker-driven system powered by Redis, MongoDB, websocket subscriptions, and automated recovery workflows.\n\nThe system dynamically managed active ticker pools, processed high-frequency tick streams, minimized execution latency, and maintained strong consistency between real-time state and long-term persistence layers.';
+  'Designed and built a persistent real-time virtual execution system that continuously tracked advisor recommendations against live websocket market prices.\n\nThe architecture replaced an interval-based cron/Lambda pipeline with a stateful worker-driven system powered by Redis, MongoDB, websocket subscriptions, and automated recovery workflows.\n\nThe system dynamically managed active ticker pools, processed high-volume tick streams, minimized execution latency, and maintained strong consistency between real-time state and long-term persistence layers.';
 
 export const rteSystemOverviewLeft = {
   title: 'System Overview',

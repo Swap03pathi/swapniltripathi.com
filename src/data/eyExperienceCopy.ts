@@ -1,10 +1,9 @@
-import { EY_SECTION_IDS } from '../constants/eyExperience';
-
 export const eyHero = {
   eyebrow: 'EY Internship Experience',
   title: 'Early Exposure to Operational Consulting & Structured Research',
+  role: 'Summer Associate · May — Jul 2018',
   description:
-    'Worked on educational content operations, structured data collection workflows, and research support initiatives during a summer consulting internship supporting large-scale educational and ecosystem programs.',
+    'Worked on educational content operations, structured data collection workflows, and research support during a summer consulting internship on an MHRD (Govt. of India) initiative to build a national education platform for teachers and students.',
   metadata: [
     { label: 'VBA', icon: 'vba' as const },
     { label: 'Research', icon: 'research' as const },
@@ -16,8 +15,23 @@ export const eyHero = {
 
 export const eyWorkAreas = [
   {
-    id: 'content-ops',
+    id: 'video-validation',
     number: '1',
+    title: 'Video Validation — My First Working System',
+    icon: 'code' as const,
+    highlight: true,
+    bullets: [
+      'A senior official asked me to "write code" — without checking that I had never coded before',
+      'Pre-AI era: asked multiple people what to learn, then taught myself',
+      'Shipped a working Python tool in ~1–2 weeks',
+      'Detected broken & blocked YouTube videos across the national content repository',
+      'Triggered replacement workflows for flagged videos',
+    ],
+    tools: ['Python', 'Video Validation', 'Self-Taught'],
+  },
+  {
+    id: 'content-ops',
+    number: '2',
     title: 'Educational Content Operations',
     icon: 'video' as const,
     highlight: false,
@@ -32,10 +46,10 @@ export const eyWorkAreas = [
   },
   {
     id: 'automation',
-    number: '2',
+    number: '3',
     title: 'Workflow Automation',
     icon: 'automation' as const,
-    highlight: true,
+    highlight: false,
     bullets: [
       'Built VBA-based questionnaire workflows',
       'Automated structured data collection processes',
@@ -46,7 +60,7 @@ export const eyWorkAreas = [
   },
   {
     id: 'research',
-    number: '3',
+    number: '4',
     title: 'Research & Ecosystem Analysis',
     icon: 'research' as const,
     highlight: false,
@@ -61,8 +75,3 @@ export const eyWorkAreas = [
 
 export const eyClosing =
   'This internship introduced me to structured operational workflows, large-scale coordination, and early automation-driven problem solving within consulting environments.';
-
-export const eySectionNav = [
-  { id: EY_SECTION_IDS.hero, label: 'Overview' },
-  { id: EY_SECTION_IDS.workAreas, label: 'Work' },
-] as const;

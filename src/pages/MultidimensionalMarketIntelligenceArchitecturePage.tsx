@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 import MmieArchitectureCanvas from '../components/architecture/mmie/MmieArchitectureCanvas';
 import { mmieProjectPath } from '../constants/multidimensionalMarketIntelligence';
 
@@ -7,6 +8,11 @@ export default function MultidimensionalMarketIntelligenceArchitecturePage() {
   const location = useLocation();
   return (
     <div className="relative z-10 min-h-screen bg-[#020617] px-4 pb-8 pt-24 text-slate-300 sm:px-6">
+      <Seo
+        title="Market Intelligence Engine — Architecture Deep Dive"
+        description="Filter first, hydrate last: the Redis sorted-set architecture serving multidimensional, live-ranked market intelligence."
+        path="/project/multidimensional-market-intelligence-engine/architecture"
+      />
       <div className="mx-auto max-w-7xl">
         <Link
           to={mmieProjectPath()}

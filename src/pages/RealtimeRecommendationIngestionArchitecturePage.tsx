@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 import RrisArchitectureCanvas from '../components/architecture/rris/RrisArchitectureCanvas';
 import { rrisProjectPath } from '../constants/realtimeRecommendationIngestion';
 
@@ -7,6 +8,11 @@ export default function RealtimeRecommendationIngestionArchitecturePage() {
   const location = useLocation();
   return (
     <div className="relative z-10 min-h-screen bg-[#030712] px-4 pb-8 pt-24 text-slate-400 sm:px-6">
+      <Seo
+        title="Realtime Recommendation Ingestion — Architecture Deep Dive"
+        description="How six noisy sources — Telegram, PDFs, YouTube live, X, news, web search — converge into one execution-ready trade schema via a two-stage LLM pipeline."
+        path="/project/realtime-recommendation-ingestion-system/architecture"
+      />
       <div className="mx-auto max-w-7xl">
         <Link
           to={rrisProjectPath()}

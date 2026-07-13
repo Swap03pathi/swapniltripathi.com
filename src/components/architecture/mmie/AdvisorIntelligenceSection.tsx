@@ -4,8 +4,8 @@ import {
   mmieAdvisorCategories,
   mmieAdvisorNew,
   mmieAdvisorOld,
+  mmieDeltaUpdatesNote,
   mmieRollingWindows,
-  mmieWeightingNote,
 } from '../../../data/mmieArchitectureCopy';
 import { MmieGlassPanel, MmieSectionShell } from './MmiePrimitives';
 
@@ -84,13 +84,13 @@ export function AdvisorIntelligenceSection() {
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Weighted scoring</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Incremental updates</p>
             <p className="mt-2 text-sm text-slate-400">
-              <span className="font-mono text-cyan-200/80">closed</span>
+              <span className="font-mono text-cyan-200/80">per-event delta</span>
               <span className="mx-1.5 text-slate-600">{'>'}</span>
-              <span className="font-mono text-slate-500">open</span>
+              <span className="font-mono text-slate-500">full recompute</span>
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-500">{mmieWeightingNote}</p>
+            <p className="mt-2 text-sm leading-relaxed text-slate-500">{mmieDeltaUpdatesNote}</p>
           </div>
         </div>
       </MmieGlassPanel>

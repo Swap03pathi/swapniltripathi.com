@@ -33,6 +33,7 @@ export default function OyoHero() {
             <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-white sm:text-3xl lg:text-[2rem]">
               {oyoHero.title}
             </h1>
+            <p className="mt-3 text-sm font-medium text-white/50">{oyoHero.role}</p>
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/42 md:text-[0.9375rem]">
               {oyoHero.description}
             </p>

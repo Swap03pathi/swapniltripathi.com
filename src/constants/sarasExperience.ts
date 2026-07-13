@@ -19,12 +19,4 @@ export const SARAS_SYSTEM_ROUTES = {
   intelligence: '/saras/systems/market-intelligence',
 } as const;
 
-export const SARAS_PLATFORM_ROUTES = {
-  operations: '/saras/platform/operations',
-  delivery: '/saras/platform/delivery',
-  reliability: '/saras/platform/reliability',
-} as const;
-
-export type SarasPlatformSlug = keyof typeof SARAS_PLATFORM_ROUTES;
-
 export type SarasSystemKey = 'realtime-ingestion' | 'realtime-execution' | 'market-intelligence';

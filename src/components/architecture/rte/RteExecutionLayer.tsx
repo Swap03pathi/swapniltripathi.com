@@ -195,7 +195,7 @@ export function RteExecutionLayer({ expand }: Props) {
           subtitle="~1000 ticks/sec active symbols"
           icon="waves"
           bullets={[
-            'High-frequency market ticks',
+            'High-volume market ticks (~1,000/sec)',
             '~1000 ticks/sec on active symbols',
             'Streams routed into matching workers',
           ]}

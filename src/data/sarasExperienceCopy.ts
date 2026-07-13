@@ -1,22 +1,23 @@
 import { SARAS_SECTION_IDS, SARAS_SYSTEM_ROUTES } from '../constants/sarasExperience';
+import type { SarasSystemKey } from '../constants/sarasExperience';
 
 export const sarasHero = {
-  label: 'Saras Experience',
+  label: 'Saras — CTO & Co-Founder · Sept 2024 – Present',
   title: 'A Trust Layer for',
   titleAccent: 'Smarter Trading Decisions',
   description:
     'Saras was built to bring transparency to the noisy world of stock market recommendations — helping retail traders evaluate advisor credibility before acting on recommendations.',
   highlights: [
     { label: 'Featured on Shark Tank India', icon: 'tv' as const },
-    { label: 'Pre-seed funded', icon: 'funding' as const },
+    { label: 'Antler-backed · $500K pre-seed', icon: 'funding' as const },
     { label: 'Built for retail traders', icon: 'users' as const },
   ],
   metrics: [
     { value: '150K+', label: 'Downloads' },
-    { value: '200K+', label: 'Signals / day' },
-    { value: '400', label: 'Daily Live trades' },
-    { value: '98%', label: 'Uptime' },
-    { value: '100K', label: 'Registered users' },
+    { value: '200K+', label: 'Messages ingested / day' },
+    { value: '~400', label: 'Concurrent live trades' },
+    { value: '99.5%', label: 'Uptime' },
+    { value: '20K', label: 'Concurrent users' },
   ],
 };
 
@@ -37,7 +38,7 @@ export const sarasCoreSystems = [
     title: 'Realtime Recommendation Ingestion System',
     summary:
       'Captures unstructured recommendations from Telegram, YouTube, reports, and social channels — normalizing them into structured, deduplicated trade candidates.',
-    challenge: 'Multi-source ingestion with AI parsing, deduplication, and stream-safe handoff under bursty advisor traffic.',
+    challenge: 'Multi-source ingestion with AI parsing, deduplication, and stream-safe handoff under bursty advisor traffic — a message store that has grown into millions of raw documents.',
     stack: ['Python', 'Redis Streams', 'MongoDB', 'Node.js', 'LLM Parsing'],
     flow: ['Sources', 'AI Parsing', 'Dedup', 'Persistence', 'Redis Streams'],
     href: SARAS_SYSTEM_ROUTES.ingestion,
@@ -46,8 +47,8 @@ export const sarasCoreSystems = [
     number: '02',
     title: 'Real-Time Virtual Execution System',
     summary:
-      'Matches live market prices against open recommendations — computing P&L, targets, stoplosses, and broadcast-ready trade state in real time.',
-    challenge: 'Sub-second execution semantics across thousands of concurrent virtual trades with deterministic exit rules.',
+      'Matches live market prices against open recommendations — computing P&L, targets, stoplosses, and broadcast-ready trade state in real time. A cost-aware active-ticker pool works within a vendor hard cap of 3,000 concurrent WebSocket tickers.',
+    challenge: '<500ms price-match latency across hundreds of concurrently live virtual trades — with hot tickers emitting up to ~1,000 ticks/sec — and deterministic target/stoploss/expiry exit rules.',
     stack: ['Node.js', 'Redis', 'WebSocket', 'MongoDB', 'AWS ECS'],
     flow: ['Live Prices', 'Matching Engine', 'Portfolio', 'Performance', 'Broadcast'],
     href: SARAS_SYSTEM_ROUTES.execution,
@@ -56,13 +57,23 @@ export const sarasCoreSystems = [
     number: '03',
     title: 'Multidimensional Market Intelligence Engine',
     summary:
-      'Redis-orchestrated filtering, ranking, and advisor scoring across combinatorial query dimensions under continuously mutating market state.',
+      'Redis-orchestrated filtering, ranking, and advisor scoring across combinatorial query dimensions under continuously mutating market state. Filtering runs directly on Redis fetch instead of MongoDB aggregations burning ECS CPU — faster and cheaper.',
     challenge: 'ID-first computation when traditional caching collapses under filter × live-price permutation explosion.',
     stack: ['Redis', 'MongoDB', 'Node.js', 'Sorted Sets', 'Incremental Rank'],
     flow: ['Trade Universe', 'Filter Sets', 'Rank Overlay', 'Top-N IDs', 'Hydration'],
     href: SARAS_SYSTEM_ROUTES.intelligence,
   },
 ] as const;
+
+/** Unique per-system intros rendered on the deep-dive pages before the shared summary. */
+export const sarasSystemIntros: Record<SarasSystemKey, string> = {
+  'realtime-execution':
+    'This engine started life as a cron + Lambda job — interval-based, roughly two minutes behind the market, with overlapping runs that broke it every few weeks. Re-architecting it as a persistent real-time engine brought price matching under 500ms, on a recovery design that needs no data backfilling.',
+  'realtime-ingestion':
+    'Recommendations arrive from five to six sources — Telegram, PDF research reports, YouTube live streams, X, and financial news — peaking at roughly 10,000 messages per hour at market open. A two-stage classify-then-extract LLM design keeps costs controlled: only the small fraction of messages that are real recommendations ever reach the expensive extraction call.',
+  'market-intelligence':
+    'The engine filters first and hydrates last: rankings and filters resolve entirely against Redis ID sets before a single full document is fetched. That design — together with a cost-aware active-ticker pool working within a vendor hard cap of 3,000 concurrent WebSocket tickers — keeps multidimensional queries fast under live market state.',
+};
 
 /** Expandable platform cards — `paragraphs` shown when “Explore” is opened. */
 export const sarasPlatformCards = {
@@ -128,9 +139,9 @@ export const sarasPlatformCards = {
     {
       id: 'reliability',
       title: 'Reliability & Infrastructure',
-      items: ['ECS Migration', 'Redis Optimization', 'Monitoring Systems', 'Security Recovery'],
+      items: ['Zero-Downtime ECS Migration', 'Redis Optimization', 'Monitoring Systems', 'Security Recovery'],
       paragraphs: [
-        'The platform infrastructure evolved significantly as operational complexity increased, including migrations from PM2-based services to ECS-managed deployments and large-scale Redis optimization for realtime filtering workflows.',
+        'The platform infrastructure evolved significantly as operational complexity increased, including a zero-downtime migration from PM2-based services to ECS on Fargate — ECR images, GitHub Actions CI/CD — and large-scale Redis optimization for realtime filtering workflows.',
         'Monitoring, observability, recovery procedures, and security hardening became increasingly important as the platform scaled operationally.',
       ],
     },
@@ -220,7 +231,7 @@ export const sarasEvolutionPhases = [
     label: 'Realtime Infrastructure',
     title: 'Building the Execution Engine',
     description:
-      'Saras moved from interval-based trade matching into a realtime execution architecture powered by Redis state management, websocket market feeds, and event-driven processing.',
+      'The original execution engine ran on cron + Lambda — interval-based by nature, trades surfaced with a ~2-minute lag, consecutive runs overlapped, and it broke every few weeks. It was re-architected as a persistent real-time engine powered by Redis state management, websocket market feeds, and event-driven processing.',
     themes: ['Redis State', 'Websocket Feeds', 'Event Processing', 'Realtime Matching'],
   },
   {
@@ -256,16 +267,17 @@ export const sarasEvolutionConclusion = {
 } as const;
 
 export const sarasReliabilityLeft = [
-  'Realtime monitoring across ingestion, execution, and API tiers',
+  'Realtime monitoring with Grafana + Prometheus across ingestion, execution, and API tiers',
   'Redis cluster scaling for ranking and stream workloads',
-  'ECS migration for containerized, repeatable deploys',
+  'Zero-downtime pm2 → ECS migration — ECS on Fargate, ECR images, GitHub Actions CI/CD',
+  'Reduced AWS compute consumption ~45% through an infrastructure optimization drive',
   'Automated recovery playbooks and health-checked services',
   'WebSocket stability for live trade and price fan-out',
 ] as const;
 
 export const sarasIncident = {
   title: 'A Critical Incident We Overcame',
-  body: 'An exposed AWS key led to unauthorized infrastructure deletion. We rebuilt core services within six hours, then introduced scoped credentials, rotation policies, and deployment guardrails to prevent recurrence.',
+  body: 'An exposed AWS key led to unauthorized infrastructure deletion. We rebuilt core services within six hours, then introduced scoped credentials, rotation policies, and deployment guardrails. When a key leaked a second time, the attack caused zero damage — and the per-process scoped keys pinpointed the source immediately.',
 };
 
 /**
@@ -299,13 +311,13 @@ export const sarasPress = [
     outlet: 'Featured on Shark Tank India',
     type: 'Recognition',
     href: '',
-    supportLine: 'Recognized as part of the broader Indian startup ecosystem.',
+    supportLine: 'Pitched Saras on national television — Shark Tank India — bringing advisor transparency to a mainstream audience.',
   },
   {
     id: 'signal',
     outlet: 'Signal By Saras',
     type: 'Platform',
-    href: 'https://www.signal.saras.market/',
+    href: '',
     supportLine: 'Community-facing product updates and platform presence.',
   },
 ] as const;
@@ -319,12 +331,15 @@ export const sarasTutorialVideoUrl = 'https://youtu.be/5OG9ehGXGNg';
 export const sarasOwned = [
   'System architecture across ingestion, execution, and intelligence',
   'Backend engineering and API design',
+  'Database schema design',
+  'Backend process logic',
   'Infrastructure, ECS, and deployment pipelines',
   'Redis strategy — streams, sorted sets, and ranking layers',
   'Data pipelines and aggregation systems',
   'Virtual execution and trade lifecycle engines',
   'Scaling, observability, and incident response',
-  'Operational tooling for moderation and rollout',
+  'Moderation and rollout tooling — scoped and built to product-defined specs',
+  'Hired and grew the ~8-person engineering team — each engineer mentored into full ownership of a vertical',
 ] as const;
 
 export const sarasCollaboration = [

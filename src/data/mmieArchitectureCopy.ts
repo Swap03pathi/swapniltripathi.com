@@ -17,10 +17,10 @@ export const mmieHero = {
 };
 
 export const mmieHeroKpis = [
-  { label: 'Low latency', value: '<150ms p95 response', tone: 'amber' as const },
-  { label: 'High throughput', value: '10K+ req/sec', tone: 'orange' as const },
-  { label: 'Active trades', value: '1M+ tracked realtime', tone: 'emerald' as const },
-  { label: 'Advisor intelligence', value: '5K+ advisors scored', tone: 'violet' as const },
+  { label: 'Filter dimensions', value: '9 dimensions · multi-select', tone: 'amber' as const },
+  { label: 'Live trades', value: '~400 concurrent, from a 200K+ msg/day firehose', tone: 'orange' as const },
+  { label: 'Data scale', value: 'Millions of documents · 3.2M-msg collection', tone: 'emerald' as const },
+  { label: 'Match latency', value: '<500ms downstream', tone: 'violet' as const },
 ];
 
 export const mmieQueryDimensions = [
@@ -81,7 +81,7 @@ export const mmieRedisLayers = [
     name: 'Advisor intelligence layer',
     accent: 'violet' as const,
     keys: ['advisor:perf:{id}'],
-    fields: ['accuracy', 'rolling consistency', 'risk score', 'realized performance', 'unrealized performance'],
+    fields: ['accuracy:1d / 7d / 30d / 90d', 'per-category splits', 'per-period splits', 'totalTrades:90d'],
     purpose: 'Dynamic advisor intelligence scoring.',
   },
   {
@@ -118,17 +118,17 @@ export const mmieAdvisorOld = {
 export const mmieAdvisorNew = {
   title: 'New system',
   parts: [
-    'realized performance',
-    'unrealized performance',
-    'rolling consistency',
-    'risk adjustment',
-    'live trade quality',
+    'closed-trade win-rate baseline',
+    'rolling windows — 1d / 7d / 30d / 90d',
+    'category + period segmentation',
+    'incremental delta updates per trade event',
   ],
 };
 
 export const mmieRollingWindows = ['1d', '7d', '30d', '90d'] as const;
 export const mmieAdvisorCategories = ['Index options', 'Stock options', 'Futures', 'Equity'] as const;
-export const mmieWeightingNote = 'Closed trades weighted higher than open trades in scoring blends.';
+export const mmieDeltaUpdatesNote =
+  'Advisor scores update via per-event increment/decrement — never a full recompute across all trades.';
 
 export const mmieIncrementalSteps = [
   'Trade event',
@@ -189,7 +189,7 @@ export const mmieTechStack = [
   { name: 'Redis', logoUrl: 'https://cdn.simpleicons.org/redis/DC382D', homepageUrl: 'https://redis.io' },
   { name: 'MongoDB', logoUrl: 'https://cdn.simpleicons.org/mongodb/47A248', homepageUrl: 'https://mongodb.com' },
   { name: 'Node.js', logoUrl: 'https://cdn.simpleicons.org/nodedotjs/5FA04E', homepageUrl: 'https://nodejs.org' },
-  { name: 'AWS ECS', logoUrl: 'https://cdn.simpleicons.org/amazonaws/FF9900', homepageUrl: 'https://aws.amazon.com/ecs/' },
+  { name: 'AWS ECS', logoUrl: '/logos/ECS.png', homepageUrl: 'https://aws.amazon.com/ecs/' },
   { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
   {
     name: 'Apache Airflow',

@@ -33,6 +33,9 @@ export default function AppleHero() {
             <h1 className="mt-4 text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-[2.5rem]">
               {appleHero.title}
             </h1>
+            <p className="mt-3 max-w-xl text-xs leading-relaxed text-white/40 md:text-sm">
+              {appleHero.tenure}
+            </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/45 md:text-base">
               {appleHero.description}
             </p>

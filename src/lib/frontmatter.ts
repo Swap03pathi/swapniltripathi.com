@@ -13,6 +13,7 @@ export function parseFrontmatter(raw: string): {
     const key = line.slice(0, idx).trim();
     let value = line.slice(idx + 1).trim();
     if (/^(['"]).*\1$/.test(value)) value = value.slice(1, -1); // strip matching quotes
+    value = value.replace(/\\(["'])/g, '$1'); // unescape \" and \' inside the value
     data[key] = value;
   }
   return { data, content: raw.slice(match[0].length) };

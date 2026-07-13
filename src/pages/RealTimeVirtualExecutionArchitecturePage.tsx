@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 import RteArchitectureCanvas from '../components/architecture/rte/RteArchitectureCanvas';
 import { rteProjectPath } from '../constants/realTimeVirtualExecution';
 
@@ -7,6 +8,11 @@ export default function RealTimeVirtualExecutionArchitecturePage() {
   const location = useLocation();
   return (
     <div className="relative z-10 pt-24 pb-8 px-4 sm:px-6">
+      <Seo
+        title="Real-Time Virtual Execution — Architecture Deep Dive"
+        description="A persistent WebSocket-driven engine matching live prices against signals in <500ms — Redis state, Mongo change streams, automatic recovery."
+        path="/project/real-time-virtual-execution-system/architecture"
+      />
       <div className="mx-auto max-w-6xl">
         <Link
           to={rteProjectPath()}
@@ -32,7 +38,7 @@ export default function RealTimeVirtualExecutionArchitecturePage() {
             Real-Time Virtual Execution Architecture
           </h1>
           <p className="relative mt-5 max-w-3xl text-sm leading-relaxed text-white/45 sm:text-base">
-            A persistent low-latency execution system designed for high-frequency
+            A persistent low-latency execution system designed for high-throughput
             websocket streams, real-time trade state transitions, and automated
             recovery.
           </p>

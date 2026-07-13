@@ -1,8 +1,7 @@
-import { OYO_SECTION_IDS } from '../constants/oyoExperience';
-
 export const oyoHero = {
   eyebrow: 'OYO Internship Experience',
   title: 'Discovering Analytics Through Experimentation',
+  role: 'Summer Analyst · Jun — Jul 2019',
   description:
     'Worked on exploratory data analysis and web scraping experiments during an early internship experience in the travel-tech space, which later shaped my interest in analytics engineering and data systems.',
   techPills: [
@@ -53,8 +52,3 @@ export const oyoExplorationCards = [
 
 export const oyoClosing =
   'This internship introduced me to analytical thinking, exploratory experimentation, and working with data beyond spreadsheets for the first time.';
-
-export const oyoSectionNav = [
-  { id: OYO_SECTION_IDS.hero, label: 'Overview' },
-  { id: OYO_SECTION_IDS.exploration, label: 'Exploration' },
-] as const;

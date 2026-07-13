@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { SARAS_EXPERIENCE_PATH, SARAS_SECTION_IDS } from '../../constants/sarasExperience';
-import { sarasCoreSystems } from '../../data/sarasExperienceCopy';
+import { sarasCoreSystems, sarasSystemIntros } from '../../data/sarasExperienceCopy';
 import { saveSarasReturnSection } from '../../utils/sarasScrollRestore';
 import { SarasPill } from './SarasPrimitives';
 import type { SarasSystemKey } from '../../constants/sarasExperience';
@@ -51,7 +51,10 @@ export default function SarasArchitectureBridge({ system }: { system: SarasSyste
         <h1 className="mt-2 max-w-3xl text-2xl font-bold tracking-tight text-white md:text-3xl">
           {core.title}
         </h1>
-        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/45 md:text-base">
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+          {sarasSystemIntros[system]}
+        </p>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/45 md:text-base">
           {core.summary}
         </p>
 

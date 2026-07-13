@@ -1,11 +1,11 @@
 import type { Tool } from './types';
-import { TESTBOOK_SECTION_IDS } from '../constants/testbookExperience';
 
 export const testbookHero = {
   eyebrow: 'Testbook Experience',
   title: 'Building Analytics & Operational Foundations at Testbook',
+  role: 'Analyst · Aug 2020 — Jan 2022',
   description:
-    'Worked across analytics, reporting, product instrumentation, and operational automation workflows supporting product, sales, and growth teams within a fast-moving edtech startup environment.',
+    'My first job out of college, on a five-person analytics team inside a fast-moving edtech startup. Worked across analytics, reporting, product instrumentation, and operational automation supporting product, sales, and growth teams.',
   metadata: [
     { label: 'Analytics', icon: 'chart' as const },
     { label: 'Redash', icon: 'dashboard' as const },
@@ -73,7 +73,7 @@ export const testbookWorkAreas = [
       'MongoDB querying across collections',
       'Redash dashboards for product, sales & marketing',
       'Query-based alert systems',
-      'MIS & ECTM reporting workflows',
+      'MIS & monthly engagement/growth reporting',
       'Adhoc analytical support for teams',
     ],
     stack: ['MongoDB', 'Redash', 'SQL (Mongo Queries)'],
@@ -86,13 +86,13 @@ export const testbookWorkAreas = [
     highlight: true,
     icon: 'target' as const,
     bullets: [
-      'Planned analytics events, triggers & property schemas',
-      'Worked with developers & QA for event implementation',
-      'Firebase, WebEngage & pixel instrumentation',
-      'A/B testing dashboards for PM workflows',
-      'Product & growth event tracking',
+      'Event instrumentation for 6M+ monthly active users (Google Tag Manager + WebEngage)',
+      'Owned event planning — triggers, properties, and schemas',
+      'Drove dev + QA through implementation and release',
+      'Built A/B-testing dashboards in Firebase for product managers',
+      'Pixel event tracking across product & growth funnels',
     ],
-    stack: ['Firebase', 'WebEngage', 'Pixel Events', 'A/B Testing'],
+    stack: ['Firebase', 'WebEngage', 'Google Tag Manager', 'Pixel Events', 'A/B Testing'],
   },
   {
     id: 'automation',
@@ -101,14 +101,14 @@ export const testbookWorkAreas = [
     accent: 'emerald' as const,
     icon: 'code' as const,
     bullets: [
-      'Automated manual data ingestion workflows',
-      'Google Apps Script + Sheets automation',
-      'Bulk lead insertion workflows',
-      'REST API integrations',
-      'Custom Sheets toolbar actions',
+      'The defining build: self-taught JavaScript (pre-AI era) to automate a manual sales workflow',
+      'Built a Google Apps Script custom toolbar the sales team used daily',
+      'Bulk-inserted leads into the production database via REST APIs (POST/GET) straight from Sheets',
+      'Became critical tooling for sales operations',
+      'PySpark data automation & Airflow DAG authoring',
       'Backup workflows using Google Cloud',
     ],
-    stack: ['Google Apps Script', 'Google Sheets', 'REST APIs', 'GCP Storage'],
+    stack: ['Google Apps Script', 'JavaScript', 'REST APIs', 'PySpark', 'Airflow', 'GCP Storage'],
   },
 ] as const;
 
@@ -134,9 +134,9 @@ export const testbookTooling: Tool[] = [
     homepageUrl: 'https://webengage.com/',
   },
   {
-    name: 'Google Analytics',
-    logoUrl: 'https://cdn.simpleicons.org/googleanalytics/E37400',
-    homepageUrl: 'https://analytics.google.com/',
+    name: 'Google Tag Manager',
+    logoUrl: 'https://cdn.simpleicons.org/googletagmanager/246FDB',
+    homepageUrl: 'https://tagmanager.google.com/',
   },
   {
     name: 'Google Apps Script',
@@ -149,9 +149,14 @@ export const testbookTooling: Tool[] = [
     homepageUrl: 'https://www.google.com/sheets/about/',
   },
   {
-    name: 'REST APIs',
-    logoUrl: 'https://cdn.simpleicons.org/postman/FF6C37',
-    homepageUrl: 'https://www.postman.com/',
+    name: 'PySpark',
+    logoUrl: 'https://cdn.simpleicons.org/apachespark/E25A1C',
+    homepageUrl: 'https://spark.apache.org/',
+  },
+  {
+    name: 'Airflow',
+    logoUrl: 'https://cdn.simpleicons.org/apacheairflow/017CEE',
+    homepageUrl: 'https://airflow.apache.org/',
   },
   {
     name: 'GCP Storage',
@@ -162,10 +167,3 @@ export const testbookTooling: Tool[] = [
 
 export const testbookClosing =
   'Testbook gave me early exposure to product analytics, operational automation, and cross-functional execution — shaping the foundation for my later work in production data systems and infrastructure engineering.';
-
-export const testbookSectionNav = [
-  { id: TESTBOOK_SECTION_IDS.hero, label: 'Overview' },
-  { id: TESTBOOK_SECTION_IDS.workflow, label: 'Workflow' },
-  { id: TESTBOOK_SECTION_IDS.workAreas, label: 'Work' },
-  { id: TESTBOOK_SECTION_IDS.tooling, label: 'Stack' },
-] as const;

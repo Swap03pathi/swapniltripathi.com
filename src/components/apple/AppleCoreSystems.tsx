@@ -3,12 +3,16 @@ import { APPLE_SECTION_IDS } from '../../constants/appleExperience';
 import { appleCoreSystems } from '../../data/appleExperienceCopy';
 import { appleSystemIcons } from './AppleIconMap';
 import AppleVerticalFlow from './AppleVerticalFlow';
-import { AppleCard, ApplePill, AppleSection, AppleSectionLabel } from './ApplePrimitives';
+import { AppleCard, ApplePill, AppleSection } from './ApplePrimitives';
 
 export default function AppleCoreSystems() {
   return (
-    <AppleSection id={APPLE_SECTION_IDS.coreSystems} className="border-b border-white/[0.06]">
-      <AppleSectionLabel>Core Systems</AppleSectionLabel>
+    <AppleSection
+      id={APPLE_SECTION_IDS.coreSystems}
+      eyebrow="Core Systems"
+      title="Core Data Systems Built at Apple"
+      className="border-b border-white/[0.06]"
+    >
       <div className="space-y-6 md:space-y-8">
         {appleCoreSystems.map((system, i) => {
           const Icon = appleSystemIcons[system.icon];
@@ -44,9 +48,14 @@ export default function AppleCoreSystems() {
                       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-accent/15 text-xs font-bold text-accent">
                         {system.number}
                       </span>
-                      <h3 className="text-xl font-bold tracking-tight text-white md:text-2xl">
-                        {system.title}
-                      </h3>
+                      <div className="min-w-0">
+                        <h3 className="text-xl font-bold tracking-tight text-white md:text-2xl">
+                          {system.title}
+                        </h3>
+                        {'subtitle' in system && system.subtitle ? (
+                          <p className="mt-1 text-xs italic text-white/35">{system.subtitle}</p>
+                        ) : null}
+                      </div>
                     </div>
                     {'description' in system && system.description ? (
                       <p className="mt-4 text-sm leading-relaxed text-white/45 md:text-[0.9375rem]">
@@ -61,6 +70,11 @@ export default function AppleCoreSystems() {
                         </li>
                       ))}
                     </ul>
+                    {'challenge' in system && system.challenge ? (
+                      <p className="mt-5 rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-sm leading-relaxed text-white/45">
+                        {system.challenge}
+                      </p>
+                    ) : null}
                     <div className="mt-6">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/30">
                         Tech

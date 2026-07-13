@@ -34,6 +34,7 @@ export default function TestbookHero() {
             <h1 className="mt-4 text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-[2.35rem]">
               {testbookHero.title}
             </h1>
+            <p className="mt-3 text-sm font-medium text-white/50">{testbookHero.role}</p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/45 md:text-base">
               {testbookHero.description}
             </p>

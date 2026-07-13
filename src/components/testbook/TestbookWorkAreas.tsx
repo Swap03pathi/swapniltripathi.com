@@ -12,7 +12,10 @@ export default function TestbookWorkAreas() {
       className="scroll-mt-28 border-b border-white/[0.06] py-14 md:py-16 lg:py-20"
     >
       <div className="mx-auto max-w-[1200px] px-5 sm:px-6 lg:px-8">
-        <div className="space-y-5 md:space-y-6">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/60">
+          Core Work Areas
+        </h2>
+        <div className="mt-8 space-y-5 md:mt-10 md:space-y-6">
           {testbookWorkAreas.map((area, i) => {
             const Icon = testbookWorkIcons[area.icon];
             const styles = testbookAccentStyles[area.accent];

@@ -159,16 +159,7 @@ export default function SarasProductSurfaces() {
               </p>
             </div>
           </div>
-        ) : (
-          <p className="mx-auto mt-6 max-w-xl text-sm text-white/40">
-            Add your YouTube URL in{' '}
-            <code className="rounded bg-white/[0.06] px-1.5 py-0.5 text-xs text-accent/80">
-              sarasTutorialVideoUrl
-            </code>{' '}
-            in <code className="text-xs text-white/50">src/data/sarasExperienceCopy.ts</code> to embed
-            the player here.
-          </p>
-        )}
+        ) : null}
       </SarasCard>
     </SarasSection>
   );

@@ -6,7 +6,6 @@ import {
   GitBranch,
   Layers,
   MessageSquare,
-  Monitor,
   Radio,
   Workflow,
   type LucideIcon,
@@ -24,13 +23,6 @@ export const appleHeroMetricIcons = {
   posts: MessageSquare,
   stack: Layers,
   workflow: Workflow,
-} as const satisfies Record<string, LucideIcon>;
-
-export const appleStatIcons = {
-  pipeline: GitBranch,
-  listening: Radio,
-  monitor: Monitor,
-  automation: Activity,
 } as const satisfies Record<string, LucideIcon>;
 
 export const appleSystemIcons = {

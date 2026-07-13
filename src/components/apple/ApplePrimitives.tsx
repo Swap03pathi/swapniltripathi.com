@@ -19,19 +19,6 @@ export function AppleBackdrop() {
   );
 }
 
-/** Centered section label with flanking lines — matches design reference. */
-export function AppleSectionLabel({ children }: { children: ReactNode }) {
-  return (
-    <div className="mb-10 flex items-center gap-4 md:mb-12">
-      <span className="h-px flex-1 bg-white/[0.06]" aria-hidden />
-      <p className="shrink-0 text-xs font-semibold uppercase tracking-[0.22em] text-accent/60">
-        {children}
-      </p>
-      <span className="h-px flex-1 bg-white/[0.06]" aria-hidden />
-    </div>
-  );
-}
-
 export function AppleSection({
   id,
   eyebrow,

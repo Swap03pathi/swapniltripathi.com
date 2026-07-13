@@ -109,7 +109,7 @@ BUY NSEPUT NIFTY
 SL 15 TGT 85,100`;
 
 export const rrisMessageJson = `{
-  "ticker": "NIFTY23600PE",
+  "ticker": "NIFTY 23600 PE (12 May 2026)",
   "category": "Index Options",
   "position": "Buy",
   "entry": 45.2,
@@ -128,7 +128,7 @@ export const rrisNormalizedObjectLines: { k: string; v: string }[] = [
   { k: 'stoploss', v: '15' },
   { k: 'target', v: '[85,100]' },
   { k: 'period', v: 'Intraday' },
-  { k: 'advisor', v: 'KSL Research' },
+  { k: 'advisor', v: 'Example Research' },
   { k: 'source', v: 'Telegram' },
   { k: 'status', v: 'Pending Review' },
 ];

@@ -1,6 +1,7 @@
 import {
   Briefcase,
   ClipboardList,
+  Code2,
   FileSpreadsheet,
   FileText,
   Layers,
@@ -20,6 +21,7 @@ export const eyMetaIcons = {
 } as const satisfies Record<string, LucideIcon>;
 
 export const eyWorkIcons = {
+  code: Code2,
   video: Video,
   automation: Workflow,
   research: Layers,
