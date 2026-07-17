@@ -43,3 +43,75 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+/* Blog post content — collapsible "technical detail" cards, figures, and wide-content
+   overflow. Minimal additions mapped to the site's existing tokens (white/10 borders,
+   white/[0.02] surfaces, white/40 muted text, accent #00d4ff). */
+.post-content details {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 18px 0;
+}
+
+.post-content summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.post-content summary:focus-visible {
+  outline: 2px solid rgba(0, 212, 255, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.post-content summary::-webkit-details-marker {
+  display: none;
+}
+
+.post-content summary::before {
+  content: '▸';
+  color: rgba(255, 255, 255, 0.4);
+  transition: transform 0.15s;
+}
+
+.post-content details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.post-content details > *:not(summary) {
+  margin-top: 12px;
+}
+
+.post-content figure {
+  margin: 24px 0;
+}
+
+.post-content figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-content figcaption {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.post-content pre {
+  overflow-x: auto;
+}
+
+.post-content table {
+  display: block;
+  overflow-x: auto;
+}

@@ -1,19 +1,18 @@
-import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github-dark.css';
 import Footer from '../components/Footer';
 import { getBlogPost } from '../lib/blogPosts';
+import { usePostHead } from '../lib/postHead';
 
 export default function BlogPostPage() {
   const { slug } = useParams();
   const post = slug ? getBlogPost(slug) : undefined;
 
-  useEffect(() => {
-    document.title = post
-      ? `${post.title} — Swapnil Tripathi`
-      : 'Post not found — Swapnil Tripathi';
-  }, [post]);
+  usePostHead(post);
 
   if (!post) {
     return (
@@ -43,8 +42,25 @@ export default function BlogPostPage() {
           Swapnil Tripathi · <time dateTime={post.date}>{post.date}</time> ·{' '}
           {post.readingMinutes} min read
         </p>
-        <div className="prose prose-invert mt-10 max-w-none">
-          <Markdown remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
+        {post.tags.length > 0 && (
+          <p className="mt-3 flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-white/40"
+              >
+                {tag}
+              </span>
+            ))}
+          </p>
+        )}
+        <div className="post-content prose prose-invert mt-10 max-w-none">
+          <Markdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw, rehypeHighlight]}
+          >
+            {post.content}
+          </Markdown>
         </div>
       </main>
       <Footer />
