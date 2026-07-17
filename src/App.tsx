@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -11,8 +11,9 @@ const ExperiencePage = lazy(() => import('./pages/ExperiencePage'));
 const ExperienceDetailPage = lazy(() => import('./pages/ExperienceDetailPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const ProjectArchitecturePage = lazy(() => import('./pages/ProjectArchitecturePage'));
-const ComingSoonPage = lazy(() => import('./pages/ComingSoonPage'));
 const MePage = lazy(() => import('./pages/MePage'));
+const BlogsPage = lazy(() => import('./pages/BlogsPage'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const AppleExperiencePage = lazy(() => import('./pages/AppleExperiencePage'));
 const EyExperiencePage = lazy(() => import('./pages/EyExperiencePage'));
 const OyoExperiencePage = lazy(() => import('./pages/OyoExperiencePage'));
@@ -65,7 +66,10 @@ function App() {
             element={<ProjectArchitecturePage />}
           />
           <Route path="/project/:slug" element={<ProjectPage />} />
-          <Route path="/thoughts" element={<ComingSoonPage title="Thoughts" />} />
+          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/blogs/:slug" element={<BlogPostPage />} />
+          {/* Old orphan route — keep any saved links working */}
+          <Route path="/thoughts" element={<Navigate to="/blogs" replace />} />
           <Route path="/me" element={<MePage />} />
         </Routes>
         </Suspense>

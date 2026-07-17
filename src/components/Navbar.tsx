@@ -24,6 +24,7 @@ export default function Navbar() {
   }[] = [
     { label: 'Experience', to: '/experience' },
     { label: 'Timeline', action: scrollToTimeline },
+    { label: 'Blog', to: '/blogs' },
     { label: 'Me', to: '/me' },
   ];
 
