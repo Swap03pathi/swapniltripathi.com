@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { WHATSAPP_URL } from '../constants/contact';
 import { socials } from '../data';
 
@@ -63,6 +64,11 @@ export default function Footer() {
             </a>
           ))}
         </div>
+
+        <nav className="mt-8 flex items-center justify-center gap-5 text-xs text-white/30">
+          <Link to="/blogs" className="hover:text-white/60 transition-colors">Blog</Link>
+          <Link to="/privacy" className="hover:text-white/60 transition-colors">Privacy</Link>
+        </nav>
 
         <p className="mt-6 text-xs text-white/15">
           &copy; {new Date().getFullYear()} Swapnil

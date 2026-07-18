@@ -14,6 +14,7 @@ const ProjectArchitecturePage = lazy(() => import('./pages/ProjectArchitecturePa
 const MePage = lazy(() => import('./pages/MePage'));
 const BlogsPage = lazy(() => import('./pages/BlogsPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const AppleExperiencePage = lazy(() => import('./pages/AppleExperiencePage'));
 const EyExperiencePage = lazy(() => import('./pages/EyExperiencePage'));
 const OyoExperiencePage = lazy(() => import('./pages/OyoExperiencePage'));
@@ -70,6 +71,7 @@ function App() {
           <Route path="/blogs/:slug" element={<BlogPostPage />} />
           {/* Old orphan route — keep any saved links working */}
           <Route path="/thoughts" element={<Navigate to="/blogs" replace />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/me" element={<MePage />} />
         </Routes>
         </Suspense>
