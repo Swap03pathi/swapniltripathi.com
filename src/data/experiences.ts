@@ -34,10 +34,7 @@ export const experiences: Experience[] = [
     fullDescription:
       'Started in Data Engineering building robust pipeline infrastructure, then transitioned to Data Science where I developed analytical systems and models. Worked on systems that needed to be reliable at Apple scale — handling massive data volumes with strict correctness requirements.',
     logoUrl: 'https://cdn.simpleicons.org/apple/ffffff',
-    projectSlugs: [
-      'anomaly-detection-system',
-      'data-quality-framework',
-    ],
+    projectSlugs: [],
   },
   {
     slug: 'testbook',
@@ -49,11 +46,7 @@ export const experiences: Experience[] = [
     fullDescription:
       'Worked as an analyst building data-driven tools and reports that directly influenced product strategy. Developed internal systems that automated reporting and provided actionable insights for the team.',
     logoUrl: '/logos/testbook.png',
-    projectSlugs: [
-      'analytics-dashboard',
-      'automated-reporting-system',
-      'user-segmentation-engine',
-    ],
+    projectSlugs: ['user-segmentation-engine'],
   },
   {
     slug: 'oyo',

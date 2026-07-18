@@ -102,6 +102,7 @@ export const testbookWorkAreas = [
     icon: 'code' as const,
     bullets: [
       'Automated manual data ingestion workflows',
+      'Automated recurring reports with Apps Script + MongoDB queries',
       'Google Apps Script + Sheets automation',
       'Bulk lead insertion workflows',
       'REST API integrations',

@@ -215,61 +215,6 @@ description:
   ],
   },
   {
-    slug: 'anomaly-detection-system',
-    name: 'Anomaly Detection System',
-    period: '2019 — 2022',
-    highlight:
-      'ML-based anomaly detection to catch critical outliers in production streams.',
-    description:
-      'Implemented a configurable anomaly scoring and alerting setup to surface abnormal behavior across high-volume datasets.',
-    tools: [
-      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
-      { name: 'TensorFlow', logoUrl: 'https://cdn.simpleicons.org/tensorflow/FF6F00', homepageUrl: 'https://tensorflow.org' },
-      { name: 'Pandas', logoUrl: 'https://cdn.simpleicons.org/pandas/150458', homepageUrl: 'https://pandas.pydata.org' },
-    ],
-  },
-  {
-    slug: 'data-quality-framework',
-    name: 'Data Quality Framework',
-    period: 'Jan 2021 — Sep 2021',
-    highlight:
-      'Automated framework for data validation and quality scoring across production datasets.',
-    description:
-      'Created a reusable quality framework with validation checks, scoring, and reporting that caught data issues before release.',
-    tools: [
-      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
-      { name: 'Great Expectations', logoUrl: 'https://cdn.simpleicons.org/greatexpectations/FC5A3B', homepageUrl: 'https://greatexpectations.io' },
-      { name: 'Tableau', logoUrl: 'https://cdn.simpleicons.org/tableau/E97627', homepageUrl: 'https://www.tableau.com' },
-    ],
-  },
-  {
-    slug: 'analytics-dashboard',
-    name: 'Analytics Dashboard',
-    period: '2020 — 2021',
-    highlight:
-      'Internal dashboard for user behavior metrics, cohorts, and product trend tracking.',
-    description:
-      'Created actionable analytics dashboards used by product teams to understand engagement and prioritize roadmap decisions.',
-    tools: [
-      { name: 'SQL', logoUrl: 'https://cdn.simpleicons.org/mysql/4479A1', homepageUrl: 'https://mysql.com' },
-      { name: 'Tableau', logoUrl: 'https://cdn.simpleicons.org/tableau/E97627', homepageUrl: 'https://www.tableau.com' },
-    ],
-  },
-  {
-    slug: 'automated-reporting-system',
-    name: 'Automated Reporting System',
-    period: '2020 — 2021',
-    highlight:
-      'Automated reporting pipeline that significantly reduced manual reporting effort.',
-    description:
-      'Built scheduled report generation and distribution workflows that improved consistency and reduced manual data operations.',
-    tools: [
-      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
-      { name: 'SQL', logoUrl: 'https://cdn.simpleicons.org/mysql/4479A1', homepageUrl: 'https://mysql.com' },
-      { name: 'Celery', logoUrl: 'https://cdn.simpleicons.org/celery/37814A', homepageUrl: 'https://docs.celeryq.dev' },
-    ],
-  },
-  {
     slug: 'user-segmentation-engine',
     name: 'User Segmentation Engine',
     period: 'Dec 2018 — Mar 2019',
