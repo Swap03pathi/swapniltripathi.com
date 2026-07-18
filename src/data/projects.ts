@@ -215,64 +215,6 @@ description:
   ],
   },
   {
-    slug: 'trading-execution-engine',
-    name: 'Trading Execution Engine',
-    period: 'Jun 2022 — Present',
-    highlight:
-      'High-throughput execution system for concurrent order flows with custom routing logic.',
-    description:
-      'Built a low-latency execution system that handles high concurrency and maintains strict state consistency across workflows.',
-    githubUrl: 'https://github.com/Swap03pathi/trading-execution-engine',
-    tools: [
-      { name: 'Go', logoUrl: 'https://cdn.simpleicons.org/go/00ADD8', homepageUrl: 'https://go.dev' },
-      { name: 'Redis', logoUrl: 'https://cdn.simpleicons.org/redis/DC382D', homepageUrl: 'https://redis.io' },
-      { name: 'PostgreSQL', logoUrl: 'https://cdn.simpleicons.org/postgresql/4169E1', homepageUrl: 'https://postgresql.org' },
-    ],
-  },
-  {
-    slug: 'signal-processing-pipeline',
-    name: 'Signal Processing Pipeline',
-    period: 'Aug 2022 — Present',
-    highlight:
-      'Distributed signal ingestion and normalization pipeline for 200K+ events/day.',
-    description:
-      'Designed and operated a reliable ingestion + deduplication pipeline with near real-time downstream delivery and alerting.',
-    tools: [
-      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
-      { name: 'Apache Kafka', logoUrl: 'https://cdn.simpleicons.org/apachekafka/231F20', homepageUrl: 'https://kafka.apache.org' },
-      { name: 'Grafana', logoUrl: 'https://cdn.simpleicons.org/grafana/F46800', homepageUrl: 'https://grafana.com' },
-    ],
-  },
-  {
-    slug: 'mobile-platform-backend',
-    name: 'Mobile Platform Backend',
-    period: 'Mar 2022 — Jul 2022',
-    highlight:
-      'Backend powering 150K+ downloads with high-concurrency API layer and real-time sync.',
-    description:
-      'Architected and built the backend platform for the Saras mobile application with real-time data sync, notifications, and resilient API behavior under load.',
-    githubUrl: 'https://github.com/Swap03pathi/saras-backend',
-    tools: [
-      { name: 'Node.js', logoUrl: 'https://cdn.simpleicons.org/nodejs/339933', homepageUrl: 'https://nodejs.org' },
-      { name: 'TypeScript', logoUrl: 'https://cdn.simpleicons.org/typescript/3178C6', homepageUrl: 'https://typescriptlang.org' },
-      { name: 'AWS', logoUrl: 'https://cdn.simpleicons.org/amazonaws/FF9900', homepageUrl: 'https://aws.amazon.com' },
-    ],
-  },
-  {
-    slug: 'data-pipeline-system',
-    name: 'Data Pipeline System',
-    period: '2019 — 2022',
-    highlight:
-      'Production-grade data pipelines processing large daily volumes with quality controls.',
-    description:
-      'Built resilient end-to-end pipelines with validation, monitoring, and recovery workflows for analytics correctness at scale.',
-    tools: [
-      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
-      { name: 'Apache Spark', logoUrl: 'https://cdn.simpleicons.org/apachespark/E25A1C', homepageUrl: 'https://spark.apache.org' },
-      { name: 'Apache Airflow', logoUrl: 'https://cdn.simpleicons.org/apacheairflow/017CEE', homepageUrl: 'https://airflow.apache.org' },
-    ],
-  },
-  {
     slug: 'anomaly-detection-system',
     name: 'Anomaly Detection System',
     period: '2019 — 2022',
