@@ -66,7 +66,6 @@ export default function Footer() {
         </div>
 
         <nav className="mt-8 flex items-center justify-center gap-5 text-xs text-white/30">
-          <Link to="/blogs" className="hover:text-white/60 transition-colors">Blog</Link>
           <Link to="/privacy" className="hover:text-white/60 transition-colors">Privacy</Link>
         </nav>
 
