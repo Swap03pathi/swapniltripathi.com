@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 
 const PRIVACY_MD = `
 **Effective date: July 18, 2026**
@@ -73,17 +73,13 @@ Questions about this policy: **swapniltripathi2905@gmail.com**.
 `;
 
 export default function PrivacyPage() {
-  useEffect(() => {
-    document.title = 'Privacy Policy — Swapnil Tripathi';
-    const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
-    meta?.setAttribute(
-      'content',
-      'How swapniltripathi.com handles cookies, advertising, and your data.'
-    );
-  }, []);
-
   return (
     <div className="relative z-10">
+      <Seo
+        title="Privacy Policy — Swapnil Tripathi"
+        description="How swapniltripathi.com handles cookies, advertising, and your data."
+        path="/privacy"
+      />
       <main className="mx-auto max-w-3xl px-6 pt-28 pb-24">
         <h1 className="text-4xl font-semibold">Privacy Policy</h1>
         <div className="prose prose-invert mt-8 max-w-none">

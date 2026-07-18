@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 import { useSarasScrollRestore } from '../hooks/useSarasScrollRestore';
 import SarasCoreSystems from '../components/saras/SarasCoreSystems';
 import SarasHero from '../components/saras/SarasHero';
@@ -17,6 +18,11 @@ export default function SarasExperiencePage() {
 
   return (
     <div className="relative z-10 min-h-screen bg-dark text-white">
+      <Seo
+        title="Saras — CTO & Co-Founder · Swapnil Tripathi"
+        description="Building a signal-intelligence platform: 200K+ daily signals, virtual trade execution on live price feeds, 150K+ downloads, 98% uptime."
+        path="/experience/saras"
+      />
       <SarasBackdrop />
       <div className="border-b border-white/[0.06] px-5 py-4 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between">

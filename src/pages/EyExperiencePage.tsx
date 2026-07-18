@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 import EyClosing from '../components/ey/EyClosing';
 import EyHero from '../components/ey/EyHero';
 import { EyBackdrop } from '../components/ey/EyPrimitives';
@@ -8,6 +9,11 @@ import EyWorkAreas from '../components/ey/EyWorkAreas';
 export default function EyExperiencePage() {
   return (
     <div className="relative z-10 min-h-screen bg-dark text-white font-sans">
+      <Seo
+        title="EY — Summer Associate · Swapnil Tripathi"
+        description="My first working system, built with zero prior coding: a YouTube video-validation tool for a national education platform."
+        path="/experience/ey"
+      />
       <EyBackdrop />
       <div className="border-b border-white/[0.05] px-5 py-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1000px]">

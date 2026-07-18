@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 import OyoClosing from '../components/oyo/OyoClosing';
 import OyoExplorationWork from '../components/oyo/OyoExplorationWork';
 import OyoHero from '../components/oyo/OyoHero';
@@ -8,6 +9,11 @@ import { OyoBackdrop } from '../components/oyo/OyoPrimitives';
 export default function OyoExperiencePage() {
   return (
     <div className="relative z-10 min-h-screen bg-dark text-white font-sans">
+      <Seo
+        title="OYO — Summer Analyst · Swapnil Tripathi"
+        description="OTA scraping and ranking analysis across booking platforms — first hands-on data work, and where I taught myself SQL."
+        path="/experience/oyo"
+      />
       <OyoBackdrop />
       <div className="border-b border-white/[0.05] px-5 py-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1040px]">

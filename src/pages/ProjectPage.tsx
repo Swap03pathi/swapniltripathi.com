@@ -1,6 +1,8 @@
-import { useParams, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getProjectBySlug, getExperienceForProject } from '../data';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
+import NotFoundPage from './NotFoundPage';
 import ProjectPageBackNav from '../components/ProjectPageBackNav';
 import { resolveAssetUrl } from '../utils/assetUrl';
 import { RTE_PROJECT_SLUG } from '../constants/realTimeVirtualExecution';
@@ -16,19 +18,7 @@ export default function ProjectPage() {
   const experience = project ? getExperienceForProject(project) : undefined;
 
   if (!project) {
-    return (
-      <div className="relative z-10 pt-24 pb-16 px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">Not found</h1>
-          <p className="text-sm text-white/40 mb-8">
-            This project doesn't exist.
-          </p>
-          <Link to="/" className="text-sm text-accent hover:underline">
-            Back home
-          </Link>
-        </div>
-      </div>
-    );
+    return <NotFoundPage />;
   }
 
   const isRte = project.slug === RTE_PROJECT_SLUG;
@@ -38,6 +28,11 @@ export default function ProjectPage() {
 
   return (
     <div className="relative z-10 pt-24 pb-16 px-6">
+      <Seo
+        title={`${project.name} — Swapnil Tripathi`}
+        description={project.highlight}
+        path={`/project/${project.slug}`}
+      />
       <div className={`mx-auto ${wideLayout ? 'max-w-4xl' : 'max-w-2xl'}`}>
         <ProjectPageBackNav project={project} />
 

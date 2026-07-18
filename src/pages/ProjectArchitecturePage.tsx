@@ -1,5 +1,6 @@
-import { Link, useParams } from 'react-router-dom';
-import Footer from '../components/Footer';
+import { useParams } from 'react-router-dom';
+import Seo from '../components/Seo';
+import NotFoundPage from './NotFoundPage';
 import { RTE_PROJECT_SLUG } from '../constants/realTimeVirtualExecution';
 import { RRIS_PROJECT_SLUG } from '../constants/realtimeRecommendationIngestion';
 import { MMIE_PROJECT_SLUG } from '../constants/multidimensionalMarketIntelligence';
@@ -11,36 +12,44 @@ export default function ProjectArchitecturePage() {
   const { slug } = useParams<{ slug: string }>();
 
   if (slug === RTE_PROJECT_SLUG) {
-    return <RealTimeVirtualExecutionArchitecturePage />;
+    return (
+      <>
+        <Seo
+          title="Real-Time Virtual Execution — Architecture Deep Dive"
+          description="A persistent WebSocket-driven engine matching live prices against signals — Redis state, Mongo change streams, automatic recovery."
+          path={`/project/${slug}/architecture`}
+        />
+        <RealTimeVirtualExecutionArchitecturePage />
+      </>
+    );
   }
 
   if (slug === RRIS_PROJECT_SLUG) {
-    return <RealtimeRecommendationIngestionArchitecturePage />;
+    return (
+      <>
+        <Seo
+          title="Realtime Recommendation Ingestion — Architecture Deep Dive"
+          description="How six noisy sources — Telegram, PDFs, YouTube live, X, news, web search — converge into one execution-ready trade schema via a two-stage LLM pipeline."
+          path={`/project/${slug}/architecture`}
+        />
+        <RealtimeRecommendationIngestionArchitecturePage />
+      </>
+    );
   }
 
   if (slug === MMIE_PROJECT_SLUG) {
-    return <MultidimensionalMarketIntelligenceArchitecturePage />;
+    return (
+      <>
+        <Seo
+          title="Market Intelligence Engine — Architecture Deep Dive"
+          description="Filter first, hydrate last: the Redis sorted-set architecture serving multidimensional, live-ranked market intelligence."
+          path={`/project/${slug}/architecture`}
+        />
+        <MultidimensionalMarketIntelligenceArchitecturePage />
+      </>
+    );
   }
 
-  return (
-    <div className="relative z-10 min-h-[55vh] px-6 pb-16 pt-24">
-      <div className="mx-auto max-w-md text-center">
-          <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-accent/45">
-            Architecture
-          </p>
-          <h1 className="text-lg font-semibold text-white">Coming soon</h1>
-          <p className="mt-3 text-sm text-white/40">
-            A dedicated architecture walkthrough is not available for this
-            project.
-          </p>
-          <Link
-            to={`/project/${slug ?? ''}`}
-            className="mt-8 inline-block text-sm text-accent hover:underline"
-          >
-            ← Back to project
-          </Link>
-        </div>
-        <Footer />
-      </div>
-  );
+  // After the purge, only the three real architecture pages exist.
+  return <NotFoundPage />;
 }

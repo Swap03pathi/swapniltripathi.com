@@ -7,4 +7,9 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  ssgOptions: {
+    dirStyle: 'nested', // emits /experience/index.html → clean /experience URLs on Cloudflare Pages
+    formatting: 'none', // 'prettify' causes hydration failures per vite-react-ssg docs
+    script: 'defer',
+  },
 });

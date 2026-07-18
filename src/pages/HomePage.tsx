@@ -3,11 +3,19 @@ import AboutBlurb from '../components/AboutBlurb';
 import Timeline from '../components/Timeline';
 import SystemsOperationalWork from '../components/SystemsOperationalWork';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
+import { PROFILE_PAGE } from '../lib/jsonld';
 // import { thoughts } from '../data';
 
 export default function HomePage() {
   return (
     <div className="relative z-10">
+      <Seo
+        title="Swapnil Tripathi — Systems Builder"
+        description="Systems builder across data, infrastructure, and realtime platforms — Saras, Apple, IIT Bombay. Writing about the architecture behind real production systems."
+        path="/"
+        jsonLd={PROFILE_PAGE}
+      />
       <Hero />
       <AboutBlurb />
       <Timeline />

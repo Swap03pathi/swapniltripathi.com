@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 import { getAllBlogPosts } from '../lib/blogPosts';
 
 const formatDate = (iso: string) =>
@@ -14,12 +14,13 @@ const formatDate = (iso: string) =>
 export default function BlogsPage() {
   const posts = getAllBlogPosts();
 
-  useEffect(() => {
-    document.title = 'Blog — Swapnil Tripathi';
-  }, []);
-
   return (
     <div className="relative z-10">
+      <Seo
+        title="Blog — Swapnil Tripathi"
+        description="Write-ups from things I build and run in production — security investigations, real-time data systems, and the tradeoffs behind them."
+        path="/blogs"
+      />
       <main className="mx-auto max-w-3xl px-6 pt-28 pb-24">
         <h1 className="text-4xl font-semibold">Blog</h1>
         <p className="mt-3 text-white/60">

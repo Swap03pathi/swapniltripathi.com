@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
 import AppleClosing from '../components/apple/AppleClosing';
 import AppleCoreSystems from '../components/apple/AppleCoreSystems';
 import AppleHero from '../components/apple/AppleHero';
@@ -9,6 +10,11 @@ import AppleScaleTooling from '../components/apple/AppleScaleTooling';
 export default function AppleExperiencePage() {
   return (
     <div className="relative z-10 min-h-screen bg-dark text-white">
+      <Seo
+        title="Apple — Data Engineer → Data Scientist · Swapnil Tripathi"
+        description="Data engineering and data science at Apple — production-scale pipelines, KPI anomaly detection, and analytics systems for AppleCare workflows."
+        path="/experience/apple"
+      />
       <AppleBackdrop />
       <div className="border-b border-white/[0.06] px-5 py-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1200px]">

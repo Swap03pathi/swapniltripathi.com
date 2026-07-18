@@ -5,34 +5,76 @@ import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
 import Footer from '../components/Footer';
+import Seo from '../components/Seo';
+import NotFoundPage from './NotFoundPage';
 import { getBlogPost } from '../lib/blogPosts';
-import { usePostHead } from '../lib/postHead';
+
+const SITE = 'https://swapniltripathi.com';
+
+// FAQ structured data for posts that answer common questions (wins People-Also-Ask /
+// AI-overview slots). Answers are faithful summaries of the post content.
+const FAQ_BY_SLUG: Record<string, { q: string; a: string }[]> = {
+  'malware-in-git-hooks': [
+    {
+      q: 'Is a take-home coding assignment from a recruiter safe to run?',
+      a: 'Treat every take-home as untrusted code. Do not git clone, npm install, or git checkout it on your real machine before inspecting it — malware can hide in git hooks and install scripts, and following the setup instructions can be the exploit itself.',
+    },
+    {
+      q: 'Can git checkout run malware?',
+      a: 'Yes. Git hooks such as post-checkout and pre-commit run automatically when you use normal git commands. A ZIP that ships a full .git folder can smuggle live hooks onto your machine — git deliberately does not transmit hooks over a normal clone, which is why attackers deliver assignments as ZIP files instead of repo links.',
+    },
+    {
+      q: 'How do I check a suspicious coding assignment without running it?',
+      a: 'Inspect it read-only: look inside .git/hooks/ for anything that is not a *.sample file, use npm install --ignore-scripts inside a throwaway VM if you must install, and verify recruiters through the company’s real domain. The free open-source interview-assignment-scanner automates these checks without ever executing the code.',
+    },
+  ],
+};
 
 export default function BlogPostPage() {
   const { slug } = useParams();
   const post = slug ? getBlogPost(slug) : undefined;
 
-  usePostHead(post);
+  if (!post) return <NotFoundPage />;
 
-  if (!post) {
-    return (
-      <div className="relative z-10">
-        <main className="px-6 pt-32 pb-24 text-center">
-          <h1 className="text-3xl font-semibold">Post not found</h1>
-          <p className="mx-auto mt-4 max-w-md text-white/60">
-            This post doesn&apos;t exist — it may have moved.
-          </p>
-          <Link to="/blogs" className="mt-8 inline-block text-sm underline hover:text-white">
-            ← Back to the blog
-          </Link>
-        </main>
-        <Footer />
-      </div>
-    );
+  const url = post.canonical ?? `${SITE}/blogs/${post.slug}`;
+  const image = post.cover ? `${SITE}${post.cover}` : undefined;
+
+  const jsonLd: object[] = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      ...(post.updated ? { dateModified: post.updated } : {}),
+      author: { '@type': 'Person', name: 'Swapnil Tripathi', url: `${SITE}/` },
+      ...(image ? { image } : {}),
+      mainEntityOfPage: url,
+    },
+  ];
+  const faq = FAQ_BY_SLUG[post.slug];
+  if (faq) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    });
   }
 
   return (
     <div className="relative z-10">
+      <Seo
+        title={`${post.title} — Swapnil Tripathi`}
+        description={post.description}
+        path={`/blogs/${post.slug}`}
+        ogType="article"
+        image={image}
+        jsonLd={jsonLd}
+      />
       <main className="mx-auto max-w-3xl px-6 pt-28 pb-24">
         <p className="text-xs uppercase tracking-widest text-white/40">
           <Link to="/blogs" className="hover:text-white/70">← Blog</Link>
