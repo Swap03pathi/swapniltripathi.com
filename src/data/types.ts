@@ -12,7 +12,6 @@ export interface Project {
   period: string;
   highlight: string;
   description: string;
-  githubUrl?: string;
   tools: Tool[];
 }
 

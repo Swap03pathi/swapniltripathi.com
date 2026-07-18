@@ -186,7 +186,7 @@ description:
   highlight:
     'ECS-based backend with Redis caching, load balancing, and high-uptime architecture.',
   description:
-    'Architected the backend infrastructure using AWS ECS with load balancing for API serving.\n\nImplemented Redis within the same VPC for fast data access and periodic synchronization. Built a system to sync data efficiently between storage layers to ensure consistent and low-latency responses.\n\nIntegrated monitoring and alerting using Grafana and Prometheus to maintain 99.9% uptime under load.\n\nFocused heavily on cost optimization while maintaining performance and reliability.',
+    'Architected the backend infrastructure using AWS ECS with load balancing for API serving.\n\nImplemented Redis within the same VPC for fast data access and periodic synchronization. Built a system to sync data efficiently between storage layers to ensure consistent and low-latency responses.\n\nIntegrated monitoring and alerting using Grafana and Prometheus to maintain 98% uptime under load.\n\nFocused heavily on cost optimization while maintaining performance and reliability.',
 
   tools: [
     { name: 'AWS ECS', logoUrl: 'https://cdn.simpleicons.org/amazonaws/FF9900', homepageUrl: 'https://aws.amazon.com/ecs/' },
@@ -213,61 +213,6 @@ description:
 
     
   ],
-  },
-  {
-    slug: 'user-segmentation-engine',
-    name: 'User Segmentation Engine',
-    period: 'Dec 2018 — Mar 2019',
-    highlight:
-      'Engine classifying users into behavioral segments for targeted interventions.',
-    description:
-      'Implemented segmentation logic and automated updates that enabled retention-focused targeting across user cohorts.',
-    tools: [
-      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
-      { name: 'scikit-learn', logoUrl: 'https://cdn.simpleicons.org/scikitlearn/F7931E', homepageUrl: 'https://scikit-learn.org' },
-      { name: 'Apache Airflow', logoUrl: 'https://cdn.simpleicons.org/apacheairflow/017CEE', homepageUrl: 'https://airflow.apache.org' },
-    ],
-  },
-  {
-    slug: 'core-application',
-    name: 'Core Application',
-    period: 'Before 2018',
-    highlight: 'First complete system built end-to-end from ingestion to output.',
-    description:
-      'Implemented the first production-like software system from scratch, including data flow, processing rules, and output handling.',
-    githubUrl: 'https://github.com/Swap03pathi/core-application',
-    tools: [
-      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
-      { name: 'Flask', logoUrl: 'https://cdn.simpleicons.org/flask/000000', homepageUrl: 'https://flask.palletsprojects.com' },
-      { name: 'SQLite', logoUrl: 'https://cdn.simpleicons.org/sqlite/003B57', homepageUrl: 'https://sqlite.org' },
-    ],
-  },
-  {
-    slug: 'automation-toolkit',
-    name: 'Automation Toolkit',
-    period: 'Before 2018',
-    highlight: 'Small utility scripts that removed repetitive manual operations.',
-    description:
-      'Assembled scripts and helpers to automate recurring tasks and speed up day-to-day engineering workflows.',
-    tools: [
-      { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
-      { name: 'Bash', logoUrl: 'https://cdn.simpleicons.org/gnubash/4EAA25', homepageUrl: 'https://gnu.org/software/bash' },
-      { name: 'Cron', logoUrl: 'https://cdn.simpleicons.org/linux/FCC624', homepageUrl: 'https://man7.org/linux/man-pages/man8/cron.8.html' },
-    ],
-  },
-  {
-    slug: 'monitoring-setup',
-    name: 'Monitoring Setup',
-    period: 'Jun 2017 — Sep 2017',
-    highlight:
-      "First monitoring and alerting system — because you can't fix what you can't see.",
-    description:
-      'Built early monitoring and alerting pipelines with basic health checks and dashboards to improve production reliability.',
-    tools: [
-      { name: 'Prometheus', logoUrl: 'https://cdn.simpleicons.org/prometheus/E6522C', homepageUrl: 'https://prometheus.io' },
-      { name: 'Grafana', logoUrl: 'https://cdn.simpleicons.org/grafana/F46800', homepageUrl: 'https://grafana.com' },
-      { name: 'Linux', logoUrl: 'https://cdn.simpleicons.org/linux/FCC624', homepageUrl: 'https://kernel.org' },
-    ],
   },
   {
     slug: 'ey-content-platform-ops',
