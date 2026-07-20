@@ -1,4 +1,4 @@
-import { WHATSAPP_URL } from '../constants/contact';
+import { Link } from 'react-router-dom';
 import { resolveAssetUrl } from '../utils/assetUrl';
 
 export default function Hero() {
@@ -45,14 +45,12 @@ export default function Hero() {
             className="animate-fade-in-up mt-10"
             style={{ animationDelay: '0.7s' }}
           >
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/contact"
               className="inline-block rounded-md border border-accent/20 bg-accent/10 px-6 py-2.5 text-sm font-medium text-accent transition-all hover:border-accent/40 hover:bg-accent/20 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]"
             >
               Let&apos;s Talk
-            </a>
+            </Link>
           </div>
         </div>
       </div>

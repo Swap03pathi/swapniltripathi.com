@@ -259,5 +259,23 @@ description:
     tools: [
       { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
     ],period: 'Jun 2019 — Jul 2019'
+  },
+  {
+    slug: 'finman',
+    name: 'Finman — On-Device AI Personal CFO',
+    period: 'June 2026',
+    highlight:
+      'Privacy-first Android "AI Personal CFO" that reads bank SMS entirely on-device to track income, expenses and savings — TypeScript engine + Flutter port kept in lockstep by golden vectors.',
+    description:
+      'A privacy-first Android app that parses transactional bank/UPI SMS on the device and turns them into a clean, reconciled personal ledger — income, expenses, savings, and per-account balances.\n\nBuilt solo, end-to-end: a framework-free TypeScript reference engine, a Flutter/Dart device port kept in lockstep by golden vectors, and a NestJS + Prisma + PostgreSQL server that only ever sees redacted skeletons.\n\nPassion project — Android-only by necessity, foundation complete, source open.',
+    tools: [
+      { name: 'Flutter', logoUrl: 'https://cdn.simpleicons.org/flutter/02569B', homepageUrl: 'https://flutter.dev' },
+      { name: 'Dart', logoUrl: 'https://cdn.simpleicons.org/dart/0175C2', homepageUrl: 'https://dart.dev' },
+      { name: 'TypeScript', logoUrl: 'https://cdn.simpleicons.org/typescript/3178C6', homepageUrl: 'https://typescriptlang.org' },
+      { name: 'NestJS', logoUrl: 'https://cdn.simpleicons.org/nestjs/E0234E', homepageUrl: 'https://nestjs.com' },
+      { name: 'Prisma', logoUrl: 'https://cdn.simpleicons.org/prisma/2D3748', homepageUrl: 'https://prisma.io' },
+      { name: 'PostgreSQL', logoUrl: 'https://cdn.simpleicons.org/postgresql/4169E1', homepageUrl: 'https://postgresql.org' },
+      { name: 'Jest', logoUrl: 'https://cdn.simpleicons.org/jest/C21325', homepageUrl: 'https://jestjs.io' },
+    ],
   }
 ];

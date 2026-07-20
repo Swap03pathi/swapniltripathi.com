@@ -1,23 +1,47 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
 import { FAVORITES_UPDATED, favoriteShelves } from '../data/meFavorites';
 
 // Personal sandbox page. Rough work — expect this to change often.
 const SURVEILLANCE_URL = 'https://swapniltripathi.com/app/surveillance';
-// Feedback is delivered over WhatsApp (same channel as the rest of the site).
-const WHATSAPP_NUMBER = '918879153323';
+// Feedback lands in a Google Sheet (no Google Form embedded — the page posts straight
+// to a tiny Apps Script web app attached to the sheet). Setup (~5 min):
+//   1. Create a Google Sheet → Extensions → Apps Script.
+//   2. Paste the doPost script (appends [timestamp, email, message] to a 'Feedback' tab).
+//   3. Deploy → New deployment → Web app → Execute as: Me · Access: Anyone.
+//   4. Paste the /exec URL here. While empty, the form shows a friendly note instead.
+// The URL only permits appending rows to that one sheet — safe to ship in the bundle.
+const SHEETS_WEBAPP_URL: string = '';
+
+type SendStatus = 'idle' | 'sending' | 'sent' | 'error';
 
 export default function MePage() {
   const [feedback, setFeedback] = useState('');
+  const [senderEmail, setSenderEmail] = useState('');
+  const [status, setStatus] = useState<SendStatus>('idle');
 
-  const sendFeedback = () => {
+  const sendFeedback = async () => {
     const text = feedback.trim();
-    if (!text) return;
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      `Feedback on swapniltripathi.com:\n\n${text}`
-    )}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
+    const email = senderEmail.trim(); // optional
+    if (!text || !SHEETS_WEBAPP_URL) return;
+
+    setStatus('sending');
+    try {
+      // mode:'no-cors' is required for Apps Script web apps — the response is opaque,
+      // so a resolved fetch is treated as success (the standard pattern for this setup).
+      await fetch(SHEETS_WEBAPP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ email, message: text }),
+      });
+      setStatus('sent');
+      setFeedback('');
+      setSenderEmail('');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -104,6 +128,42 @@ export default function MePage() {
                 </span>
               </div>
             </a>
+            <Link
+              to="/project/finman"
+              className="group block h-full rounded-lg border border-white/5 bg-white/[0.02] p-5 transition-all duration-300 ease-out hover:border-accent/20 hover:bg-white/[0.04] hover:shadow-[0_12px_36px_-18px_rgba(0,212,255,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/40"
+            >
+              <div className="flex h-full min-h-[120px] flex-col">
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-accent/45">
+                    Paused · On-Device AI / Android
+                  </span>
+                  <svg
+                    className="h-4 w-4 shrink-0 text-white/10 transition-colors group-hover:text-accent/55"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                <h3 className="mt-3 text-sm font-semibold leading-snug text-white transition-colors group-hover:text-accent">
+                  Finman — AI Personal CFO
+                </h3>
+                <p className="mt-2 flex-1 text-xs leading-relaxed text-white/45 transition-colors group-hover:text-white/55">
+                  Privacy-first Android app that reads bank SMS entirely on-device and turns
+                  them into three honest numbers — income, expenses, savings — with
+                  per-account reconciliation. TypeScript engine + Flutter port kept in
+                  lockstep by golden vectors. Raw messages never leave the phone.
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent/70 transition-colors group-hover:text-accent">
+                  Read the case study
+                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </Link>
           </div>
           <p className="mt-4 text-xs text-white/25">
             First load takes ~1–2 minutes — the server sleeps when idle to keep it
@@ -162,7 +222,15 @@ export default function MePage() {
           <p className="mb-4 text-sm text-white/40">
             Tried something here? Tell me what you think — good, bad, or broken.
           </p>
+          {SHEETS_WEBAPP_URL ? (
           <div className="rounded-lg border border-white/5 bg-white/[0.02] p-5">
+            <input
+              type="email"
+              value={senderEmail}
+              onChange={(e) => setSenderEmail(e.target.value)}
+              placeholder="Your email (optional — only if you'd like a reply)"
+              className="mb-3 w-full rounded-md border border-white/10 bg-dark/40 px-3 py-2.5 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-accent/40"
+            />
             <textarea
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
@@ -170,17 +238,34 @@ export default function MePage() {
               placeholder="What did you think?"
               className="w-full resize-y rounded-md border border-white/10 bg-dark/40 px-3 py-2.5 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-accent/40"
             />
-            <div className="mt-3 flex justify-end">
+            <div className="mt-3 flex items-center justify-end gap-4">
+              {status === 'sent' ? (
+                <span className="text-xs text-accent/70">Sent — thank you!</span>
+              ) : null}
+              {status === 'error' ? (
+                <span className="text-xs text-white/40">
+                  Couldn&apos;t send — please email me instead.
+                </span>
+              ) : null}
               <button
                 type="button"
                 onClick={sendFeedback}
-                disabled={!feedback.trim()}
+                disabled={!feedback.trim() || status === 'sending'}
                 className="rounded-md border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-all hover:border-accent/40 hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                Send feedback
+                {status === 'sending' ? 'Sending…' : 'Send feedback'}
               </button>
             </div>
           </div>
+          ) : (
+          <div className="rounded-lg border border-white/5 bg-white/[0.02] p-5 text-sm text-white/45">
+            The feedback box is being wired up — meanwhile, tell me what you think via the{' '}
+            <Link to="/contact" className="text-accent/70 underline hover:text-accent">
+              contact page
+            </Link>
+            .
+          </div>
+          )}
         </div>
       </section>
 

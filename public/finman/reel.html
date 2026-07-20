@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Finman — AI Personal CFO · Portfolio Reel</title>
+<style>
+  :root{
+    --bg:#0E1116; --surface:#161A21; --surfaceHigh:#1E232C; --surfaceLow:#11151B;
+    --border:#262C36; --borderStrong:#333B47;
+    --primary:#63C7FF; --onPrimary:#04222F;
+    --positive:#49D6A0; --negative:#FF6B85; --warning:#FFC861; --neutral:#8A93A3;
+    --t1:#F2F5FA; --t2:#AEB6C4; --t3:#727B8A; --inv:#0E1116;
+    --s1:#7C9EFF; --s2:#FF8FA3; --s3:#5BD1B7; --s4:#FFC861; --s5:#B28DFF; --s6:#7ED957; --s7:#FF9F68; --s8:#63C7FF;
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Inter, system-ui, sans-serif;
+    --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+  body{
+    background: radial-gradient(1200px 800px at 70% -10%, #182030 0%, var(--bg) 55%) fixed;
+    color:var(--t1); font-family:var(--font); overflow:hidden; -webkit-font-smoothing:antialiased;
+  }
+  /* ── stage / letterbox ── */
+  #stage{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
+  #frame{
+    position:relative; width:min(96vw, calc(96vh * 16/9)); height:min(96vh, calc(96vw * 9/16));
+    background:var(--bg); border-radius:20px; overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,.55), 0 0 0 1px var(--border);
+  }
+  /* persistent chrome */
+  .wordmark{ position:absolute; top:26px; left:30px; display:flex; gap:10px; align-items:center; z-index:40; }
+  .wordmark .dot{ width:26px; height:26px; border-radius:8px; background:linear-gradient(140deg,var(--primary),var(--s5));
+    display:flex; align-items:center; justify-content:center; color:var(--inv); font-weight:800; font-size:15px; }
+  .wordmark b{ font-size:17px; letter-spacing:.3px; }
+  .wordmark span{ color:var(--t3); font-size:12px; margin-left:4px; }
+  .progress{ position:absolute; top:0; left:0; height:3px; width:0%; z-index:40;
+    background:linear-gradient(90deg,var(--primary),var(--positive)); transition:width .25s linear; }
+  .counter{ position:absolute; top:26px; right:30px; z-index:40; color:var(--t3); font-size:12px; font-family:var(--mono); }
+
+  /* ── scenes ── */
+  .scene{ position:absolute; inset:0; padding:84px 70px 70px; opacity:0; visibility:hidden;
+    transition:opacity .55s ease; display:flex; flex-direction:column; }
+  .scene.active{ opacity:1; visibility:visible; }
+  [data-reveal]{ opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.75,.2,1); transition-delay:var(--d,0s); }
+  .scene.active [data-reveal]{ opacity:1; transform:none; }
+
+  .kicker{ color:var(--primary); font-weight:700; font-size:14px; letter-spacing:2.5px; text-transform:uppercase; }
+  h1{ font-size:60px; line-height:1.04; letter-spacing:-1px; margin-top:14px; font-weight:800; }
+  h2{ font-size:40px; line-height:1.08; letter-spacing:-.5px; font-weight:800; margin-top:10px; }
+  .sub{ color:var(--t2); font-size:21px; line-height:1.5; margin-top:18px; max-width:760px; }
+  .center{ align-items:center; text-align:center; justify-content:center; }
+  .center .sub{ margin-left:auto; margin-right:auto; }
+  .grow{ flex:1; }
+
+  /* chips & cards */
+  .card{ background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px 20px; }
+  .pill{ display:inline-flex; align-items:center; gap:8px; padding:9px 15px; border-radius:999px;
+    background:var(--surfaceHigh); border:1px solid var(--border); color:var(--t1); font-size:15px; font-weight:600; }
+  .pill .ic{ font-size:15px; }
+  .row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .muted{ color:var(--t3); }
+  .mono{ font-family:var(--mono); }
+
+  /* ── pipeline (data flow) ── */
+  .pipe{ display:flex; align-items:center; gap:0; margin-top:30px; flex-wrap:nowrap; }
+  .node{ background:var(--surface); border:1px solid var(--borderStrong); border-radius:14px; padding:16px 16px;
+    min-width:118px; text-align:center; position:relative; }
+  .node .n-ic{ font-size:24px; }
+  .node .n-t{ font-size:15px; font-weight:700; margin-top:6px; }
+  .node .n-s{ font-size:11.5px; color:var(--t3); margin-top:3px; line-height:1.3; }
+  .node.glow{ box-shadow:0 0 0 1px var(--primary), 0 0 26px rgba(99,199,255,.28); border-color:var(--primary); }
+  .arrow{ flex:1; height:2px; background:linear-gradient(90deg,var(--border),var(--borderStrong)); position:relative; min-width:26px; }
+  .arrow::after{ content:""; position:absolute; right:-1px; top:-4px; border:5px solid transparent; border-left-color:var(--borderStrong); }
+  .packet{ position:absolute; top:-4px; left:0; width:10px; height:10px; border-radius:50%;
+    background:var(--primary); box-shadow:0 0 14px var(--primary); }
+  .scene.active .packet{ animation:flow 3s cubic-bezier(.6,0,.4,1) infinite; }
+  @keyframes flow{ 0%{ left:0; opacity:0;} 8%{opacity:1;} 92%{opacity:1;} 100%{ left:100%; opacity:0; } }
+
+  /* ── two-language lockstep ── */
+  .twocol{ display:grid; grid-template-columns:1fr 64px 1fr; gap:0; align-items:stretch; margin-top:26px; }
+  .langcard{ background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:22px; }
+  .langcard h3{ font-size:20px; } .langcard .tag{ font-size:12px; color:var(--t3); margin-top:3px; }
+  .langcard ul{ margin-top:14px; list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .langcard li{ font-size:14.5px; color:var(--t2); display:flex; gap:8px; }
+  .langcard li b{ color:var(--t1); font-weight:600; }
+  .sync{ display:flex; align-items:center; justify-content:center; font-size:30px; color:var(--primary); }
+  .golden{ margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; }
+  .gv{ font-family:var(--mono); font-size:12.5px; color:var(--t2); background:var(--surfaceLow);
+    border:1px solid var(--border); border-radius:9px; padding:7px 11px; }
+  .tdd{ margin-top:16px; display:flex; gap:10px; align-items:center; font-size:15px; color:var(--t2); flex-wrap:wrap; }
+  .tdd .step{ background:var(--surfaceHigh); border:1px solid var(--border); padding:7px 12px; border-radius:999px; }
+  .red{ color:var(--negative); } .green{ color:var(--positive); }
+
+  /* ── privacy ── */
+  .privwrap{ display:grid; grid-template-columns:1fr 70px 1fr; gap:0; align-items:center; margin-top:26px; }
+  .sms{ background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:20px; font-size:15px; line-height:1.6; }
+  .sms .from{ color:var(--t3); font-size:12px; font-family:var(--mono); margin-bottom:10px; }
+  .sms .red-tok{ background:rgba(255,107,133,.16); color:var(--negative); border-radius:5px; padding:1px 5px; font-family:var(--mono); font-size:13.5px; transition:all .6s ease; }
+  .scene.active .sms.masked .red-tok{ background:var(--surfaceHigh); color:var(--t3); }
+  .skel{ background:var(--surfaceLow); border:1px dashed var(--borderStrong); border-radius:16px; padding:20px; font-family:var(--mono); font-size:14px; line-height:1.7; color:var(--t2); }
+  .skel .ph{ color:var(--primary); }
+  .priv-arrow{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--t3); font-size:12px; }
+  .priv-arrow .big{ font-size:26px; color:var(--positive); }
+  .guards{ margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; }
+  .guard{ display:flex; gap:10px; align-items:center; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px 16px; font-size:14.5px; }
+  .guard .gi{ font-size:18px; }
+
+  /* ── phone mockups (demo) ── */
+  .phones{ display:flex; gap:30px; justify-content:center; align-items:flex-start; margin-top:18px; }
+  .phonewrap{ display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .phone{ width:236px; height:430px; background:var(--bg); border:8px solid #05070b; border-radius:34px;
+    box-shadow:0 22px 50px rgba(0,0,0,.5), inset 0 0 0 1px var(--border); padding:16px 14px; overflow:hidden; position:relative; }
+  .phone .pbar{ font-size:11px; color:var(--t3); display:flex; justify-content:space-between; margin-bottom:10px; }
+  .ph-title{ font-size:14px; font-weight:700; margin-bottom:10px; }
+  .stat3{ display:flex; gap:8px; }
+  .stat{ flex:1; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:9px 8px; }
+  .stat .l{ font-size:9.5px; color:var(--t3); } .stat .v{ font-size:15px; font-weight:800; margin-top:3px; }
+  .stat.big{ margin-top:8px; }
+  .donut{ width:128px; height:128px; border-radius:50%; margin:14px auto 6px;
+    background:conic-gradient(var(--s1) 0 34%, var(--s2) 34% 58%, var(--s3) 58% 75%, var(--s4) 75% 88%, var(--s5) 88% 100%);
+    -webkit-mask: radial-gradient(closest-side, transparent 60%, #000 61%); mask: radial-gradient(closest-side, transparent 60%, #000 61%); position:relative; }
+  .donut-c{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .donut-c .dl{ font-size:9px; color:var(--t3); } .donut-c .dv{ font-size:16px; font-weight:800; }
+  .legend{ display:flex; flex-direction:column; gap:6px; margin-top:4px; }
+  .legrow{ display:flex; align-items:center; gap:7px; font-size:11px; color:var(--t2); }
+  .sw{ width:10px; height:10px; border-radius:3px; }
+  .acct{ display:flex; justify-content:space-between; font-size:11.5px; padding:7px 2px; border-top:1px solid var(--border); }
+  .acct .lab{ color:var(--t2); } .acct .bal{ font-weight:700; }
+  .banner{ background:rgba(255,200,97,.12); border:1px solid rgba(255,200,97,.4); border-radius:10px; padding:9px 11px; font-size:11px; color:var(--warning); display:flex; gap:7px; margin-bottom:10px; }
+  .bars{ display:flex; align-items:flex-end; gap:9px; height:120px; margin-top:6px; padding:0 4px; }
+  .barcol{ flex:1; display:flex; flex-direction:column; justify-content:flex-end; gap:3px; }
+  .barseg{ border-radius:3px; } .barlbl{ font-size:9px; color:var(--t3); text-align:center; margin-top:5px; }
+  .popup{ position:absolute; left:14px; right:14px; bottom:14px; background:var(--surfaceHigh); border:1px solid var(--borderStrong);
+    border-radius:14px; padding:12px; box-shadow:0 -10px 30px rgba(0,0,0,.5); }
+  .popup .pt{ font-size:12px; font-weight:700; } .popup .ps{ font-size:10.5px; color:var(--t3); margin-top:2px; }
+  .catrow{ display:flex; gap:6px; margin-top:9px; flex-wrap:wrap; }
+  .cat{ font-size:10.5px; padding:5px 9px; border-radius:999px; background:var(--surface); border:1px solid var(--border); }
+  .cat.sel{ background:var(--primary); color:var(--inv); border-color:var(--primary); font-weight:700; }
+  .cap{ font-size:14px; color:var(--t2); text-align:center; max-width:230px; }
+
+  /* close */
+  .stackrow{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:26px; }
+  .wins{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:22px; max-width:880px; }
+  .win{ display:flex; gap:9px; align-items:center; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px 16px; font-size:15px; }
+
+  /* start + hint overlays */
+  #start{ position:absolute; inset:0; z-index:60; background:rgba(8,10,14,.86); backdrop-filter:blur(6px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; text-align:center; }
+  #start h1{ font-size:48px; } #start p{ color:var(--t2); font-size:17px; max-width:560px; }
+  .btn{ margin-top:8px; background:linear-gradient(140deg,var(--primary),var(--s5)); color:var(--inv); font-weight:800;
+    font-size:18px; border:none; border-radius:14px; padding:15px 34px; cursor:pointer; box-shadow:0 14px 40px rgba(99,199,255,.3); }
+  .keys{ color:var(--t3); font-size:13px; margin-top:14px; font-family:var(--mono); }
+  .hint{ position:absolute; bottom:18px; left:50%; transform:translateX(-50%); color:var(--t3); font-size:12px; z-index:40;
+    font-family:var(--mono); opacity:.7; }
+  .pulse{ animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:.5;} 50%{opacity:1;} }
+</style>
+</head>
+<body>
+<div id="stage"><div id="frame">
+  <div class="progress" id="prog"></div>
+  <div class="wordmark"><div class="dot">₹</div><b>finman</b><span>AI Personal CFO</span></div>
+  <div class="counter" id="counter">01 / 07</div>
+
+  <!-- 1 · TITLE -->
+  <section class="scene center" data-dur="8">
+    <div class="kicker" data-reveal style="--d:.1s">Personal finance · 100% on-device</div>
+    <h1 data-reveal style="--d:.35s">An AI Personal CFO that<br>reads your bank SMS — privately.</h1>
+    <div class="sub" data-reveal style="--d:.7s">Turns the chaos of transactional SMS into three honest numbers —
+      income, expenses, savings — without a single raw message ever leaving the phone.</div>
+    <div class="row" data-reveal style="--d:1.05s; margin-top:30px; justify-content:center;">
+      <span class="pill"><span class="ic">📲</span> Flutter / Dart device app</span>
+      <span class="pill"><span class="ic">🧠</span> TypeScript reference engine</span>
+      <span class="pill"><span class="ic">🗄️</span> NestJS · Prisma · Postgres</span>
+    </div>
+  </section>
+
+  <!-- 2 · PROBLEM -->
+  <section class="scene" data-dur="10">
+    <div class="kicker" data-reveal>The problem</div>
+    <h2 data-reveal style="--d:.2s">Your money story is already in your inbox —<br>just buried and unreadable.</h2>
+    <div class="row" data-reveal style="--d:.5s; margin-top:34px; gap:16px; align-items:stretch;">
+      <div class="card" style="flex:1; opacity:.9;">
+        <div class="muted mono" style="font-size:12px">HDFCBK · 14:32</div>
+        <div style="margin-top:8px; color:var(--t2)">Rs.4,510 spent on Card xx1234 at ZOMATO. Avl Bal Rs.18,240.</div>
+      </div>
+      <div class="card" style="flex:1; opacity:.65;">
+        <div class="muted mono" style="font-size:12px">SBIINB · 09:01</div>
+        <div style="margin-top:8px; color:var(--t2)">Your a/c XXXX3456 credited INR 65,000.00 — SALARY.</div>
+      </div>
+      <div class="card" style="flex:1; opacity:.45;">
+        <div class="muted mono" style="font-size:12px">PAYTM · 21:14</div>
+        <div style="margin-top:8px; color:var(--t2)">Rs 5,000 transferred to self via UPI. Ref 412345678901.</div>
+      </div>
+    </div>
+    <div class="sub" data-reveal style="--d:.9s; margin-top:30px;">Dozens of banks, dozens of formats, OTPs and promos in the mix,
+      and balances that drift. <b style="color:var(--t1)">Finman parses it all on-device</b> and reconciles it to the rupee.</div>
+  </section>
+
+  <!-- 3 · DEV CYCLE -->
+  <section class="scene" data-dur="16">
+    <div class="kicker" data-reveal>How it's built · two-language lockstep</div>
+    <h2 data-reveal style="--d:.15s">One parsing brain, two runtimes — kept honest by golden vectors.</h2>
+    <div class="twocol" data-reveal style="--d:.45s">
+      <div class="langcard">
+        <h3>@finman/engine <span style="color:var(--primary)">·TS</span></h3>
+        <div class="tag">Framework-free reference spec</div>
+        <ul>
+          <li><b>gate</b> → drop OTP / promo / balance-only</li>
+          <li><b>fingerprint</b> = mask(body) → SHA-256</li>
+          <li><b>parse + classify</b> → ledger entry</li>
+          <li>Jest + fast-check invariants</li>
+        </ul>
+      </div>
+      <div class="sync">⇄</div>
+      <div class="langcard">
+        <h3>Dart device port <span style="color:var(--primary)">·Flutter</span></h3>
+        <div class="tag">Ships the same logic to the phone</div>
+        <ul>
+          <li>Mirrors gate / fingerprint / redact</li>
+          <li>Offline-first: drift/sqlite + outbox</li>
+          <li>Same masker == same redactor</li>
+          <li>Must never drift from the engine</li>
+        </ul>
+      </div>
+    </div>
+    <div class="golden" data-reveal style="--d:.8s">
+      <span class="gv">golden-vectors/redaction.json</span>
+      <span class="gv">fingerprint.json</span>
+      <span class="gv">fields.json</span>
+      <span class="gv">gate-outcome.json</span>
+      <span class="gv muted">input → expected · verified in BOTH languages</span>
+    </div>
+    <div class="tdd" data-reveal style="--d:1.1s">
+      <b>Fail-first TDD:</b>
+      <span class="step red">🔴 write the regression test</span> →
+      <span class="step">watch it RED</span> →
+      <span class="step">fix</span> →
+      <span class="step green">🟢 green in both</span>
+      <span class="muted" style="margin-left:8px">this session: 12 server e2e ✓ · 109 device ✓ · engine matrix ✓</span>
+    </div>
+  </section>
+
+  <!-- 4 · DATA FLOW -->
+  <section class="scene" data-dur="16">
+    <div class="kicker" data-reveal>Data flow · on the device</div>
+    <h2 data-reveal style="--d:.15s">SMS in → three numbers out, deterministically.</h2>
+    <div class="pipe" data-reveal style="--d:.5s">
+      <div class="node glow"><div class="n-ic">✉️</div><div class="n-t">SMS</div><div class="n-s">device inbox</div></div>
+      <div class="arrow"><span class="packet"></span></div>
+      <div class="node"><div class="n-ic">🚦</div><div class="n-t">Gate</div><div class="n-s">drop OTP / promo</div></div>
+      <div class="arrow"><span class="packet" style="animation-delay:.4s"></span></div>
+      <div class="node"><div class="n-ic">🔑</div><div class="n-t">Fingerprint</div><div class="n-s">mask → SHA-256</div></div>
+      <div class="arrow"><span class="packet" style="animation-delay:.8s"></span></div>
+      <div class="node"><div class="n-ic">🧩</div><div class="n-t">Parse</div><div class="n-s">template + classify</div></div>
+      <div class="arrow"><span class="packet" style="animation-delay:1.2s"></span></div>
+      <div class="node"><div class="n-ic">📒</div><div class="n-t">Ledger</div><div class="n-s">idempotent entry</div></div>
+      <div class="arrow"><span class="packet" style="animation-delay:1.6s"></span></div>
+      <div class="node glow"><div class="n-ic">₹</div><div class="n-t">3 numbers</div><div class="n-s">income·exp·savings</div></div>
+    </div>
+    <div class="row" data-reveal style="--d:1s; margin-top:34px; gap:14px;">
+      <div class="guard"><span class="gi">🆔</span> Idempotent UUIDv5 — a re-sync or dual SMS never double-counts</div>
+      <div class="guard"><span class="gi">🏦</span> Deposit accounts reconcile per issuer — balances match to the rupee</div>
+      <div class="guard"><span class="gi">🚫</span> Transfers / top-ups never counted as income or expense</div>
+    </div>
+    <div class="sub" data-reveal style="--d:1.3s">Unknown message shapes are <b style="color:var(--t1)">induced server-side from a redacted skeleton only</b>,
+      cached as a template, then re-parsed on-device. The raw body never travels.</div>
+  </section>
+
+  <!-- 5 · PRIVACY -->
+  <section class="scene" data-dur="16">
+    <div class="kicker" data-reveal>The privacy line · non-negotiable</div>
+    <h2 data-reveal style="--d:.15s">Raw SMS never leaves the device. Ever.</h2>
+    <div class="privwrap" data-reveal style="--d:.45s">
+      <div class="sms masked">
+        <div class="from">raw SMS · device-local only</div>
+        Rs.<span class="red-tok">4,510</span> spent on Card <span class="red-tok">xx1234</span>
+        at ZOMATO on <span class="red-tok">02-06</span>. Avl Bal Rs.<span class="red-tok">18,240</span>. Ref <span class="red-tok">559210</span>
+      </div>
+      <div class="priv-arrow"><div class="big">→</div><div>mask == redact<br>(same code path)</div></div>
+      <div class="skel">
+        <div class="muted" style="font-family:var(--font); font-size:12px; margin-bottom:8px;">redacted skeleton · the ONLY thing that syncs</div>
+        Rs.<span class="ph">§AMT§</span> spent on Card <span class="ph">§ACCT§</span><br>
+        at <span class="ph">§MERCHANT§</span> on <span class="ph">§DATE§</span>.<br>
+        Avl Bal Rs.<span class="ph">§AMT§</span>. Ref <span class="ph">§REF§</span>
+      </div>
+    </div>
+    <div class="guards" data-reveal style="--d:.85s">
+      <div class="guard"><span class="gi">🔒</span> Raw bodies never persisted server-side — device + your own Drive only</div>
+      <div class="guard"><span class="gi">🧮</span> Money is integer paise / NUMERIC(14,2) — never a float</div>
+      <div class="guard"><span class="gi">🛡️</span> Server re-checks redaction — a surviving digit-run is rejected (422)</div>
+    </div>
+    <div class="guards" data-reveal style="--d:1.15s">
+      <div class="guard"><span class="gi">🔑</span> Per-install random device key — no shared account, no cross-user leak</div>
+      <div class="guard"><span class="gi">🚪</span> Fail-closed JWT · rate-limited · helmet · no cloud backup of the ledger</div>
+    </div>
+  </section>
+
+  <!-- 6 · APP DEMO -->
+  <section class="scene" data-dur="18">
+    <div class="kicker" data-reveal>The app</div>
+    <h2 data-reveal style="--d:.12s">Period-honest, drill-downable, reconciled.</h2>
+    <div class="phones" data-reveal style="--d:.4s">
+      <!-- screen 1 -->
+      <div class="phonewrap">
+        <div class="phone">
+          <div class="pbar"><span>9:41</span><span>▰▰▰ 100%</span></div>
+          <div class="ph-title">Dashboard</div>
+          <div class="banner">ⓘ Showing “since you installed”. Your full picture builds as you go.</div>
+          <div class="stat3">
+            <div class="stat"><div class="l">Income</div><div class="v" style="color:var(--positive)">₹65,000</div></div>
+            <div class="stat"><div class="l">Expenses</div><div class="v" style="color:var(--negative)">₹24,118</div></div>
+          </div>
+          <div class="stat big" style="border:1px solid var(--primary)"><div class="l">Savings</div><div class="v" style="color:var(--primary)">₹40,882</div></div>
+          <div class="donut"><div class="donut-c"><div class="dl">Spent</div><div class="dv">₹24,118</div></div></div>
+        </div>
+        <div class="cap">Three honest numbers + a spend donut</div>
+      </div>
+      <!-- screen 2 -->
+      <div class="phonewrap">
+        <div class="phone">
+          <div class="pbar"><span>9:41</span><span>▰▰▰ 100%</span></div>
+          <div class="ph-title">Food &amp; Dining → platforms</div>
+          <div class="legend">
+            <div class="legrow"><span class="sw" style="background:var(--s1)"></span>Zomato · ₹9,210</div>
+            <div class="legrow"><span class="sw" style="background:var(--s2)"></span>Swiggy · ₹6,400</div>
+            <div class="legrow"><span class="sw" style="background:var(--s3)"></span>Blinkit · ₹3,180</div>
+          </div>
+          <div class="bars">
+            <div class="barcol"><div class="barseg" style="height:46px; background:var(--s1)"></div><div class="barseg" style="height:20px; background:var(--s2)"></div></div>
+            <div class="barcol"><div class="barseg" style="height:60px; background:var(--s1)"></div><div class="barseg" style="height:30px; background:var(--s2)"></div><div class="barseg" style="height:14px; background:var(--s3)"></div></div>
+            <div class="barcol"><div class="barseg" style="height:38px; background:var(--s1)"></div><div class="barseg" style="height:44px; background:var(--s2)"></div></div>
+          </div>
+          <div style="display:flex; justify-content:space-around"><span class="barlbl">Apr</span><span class="barlbl">May</span><span class="barlbl">Jun</span></div>
+        </div>
+        <div class="cap">Drill down: category → platform → month</div>
+      </div>
+      <!-- screen 3 -->
+      <div class="phonewrap">
+        <div class="phone">
+          <div class="pbar"><span>9:41</span><span>▰▰▰ 100%</span></div>
+          <div class="ph-title">Account balances</div>
+          <div class="acct" style="border-top:none"><span class="lab">HDFCBK ••1234</span><span class="bal">₹18,240</span></div>
+          <div class="acct"><span class="lab">SBIINB ••3456</span><span class="bal">₹2,41,900</span></div>
+          <div class="acct"><span class="lab">Slice</span><span class="bal" style="color:var(--warning)">₹1,012</span></div>
+          <div class="banner" style="margin-top:12px">⚖️ Balance rose ₹12 with no message — likely interest. Needs review.</div>
+          <div class="popup">
+            <div class="pt">New merchant: BLINKIT</div>
+            <div class="ps">Pick a category — remembered next time.</div>
+            <div class="catrow"><span class="cat sel">Groceries</span><span class="cat">Food</span><span class="cat">Shopping</span></div>
+          </div>
+        </div>
+        <div class="cap">Reconciled balances + learn-once categories</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CLOSE -->
+  <section class="scene center" data-dur="9">
+    <div class="kicker" data-reveal>Built end-to-end · distribution-ready</div>
+    <h1 data-reveal style="--d:.3s; font-size:50px;">Private by construction.<br>Correct to the rupee.</h1>
+    <div class="stackrow" data-reveal style="--d:.65s">
+      <span class="pill">TypeScript</span><span class="pill">NestJS</span><span class="pill">Prisma</span>
+      <span class="pill">PostgreSQL</span><span class="pill">Flutter · Dart</span><span class="pill">Jest · fast-check</span>
+    </div>
+    <div class="wins" data-reveal style="--d:1s">
+      <div class="win"><span>🔒</span> On-device privacy</div>
+      <div class="win"><span>🏦</span> Per-account reconciliation</div>
+      <div class="win"><span>🔑</span> Fail-closed auth + per-install keys</div>
+      <div class="win"><span>🧪</span> Two-language golden-vector lockstep</div>
+    </div>
+    <div class="sub" data-reveal style="--d:1.3s">finman — an AI Personal CFO.</div>
+  </section>
+
+  <div class="hint" id="hint">space pause · → next · ← back · F fullscreen · R restart</div>
+
+  <!-- START OVERLAY -->
+  <div id="start">
+    <div class="wordmark" style="position:static; justify-content:center;"><div class="dot">₹</div><b style="font-size:22px">finman</b></div>
+    <h1>Project walkthrough</h1>
+    <p>7 slides · auto-advances in about 90 seconds.</p>
+    <button class="btn" id="startBtn">▶ Start</button>
+    <div class="keys">F fullscreen · Space pause · ← → step · R restart</div>
+  </div>
+</div></div>
+
+<script>
+  const scenes = [...document.querySelectorAll('.scene')];
+  const prog = document.getElementById('prog');
+  const counter = document.getElementById('counter');
+  const startEl = document.getElementById('start');
+  const hint = document.getElementById('hint');
+  let i = 0, timer = null, rafId = null, paused = false, started = false, sceneStart = 0, sceneDur = 0, elapsedBefore = 0;
+
+  const pad = n => String(n).padStart(2,'0');
+
+  function show(idx){
+    cancelAnimationFrame(rafId); clearTimeout(timer);
+    scenes.forEach((s,k)=> s.classList.toggle('active', k===idx));
+    i = idx;
+    counter.textContent = pad(idx+1) + ' / ' + pad(scenes.length);
+    sceneDur = (parseFloat(scenes[idx].dataset.dur)||8) * 1000;
+    elapsedBefore = 0;
+    runTimer();
+  }
+  function runTimer(){
+    if(paused) return;
+    sceneStart = performance.now();
+    const remaining = sceneDur - elapsedBefore;
+    timer = setTimeout(()=>{ if(i < scenes.length-1) show(i+1); else finish(); }, remaining);
+    tick();
+  }
+  function tick(){
+    rafId = requestAnimationFrame(tick);
+    const e = elapsedBefore + (performance.now() - sceneStart);
+    prog.style.width = Math.min(100, (e/sceneDur)*100) + '%';
+  }
+  function finish(){ prog.style.width='100%'; hint.classList.add('pulse'); }
+  function next(){ if(i<scenes.length-1) show(i+1); }
+  function prev(){ if(i>0) show(i-1); }
+  function togglePause(){
+    paused = !paused;
+    if(paused){ clearTimeout(timer); cancelAnimationFrame(rafId); elapsedBefore += performance.now()-sceneStart; hint.textContent='⏸ paused · space to resume'; }
+    else { hint.textContent='space pause · → next · ← back · F fullscreen · R restart'; runTimer(); }
+  }
+  function begin(){ started = true; startEl.style.display='none'; show(0); }
+
+  // Deep-link for review/screenshots: ?scene=N shows scene N paused; ?auto=1 autostarts playing.
+  const params = new URLSearchParams(location.search);
+  if(params.has('scene')){
+    started = true; paused = true; startEl.style.display='none';
+    const n = Math.max(1, Math.min(scenes.length, parseInt(params.get('scene'))||1)) - 1;
+    scenes.forEach((s,k)=> s.classList.toggle('active', k===n));
+    i=n; counter.textContent = pad(n+1)+' / '+pad(scenes.length); prog.style.width='100%';
+    hint.textContent='paused · ?scene='+(n+1);
+  } else if(params.get('auto')==='1'){ begin(); }
+
+  document.getElementById('startBtn').addEventListener('click', begin);
+  window.addEventListener('keydown', e=>{
+    if(e.key==='f'||e.key==='F'){ const el=document.documentElement; if(!document.fullscreenElement) el.requestFullscreen?.(); else document.exitFullscreen?.(); return; }
+    if(!started){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); begin(); } return; }
+    if(e.key==='ArrowRight'){ e.preventDefault(); next(); }
+    else if(e.key==='ArrowLeft'){ e.preventDefault(); prev(); }
+    else if(e.key===' '){ e.preventDefault(); togglePause(); }
+    else if(e.key==='r'||e.key==='R'){ paused=false; show(0); }
+  });
+</script>
+</body>
+</html>

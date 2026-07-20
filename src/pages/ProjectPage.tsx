@@ -11,6 +11,7 @@ import { MMIE_PROJECT_SLUG } from '../constants/multidimensionalMarketIntelligen
 import RealTimeVirtualExecutionSections from '../components/project/RealTimeVirtualExecutionSections';
 import RealtimeRecommendationIngestionSections from '../components/project/RealtimeRecommendationIngestionSections';
 import MultidimensionalMarketIntelligenceSections from '../components/project/MultidimensionalMarketIntelligenceSections';
+import FinmanSections from '../components/project/FinmanSections';
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -24,7 +25,8 @@ export default function ProjectPage() {
   const isRte = project.slug === RTE_PROJECT_SLUG;
   const isRris = project.slug === RRIS_PROJECT_SLUG;
   const isMmie = project.slug === MMIE_PROJECT_SLUG;
-  const wideLayout = isRte || isRris || isMmie;
+  const isFinman = project.slug === 'finman';
+  const wideLayout = isRte || isRris || isMmie || isFinman;
 
   return (
     <div className="relative z-10 pt-24 pb-16 px-6">
@@ -32,6 +34,9 @@ export default function ProjectPage() {
         title={`${project.name} — Swapnil Tripathi`}
         description={project.highlight}
         path={`/project/${project.slug}`}
+        image={
+          isFinman ? 'https://swapniltripathi.com/finman/reel-poster.png' : undefined
+        }
       />
       <div className={`mx-auto ${wideLayout ? 'max-w-4xl' : 'max-w-2xl'}`}>
         <ProjectPageBackNav project={project} />
@@ -58,6 +63,13 @@ export default function ProjectPage() {
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/40">
               Redis-orchestrated multidimensional filtering and ranking under continuously mutating live market
               state — ID-first execution, not dashboard analytics.
+            </p>
+          ) : null}
+          {isFinman ? (
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/40">
+              Finman turns the chaos of transactional SMS into three honest numbers — income,
+              expenses, savings — and reconciles every account to the rupee, without a single
+              raw message ever leaving the phone.
             </p>
           ) : null}
 
@@ -117,6 +129,12 @@ export default function ProjectPage() {
         {isMmie ? (
           <div className="mb-16">
             <MultidimensionalMarketIntelligenceSections />
+          </div>
+        ) : null}
+
+        {isFinman ? (
+          <div className="mb-16">
+            <FinmanSections />
           </div>
         ) : null}
 

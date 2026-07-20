@@ -1,6 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { WHATSAPP_URL } from '../constants/contact';
 import SiteLogo from './SiteLogo';
 
 export default function Navbar() {
@@ -27,7 +26,6 @@ export default function Navbar() {
     { label: 'Experience', to: '/experience' },
     { label: 'Timeline', action: scrollToTimeline },
     { label: 'Blog', to: '/blogs' },
-    { label: 'About', to: '/about' },
     { label: 'Me', to: '/me' },
   ];
 
@@ -76,9 +74,9 @@ export default function Navbar() {
               </Link>
             )
           )}
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`ml-2 ${ctaClass}`}>
+          <Link to="/contact" className={`ml-2 ${ctaClass}`}>
             Let&apos;s Talk
-          </a>
+          </Link>
         </div>
 
         <button
@@ -129,9 +127,13 @@ export default function Navbar() {
               </Link>
             )
           )}
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`mt-2 inline-block ${ctaClass}`}>
+          <Link
+            to="/contact"
+            onClick={() => setMobileOpen(false)}
+            className={`mt-2 inline-block ${ctaClass}`}
+          >
             Let&apos;s Talk
-          </a>
+          </Link>
         </div>
       ) : null}
     </nav>
