@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
+import { FAVORITES_UPDATED, favoriteShelves } from '../data/meFavorites';
 
 // Personal sandbox page. Rough work — expect this to change often.
 const SURVEILLANCE_URL = 'https://swapniltripathi.com/app/surveillance';
@@ -108,6 +109,47 @@ export default function MePage() {
             First load takes ~1–2 minutes — the server sleeps when idle to keep it
             free, and wakes on demand.
           </p>
+        </div>
+      </section>
+
+      {/* Current favorites — rotating shelf, data in src/data/meFavorites.ts */}
+      <section className="px-0 pb-16">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-8 flex items-center gap-3">
+            <h2 className="text-xs font-medium uppercase tracking-widest text-accent/60">
+              Current Favorites
+            </h2>
+            <span className="rounded border border-accent/15 px-2 py-0.5 text-[10px] font-medium text-accent/40">
+              rotates whenever taste does · {FAVORITES_UPDATED}
+            </span>
+          </div>
+          <div className="space-y-6">
+            {favoriteShelves.map((shelf) => (
+              <div key={shelf.id}>
+                <h3 className="mb-2.5 text-[11px] font-medium uppercase tracking-wider text-white/35">
+                  {shelf.title}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {shelf.items.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs text-white/60 transition-all hover:border-accent/30 hover:bg-accent/5 hover:text-accent"
+                    >
+                      {item.name}
+                      {item.note ? (
+                        <span className="text-[10px] text-accent/45 group-hover:text-accent/70">
+                          · {item.note}
+                        </span>
+                      ) : null}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -58,6 +58,8 @@ export const routes: RouteRecord[] = [
         getStaticPaths: () => getAllBlogPosts().map((p) => `blogs/${p.slug}`),
       },
 
+      { path: 'about', lazy: page(() => import('./pages/AboutPage')) },
+      { path: 'contact', lazy: page(() => import('./pages/ContactPage')) },
       { path: 'privacy', lazy: page(() => import('./pages/PrivacyPage')) },
       { path: 'me', lazy: page(() => import('./pages/MePage')) },
       // NOTE: /thoughts now 301s to /blogs at the edge (public/_redirects) — no route here.
