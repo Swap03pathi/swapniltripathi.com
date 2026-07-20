@@ -13,7 +13,8 @@ const SURVEILLANCE_URL = 'https://swapniltripathi.com/app/surveillance';
 //   3. Deploy → New deployment → Web app → Execute as: Me · Access: Anyone.
 //   4. Paste the /exec URL here. While empty, the form shows a friendly note instead.
 // The URL only permits appending rows to that one sheet — safe to ship in the bundle.
-const SHEETS_WEBAPP_URL: string = '';
+const SHEETS_WEBAPP_URL: string =
+  'https://script.google.com/macros/s/AKfycby5wYHuhuLdlvWVXL5Q38Z1GkuHakjJH3CaSJpYXZ6ZKEUnsGcN9PBFpTsLrfaZmPyW0g/exec';
 
 type SendStatus = 'idle' | 'sending' | 'sent' | 'error';
 
