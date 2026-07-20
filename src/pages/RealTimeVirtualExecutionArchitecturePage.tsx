@@ -32,7 +32,7 @@ export default function RealTimeVirtualExecutionArchitecturePage() {
             Real-Time Virtual Execution Architecture
           </h1>
           <p className="relative mt-5 max-w-3xl text-sm leading-relaxed text-white/45 sm:text-base">
-            A persistent low-latency execution system designed for high-frequency
+            A persistent low-latency execution system designed for high-throughput
             websocket streams, real-time trade state transitions, and automated
             recovery.
           </p>

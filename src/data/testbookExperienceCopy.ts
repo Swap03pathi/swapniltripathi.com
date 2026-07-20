@@ -73,7 +73,7 @@ export const testbookWorkAreas = [
       'MongoDB querying across collections',
       'Redash dashboards for product, sales & marketing',
       'Query-based alert systems',
-      'MIS & ECTM reporting workflows',
+      'MIS & monthly engagement reporting workflows',
       'Adhoc analytical support for teams',
     ],
     stack: ['MongoDB', 'Redash', 'SQL (Mongo Queries)'],
@@ -89,6 +89,7 @@ export const testbookWorkAreas = [
       'Planned analytics events, triggers & property schemas',
       'Worked with developers & QA for event implementation',
       'Firebase, WebEngage & pixel instrumentation',
+      'GA + Google Tag Manager event planning & user-journey tracking',
       'A/B testing dashboards for PM workflows',
       'Product & growth event tracking',
     ],
@@ -138,6 +139,11 @@ export const testbookTooling: Tool[] = [
     name: 'Google Analytics',
     logoUrl: 'https://cdn.simpleicons.org/googleanalytics/E37400',
     homepageUrl: 'https://analytics.google.com/',
+  },
+  {
+    name: 'Google Tag Manager',
+    logoUrl: 'https://cdn.simpleicons.org/googletagmanager/246FDB',
+    homepageUrl: 'https://tagmanager.google.com/',
   },
   {
     name: 'Google Apps Script',

@@ -8,12 +8,12 @@ export const sarasHero = {
     'Saras was built to bring transparency to the noisy world of stock market recommendations — helping retail traders evaluate advisor credibility before acting on recommendations.',
   highlights: [
     { label: 'Featured on Shark Tank India', icon: 'tv' as const },
-    { label: 'Pre-seed funded', icon: 'funding' as const },
+    { label: 'Antler-backed · $500K pre-seed', icon: 'funding' as const },
     { label: 'Built for retail traders', icon: 'users' as const },
   ],
   metrics: [
     { value: '150K+', label: 'Downloads' },
-    { value: '200K+', label: 'Signals / day' },
+    { value: '200K+', label: 'Messages received / day' },
     { value: '400', label: 'Daily Live trades' },
     { value: '98%', label: 'Uptime' },
     { value: '100K', label: 'Registered users' },
@@ -299,14 +299,14 @@ export const sarasPress = [
     outlet: 'Featured on Shark Tank India',
     type: 'Recognition',
     href: '',
-    supportLine: 'Recognized as part of the broader Indian startup ecosystem.',
+    supportLine: 'Pitched Saras on national television — bringing advisor transparency to a mainstream audience.',
   },
   {
     id: 'signal',
     outlet: 'Signal By Saras',
     type: 'Platform',
-    href: 'https://www.signal.saras.market/',
-    supportLine: 'Community-facing product updates and platform presence.',
+    href: '',
+    supportLine: 'The platform I architected and laid the foundation for — now live as Signal by Saras.',
   },
 ] as const;
 

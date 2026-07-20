@@ -7,7 +7,7 @@ export const appleHero = {
   description:
     'Worked across analytics, social listening, and data science workflows within AppleCare Digital to build and maintain production-grade data pipelines, anomaly detection systems, and operational reporting infrastructure.',
   metadata: [
-    { label: 'Data Engineer', icon: 'code' as const },
+    { label: 'Consulting Data Engineer → Data Scientist (2022–2024)', icon: 'code' as const },
     { label: 'Analytics & BI', icon: 'chart' as const },
     { label: 'AppleCare Digital', icon: 'building' as const },
     { label: 'Social Listening', icon: 'radio' as const },

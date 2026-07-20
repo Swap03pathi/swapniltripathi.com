@@ -9,9 +9,9 @@ export const experiences: Experience[] = [
     role: 'CTO, Co-Founder',
     period: 'Sept 2024 — Present',
     shortDescription:
-    'Built a signal intelligence platform that captures, parses, and virtually executes trading recommendations across multiple sources. 150K+ downloads, 200K+ daily signals, 98% uptime.',
+    'Built a signal intelligence platform that captures, parses, and virtually executes trading recommendations across multiple sources. 150K+ downloads, 200K+ daily messages received, 98% uptime.',
     fullDescription:
-    'Saras (formerly Finosauras) is a signal intelligence platform designed to capture trading recommendations from multiple unstructured sources and convert them into structured, trackable, and virtually executed trades.\n\nAs CTO and Co-Founder, I built the system from scratch — covering ingestion, processing, execution, and infrastructure — with a focus on reliability, speed, and cost efficiency.\n\nThe platform ingests signals from Telegram, PDFs, news articles, YouTube live streams, and Twitter, normalizes them using LLM-based parsing, and executes them virtually using real-time price feeds. Trades remain active until exit conditions such as target, stoploss, expiry, or time-based rules are met.\n\nWe launched the platform within 3 months and scaled to over 150,000 downloads, processing 200K+ signals daily while maintaining 98% uptime.\n\nThe company raised $500K+ in pre-seed funding and was featured on Shark Tank India.',
+    'Saras (formerly Finosauras) is a signal intelligence platform designed to capture trading recommendations from multiple unstructured sources and convert them into structured, trackable, and virtually executed trades.\n\nAs CTO and Co-Founder, I built the system from scratch — covering ingestion, processing, execution, and infrastructure — with a focus on reliability, speed, and cost efficiency.\n\nThe platform ingests signals from Telegram, PDFs, news articles, YouTube live streams, and Twitter, normalizes them using LLM-based parsing, and executes them virtually using real-time price feeds. Trades remain active until exit conditions such as target, stoploss, expiry, or time-based rules are met.\n\nWe launched the platform within 3 months and scaled to over 150,000 downloads, receiving 200K+ messages daily while maintaining 98% uptime.\n\nThe company raised a $500K+ pre-seed led by Antler. Separately, Saras was featured on Shark Tank India.',
     logoUrl: '/logos/saras.png',
     projectSlugs: [
       'signal-ingestion-system',
@@ -63,7 +63,7 @@ export const experiences: Experience[] = [
   },
   {
     slug: 'ey',
-    title: 'Ernst&Young',
+    title: 'EY',
     role: 'Summer Associate',
     period: 'May 2018 — Jul 2018',
     shortDescription:

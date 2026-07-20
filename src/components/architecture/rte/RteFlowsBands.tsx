@@ -204,7 +204,7 @@ const decisions = [
 const outcomes = [
   'Real-time trade visibility',
   'Reduced execution latency',
-  'Stable high-frequency processing',
+  'Stable high-volume tick processing',
   'Automatic recovery & reconciliation',
   'Strong Redis/Mongo consistency',
   'Operational reliability at scale',
