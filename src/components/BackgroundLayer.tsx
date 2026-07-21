@@ -22,6 +22,12 @@ export default function BackgroundLayer() {
   );
   /** Capability is fixed for the session — evaluate once. */
   const [capableDevice] = useState(() => isHighEndDevice());
+  /**
+   * The Stellarium engine is ~6MB (script + WASM + sky data). Loading it at mount
+   * competes with LCP/TBT, so it waits for window load + an idle slot; StarField
+   * covers the visuals instantly in the meantime.
+   */
+  const [engineAllowed, setEngineAllowed] = useState(false);
   const [stellariumActive, setStellariumActive] = useState(false);
   const [skyIdentifyMode, setSkyIdentifyMode] = useState(false);
   const [showIdentifyToast, setShowIdentifyToast] = useState(false);
@@ -34,8 +40,32 @@ export default function BackgroundLayer() {
     return () => mq.removeEventListener?.('change', sync);
   }, []);
 
+  useEffect(() => {
+    let idleId: number | undefined;
+    let timerId: number | undefined;
+    const allow = () => setEngineAllowed(true);
+    const schedule = () => {
+      if (typeof window.requestIdleCallback === 'function') {
+        idleId = window.requestIdleCallback(allow, { timeout: 3000 });
+      } else {
+        timerId = window.setTimeout(allow, 2500);
+      }
+    };
+    if (document.readyState === 'complete') {
+      schedule();
+    } else {
+      window.addEventListener('load', schedule, { once: true });
+    }
+    return () => {
+      window.removeEventListener('load', schedule);
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+      if (timerId !== undefined) window.clearTimeout(timerId);
+    };
+  }, []);
+
   /** Desktop always; mobile only when the device can handle the engine. */
-  const shouldTryStellarium = HAS_SKYDATA_CONFIG && (wideScreen || capableDevice);
+  const shouldTryStellarium =
+    HAS_SKYDATA_CONFIG && engineAllowed && (wideScreen || capableDevice);
 
   useEffect(() => {
     if (!shouldTryStellarium) setStellariumActive(false);

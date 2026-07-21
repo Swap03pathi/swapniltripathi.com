@@ -65,8 +65,10 @@ export default function AboutPage() {
       <main className="mx-auto max-w-3xl px-6 pt-28 pb-24">
         <div className="flex items-center gap-6">
           <img
-            src={resolveAssetUrl('/swapnil-profile.png')}
+            src={resolveAssetUrl('/swapnil-profile-sm.jpg')}
             alt="Swapnil Tripathi"
+            width={300}
+            height={400}
             className="h-20 w-20 rounded-full border border-white/10 object-cover object-[50%_18%]"
           />
           <h1 className="text-4xl font-semibold">About</h1>

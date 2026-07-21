@@ -10,9 +10,12 @@ export default function Hero() {
           style={{ animationDelay: '0.05s' }}
         >
           <img
-            src={resolveAssetUrl('/swapnil-profile.png')}
+            src={resolveAssetUrl('/swapnil-profile-sm.jpg')}
             alt="Swapnil Tripathi"
+            width={300}
+            height={400}
             className="h-full w-full min-h-full min-w-full object-cover object-[50%_18%]"
+            {...{ fetchpriority: 'high' }}
           />
         </div>
 
