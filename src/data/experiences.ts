@@ -27,7 +27,7 @@ export const experiences: Experience[] = [
   {
     slug: 'apple',
     title: 'Apple',
-    role: 'Data Engineer → Data Scientist',
+    role: 'Consulting Data Engineer → Data Scientist',
     period: 'Jan 2022 — July 2024',
     shortDescription:
       'Worked across Data Engineering and Data Science, building systems that handled production-scale data workflows.',
@@ -54,9 +54,9 @@ export const experiences: Experience[] = [
     role: 'Summer Analyst',
     period: 'Jun 2019 — Jul 2019',
     shortDescription:
-    'Built data scraping and analysis systems to improve OTA rankings and pricing strategy across 2500+ listings.',
+    'Scraped OTA listing data and ran ranking-analysis experiments — my first hands-on exposure to real-world data problems, and where I taught myself SQL.',
     fullDescription:
-    'As a Summer Analyst in Global OTA Operations at OYO, I worked on improving search ranking and pricing strategy across online travel platforms.\n\nI built a Python-based scraping system to collect data from multiple Online Travel Agents and used statistical modeling to understand factors affecting hotel ranking.\n\nThe analysis was used to identify opportunities for improving customer experience and retention, with proposed strategies expected to increase online reviews by ~12%.\n\nI also designed dashboards to monitor performance across 2500+ properties and analyzed discounting strategies across platforms to maintain pricing consistency.\n\nThis was my first exposure to real-world data problems, combining scraping, analysis, and business decision-making.',
+    'As a Summer Analyst in Global OTA Operations at OYO, I explored search ranking and pricing across online travel platforms.\n\nI built Python-based scrapers to collect listing data from multiple Online Travel Agents and used statistical analysis to look for factors affecting hotel ranking. The experiments did not lead to meaningful conclusions — an honest early lesson in exploratory analytics.\n\nI also analyzed discounting strategies across platforms for pricing consistency, and taught myself SQL and spreadsheet dashboarding along the way.\n\nThis was my first exposure to real-world data problems.',
     logoUrl: 'https://cdn.simpleicons.org/OYO/EE2E24',
     projectSlugs: [ 'oyo-data-scraping',
       'oyo-ranking-analysis'],

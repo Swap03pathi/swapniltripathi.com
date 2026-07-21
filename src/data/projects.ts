@@ -243,7 +243,7 @@ description:
     highlight:
       'Regression-based analysis to improve search ranking and pricing consistency.',
     description:
-      'Applied statistical models to analyze dependencies between different variables affecting hotel ranking.\n\nEvaluated discount strategies across platforms to ensure pricing parity and prevent price masking.\n\nDesigned dashboards for monitoring performance across 2500+ listings and proposed improvements for customer retention.',
+      'Applied statistical models to analyze dependencies between different variables affecting hotel ranking.\n\nEvaluated discount strategies across platforms to ensure pricing parity and prevent price masking.\n\nDesigned dashboards to monitor listing performance across platforms. The ranking experiments were inconclusive — an honest early lesson in exploratory analytics.',
     tools: [
       { name: 'Python', logoUrl: 'https://cdn.simpleicons.org/python/3776AB', homepageUrl: 'https://python.org' },
       { name: 'Excel', logoUrl: 'https://cdn.simpleicons.org/microsoftexcel/217346', homepageUrl: 'https://microsoft.com/excel' },

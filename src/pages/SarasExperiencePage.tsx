@@ -20,7 +20,7 @@ export default function SarasExperiencePage() {
     <div className="relative z-10 min-h-screen bg-dark text-white">
       <Seo
         title="Saras — CTO & Co-Founder · Swapnil Tripathi"
-        description="Building a signal-intelligence platform: 200K+ daily signals, virtual trade execution on live price feeds, 150K+ downloads, 98% uptime."
+        description="Building a signal-intelligence platform: 200K+ daily messages received, virtual trade execution on live price feeds, 150K+ downloads, 98% uptime."
         path="/experience/saras"
       />
       <SarasBackdrop />

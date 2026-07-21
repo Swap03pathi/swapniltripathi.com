@@ -167,7 +167,7 @@ export default function ProjectPage() {
                     />
                   </a>
                   <div
-                    className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex -translate-x-1/2 translate-y-1 scale-95 items-center gap-2 whitespace-nowrap rounded-md border border-white/5 bg-dark px-3 py-2 opacity-0 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.06] transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:scale-100 group-focus-within:opacity-100"
+                    className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex w-max -translate-x-1/2 translate-y-1 scale-95 items-center gap-2 whitespace-nowrap rounded-md border border-white/5 bg-dark px-3 py-2 opacity-0 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.06] transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:scale-100 group-focus-within:opacity-100"
                   >
                     <img
                       src={tool.logoUrl}
