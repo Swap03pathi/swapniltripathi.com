@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 import type { RouteRecord } from 'vite-react-ssg';
 import Layout from './Layout';
+import RouteErrorPage from './pages/RouteErrorPage';
 import { getAllBlogPosts } from './lib/blogPosts';
 import { projects } from './data/projects';
 
@@ -21,6 +22,7 @@ export const routes: RouteRecord[] = [
   {
     path: '/',
     element: <Layout />,
+    errorElement: <RouteErrorPage />,
     children: [
       { index: true, lazy: page(() => import('./pages/HomePage')) },
       { path: 'experience', lazy: page(() => import('./pages/ExperiencePage')) },
