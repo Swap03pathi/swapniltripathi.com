@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="py-16 px-6 border-t border-white/5">
       <div className="max-w-2xl mx-auto text-center">
-        <p className="text-sm text-white/30">
+        <p className="text-sm text-white/55">
           Want to build something that works?
         </p>
         <Link
@@ -32,13 +32,13 @@ export default function Footer() {
           ))}
         </div>
 
-        <nav className="mt-8 flex items-center justify-center gap-5 text-xs text-white/30">
-          <Link to="/about" className="hover:text-white/60 transition-colors">About</Link>
-          <Link to="/contact" className="hover:text-white/60 transition-colors">Contact</Link>
-          <Link to="/privacy" className="hover:text-white/60 transition-colors">Privacy</Link>
+        <nav className="mt-8 flex items-center justify-center gap-5 text-xs text-white/55">
+          <Link to="/about" className="hover:text-white/85 transition-colors">About</Link>
+          <Link to="/contact" className="hover:text-white/85 transition-colors">Contact</Link>
+          <Link to="/privacy" className="hover:text-white/85 transition-colors">Privacy</Link>
         </nav>
 
-        <p className="mt-6 text-xs text-white/15">
+        <p className="mt-6 text-xs text-white/50">
           &copy; {new Date().getFullYear()} Swapnil
         </p>
       </div>

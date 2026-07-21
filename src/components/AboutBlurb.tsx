@@ -2,7 +2,7 @@ export default function AboutBlurb() {
   return (
     <section className="px-6 py-24">
       <div className="mx-auto max-w-[600px]">
-        <h2 className="mb-6 text-xs font-medium uppercase tracking-widest text-accent/60">About</h2>
+        <h2 className="mb-6 text-xs font-medium uppercase tracking-widest text-accent/80">About</h2>
         <div className="space-y-4 text-sm leading-relaxed text-white/50">
           <p>
             I&apos;m an engineer focused on building operational systems that remain reliable

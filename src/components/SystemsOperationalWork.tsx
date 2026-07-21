@@ -5,7 +5,7 @@ export default function SystemsOperationalWork() {
   return (
     <section className="px-6 py-24">
       <div className="mx-auto max-w-4xl">
-        <h2 className="mb-8 text-xs font-medium uppercase tracking-widest text-accent/60">
+        <h2 className="mb-8 text-xs font-medium uppercase tracking-widest text-accent/80">
           Systems & Operational Work
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">

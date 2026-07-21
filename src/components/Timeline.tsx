@@ -7,7 +7,7 @@ export default function Timeline() {
   return (
     <section id="timeline" className="py-24 px-6">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-xs font-medium text-accent/60 uppercase tracking-widest mb-10">
+        <h2 className="text-xs font-medium text-accent/80 uppercase tracking-widest mb-10">
           Timeline
         </h2>
 
@@ -38,10 +38,10 @@ export default function Timeline() {
                     <h3 className="text-base font-semibold text-white group-hover:text-accent transition-colors">
                       {exp.title}
                     </h3>
-                    <span className="text-xs text-white/25">{exp.period}</span>
+                    <span className="text-xs text-white/50">{exp.period}</span>
                   </div>
-                  <p className="text-xs text-white/40 mt-0.5">{exp.role}</p>
-                  <p className="text-sm text-white/40 mt-2 group-hover:text-white/60 transition-colors">
+                  <p className="text-xs text-white/60 mt-0.5">{exp.role}</p>
+                  <p className="text-sm text-white/60 mt-2 group-hover:text-white/75 transition-colors">
                     {exp.shortDescription}
                   </p>
                 </div>

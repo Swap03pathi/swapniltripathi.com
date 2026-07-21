@@ -23,10 +23,10 @@ export default function ExperienceCard({ experience }: { experience: Experience 
             <h3 className="text-lg font-semibold text-white group-hover:text-accent transition-colors">
               {experience.title}
             </h3>
-            <span className="text-xs text-white/25">{experience.period}</span>
+            <span className="text-xs text-white/50">{experience.period}</span>
           </div>
-          <p className="text-xs text-white/40 mt-0.5">{experience.role}</p>
-          <p className="text-sm text-white/40 mt-3 group-hover:text-white/60 transition-colors">
+          <p className="text-xs text-white/60 mt-0.5">{experience.role}</p>
+          <p className="text-sm text-white/60 mt-3 group-hover:text-white/75 transition-colors">
             {experience.shortDescription}
           </p>
         </div>

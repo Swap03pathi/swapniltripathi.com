@@ -18,7 +18,7 @@ export default function SystemGatewayCard({
     >
       <div className="flex h-full min-h-[120px] flex-col">
         <div className="flex items-start justify-between gap-3">
-          <span className="text-[10px] font-medium uppercase tracking-wider text-accent/45">{label}</span>
+          <span className="text-[10px] font-medium uppercase tracking-wider text-accent/75">{label}</span>
           <svg
             className="h-4 w-4 shrink-0 text-white/10 transition-colors group-hover:text-accent/55"
             fill="none"
@@ -32,7 +32,7 @@ export default function SystemGatewayCard({
         <h3 className="mt-3 text-sm font-semibold leading-snug text-white transition-colors group-hover:text-accent">
           {title}
         </h3>
-        <p className="mt-2 flex-1 text-xs leading-relaxed text-white/45 transition-colors group-hover:text-white/55">
+        <p className="mt-2 flex-1 text-xs leading-relaxed text-white/60 transition-colors group-hover:text-white/75">
           {description}
         </p>
       </div>
