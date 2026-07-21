@@ -5,7 +5,7 @@ export const testbookHero = {
   eyebrow: 'Testbook Experience',
   title: 'Building Analytics & Operational Foundations at Testbook',
   description:
-    'Worked across analytics, reporting, product instrumentation, and operational automation workflows supporting product, sales, and growth teams within a fast-moving edtech startup environment.',
+    'My first job out of college, on a five-person analytics team. Worked across analytics, reporting, product instrumentation, and operational automation workflows supporting product, sales, and growth teams within a fast-moving edtech startup environment.',
   metadata: [
     { label: 'Analytics', icon: 'chart' as const },
     { label: 'Redash', icon: 'dashboard' as const },
