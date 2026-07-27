@@ -102,9 +102,12 @@ export default function BlogPostPage() {
             rehypePlugins={[rehypeRaw, rehypeHighlight]}
             components={{
               // Article images live below the fold — lazy-load them all.
-              img: ({ node, ...props }) => (
-                <img loading="lazy" decoding="async" {...props} />
-              ),
+              // (react-markdown passes a `node` prop that must not reach the DOM.)
+              img: (imgProps) => {
+                const { node: _node, ...props } = imgProps;
+                void _node;
+                return <img loading="lazy" decoding="async" {...props} />;
+              },
             }}
           >
             {post.content}
