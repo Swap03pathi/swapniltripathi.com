@@ -21,7 +21,6 @@ export interface Experience {
   role: string;
   period: string;
   shortDescription: string;
-  fullDescription: string;
   logoUrl: string;
   projectSlugs: string[];
 }

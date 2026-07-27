@@ -1,8 +1,9 @@
 import { Head } from 'vite-react-ssg';
 
 const SITE = 'https://swapniltripathi.com';
-// TODO: replace with a dedicated 1200x630 og-card.png for richer share cards
-const DEFAULT_IMAGE = `${SITE}/swapnil-profile.png`;
+// Dedicated 1200x630 dark share card (public/og-card.png). Pages with their own
+// image (blog covers, Finman poster) override via the `image` prop.
+const DEFAULT_IMAGE = `${SITE}/og-card.png`;
 
 type SeoProps = {
   title: string;

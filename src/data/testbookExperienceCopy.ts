@@ -1,5 +1,4 @@
 import type { Tool } from './types';
-import { TESTBOOK_SECTION_IDS } from '../constants/testbookExperience';
 
 export const testbookHero = {
   eyebrow: 'Testbook Experience',
@@ -170,9 +169,3 @@ export const testbookTooling: Tool[] = [
 export const testbookClosing =
   'Testbook gave me early exposure to product analytics, operational automation, and cross-functional execution — shaping the foundation for my later work in production data systems and infrastructure engineering.';
 
-export const testbookSectionNav = [
-  { id: TESTBOOK_SECTION_IDS.hero, label: 'Overview' },
-  { id: TESTBOOK_SECTION_IDS.workflow, label: 'Workflow' },
-  { id: TESTBOOK_SECTION_IDS.workAreas, label: 'Work' },
-  { id: TESTBOOK_SECTION_IDS.tooling, label: 'Stack' },
-] as const;

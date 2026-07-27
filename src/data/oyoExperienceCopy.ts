@@ -1,4 +1,3 @@
-import { OYO_SECTION_IDS } from '../constants/oyoExperience';
 
 export const oyoHero = {
   eyebrow: 'OYO Internship Experience',
@@ -54,7 +53,3 @@ export const oyoExplorationCards = [
 export const oyoClosing =
   'This internship introduced me to analytical thinking, exploratory experimentation, and working with data beyond spreadsheets for the first time.';
 
-export const oyoSectionNav = [
-  { id: OYO_SECTION_IDS.hero, label: 'Overview' },
-  { id: OYO_SECTION_IDS.exploration, label: 'Exploration' },
-] as const;

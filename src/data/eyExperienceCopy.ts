@@ -1,4 +1,3 @@
-import { EY_SECTION_IDS } from '../constants/eyExperience';
 
 export const eyHero = {
   eyebrow: 'EY Internship Experience',
@@ -62,7 +61,3 @@ export const eyWorkAreas = [
 export const eyClosing =
   'This internship introduced me to structured operational workflows, large-scale coordination, and early automation-driven problem solving within consulting environments.';
 
-export const eySectionNav = [
-  { id: EY_SECTION_IDS.hero, label: 'Overview' },
-  { id: EY_SECTION_IDS.workAreas, label: 'Work' },
-] as const;

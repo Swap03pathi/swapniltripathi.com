@@ -145,10 +145,9 @@ export const projects: Project[] = [
         logoImgClassName: 'h-7 w-7',
       },
       {
-        name: 'WebSocket',
+        name: 'Socket.IO',
         logoUrl: 'https://cdn.simpleicons.org/socketdotio/ffffff',
-        homepageUrl:
-          'https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API',
+        homepageUrl: 'https://socket.io/',
       },
       {
         name: 'Grafana',
