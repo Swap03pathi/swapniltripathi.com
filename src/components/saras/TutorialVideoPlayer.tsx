@@ -38,7 +38,7 @@ export default function TutorialVideoPlayer({ videoId, title = 'Saras product tu
         aria-label="Play tutorial video"
       >
         <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[22px] border border-white/[0.08] bg-black">
-          <img
+          <img loading="lazy" decoding="async"
             src={thumbSrc}
             alt=""
             className="h-full w-full object-cover opacity-[0.82] transition-all duration-300 group-hover:scale-[1.015] group-hover:opacity-95"

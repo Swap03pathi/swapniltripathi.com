@@ -27,7 +27,7 @@ export default function Timeline() {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 flex-wrap">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={resolveAssetUrl(exp.logoUrl)}
                       alt={exp.title}
                       className="w-5 h-5 rounded-sm opacity-60 group-hover:opacity-100 transition-opacity"

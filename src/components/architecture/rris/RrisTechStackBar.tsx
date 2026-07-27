@@ -22,7 +22,7 @@ export function RrisTechStackBar() {
             className="flex h-14 w-14 items-center justify-center rounded-lg border border-slate-800/80 bg-slate-950/60 shadow-[0_8px_28px_-18px_rgba(59,130,246,0.2)] transition-colors hover:border-sky-500/25 hover:bg-slate-900/80"
             title={t.name}
           >
-            <img
+            <img loading="lazy" decoding="async"
               src={t.logoUrl}
               alt=""
               className={

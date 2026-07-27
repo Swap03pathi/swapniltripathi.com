@@ -100,6 +100,12 @@ export default function BlogPostPage() {
           <Markdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeHighlight]}
+            components={{
+              // Article images live below the fold — lazy-load them all.
+              img: ({ node, ...props }) => (
+                <img loading="lazy" decoding="async" {...props} />
+              ),
+            }}
           >
             {post.content}
           </Markdown>

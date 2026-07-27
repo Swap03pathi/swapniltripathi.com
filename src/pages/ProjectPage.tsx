@@ -79,7 +79,7 @@ export default function ProjectPage() {
               to={`/experience/${experience.slug}`}
               className="inline-flex items-center gap-2 mt-4 group"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src={resolveAssetUrl(experience.logoUrl)}
                 alt={experience.title}
                 className="w-5 h-5 rounded-sm opacity-60 group-hover:opacity-100 transition-opacity"
@@ -157,7 +157,7 @@ export default function ProjectPage() {
                     className="flex h-11 w-11 items-center justify-center rounded-md border border-white/5 bg-white/[0.02] transition-all hover:border-accent/20 hover:bg-white/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/40"
                     aria-label={`${tool.name} — open homepage`}
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={tool.logoUrl}
                       alt=""
                       className={`object-contain opacity-50 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 ${tool.logoImgClassName ?? 'h-6 w-6'}`}
@@ -169,7 +169,7 @@ export default function ProjectPage() {
                   <div
                     className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex w-max -translate-x-1/2 translate-y-1 scale-95 items-center gap-2 whitespace-nowrap rounded-md border border-white/5 bg-dark px-3 py-2 opacity-0 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.06] transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:scale-100 group-focus-within:opacity-100"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={tool.logoUrl}
                       alt=""
                       className="h-4 w-4 object-contain opacity-80"

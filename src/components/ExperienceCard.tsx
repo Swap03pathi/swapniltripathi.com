@@ -12,7 +12,7 @@ export default function ExperienceCard({ experience }: { experience: Experience 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex items-baseline gap-3 flex-wrap">
-            <img
+            <img loading="lazy" decoding="async"
               src={resolveAssetUrl(experience.logoUrl)}
               alt={experience.title}
               className="w-5 h-5 rounded-sm opacity-60 group-hover:opacity-100 transition-opacity"
