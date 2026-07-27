@@ -38,7 +38,7 @@ export default function Hero() {
           </p>
 
           <p
-            className="animate-fade-in-up mt-3 text-xs tracking-wide text-white/25"
+            className="animate-fade-in-up mt-3 text-xs tracking-wide text-white/50"
             style={{ animationDelay: '0.5s' }}
           >
             CTO @ Saras &bull; Apple &bull; IIT Bombay

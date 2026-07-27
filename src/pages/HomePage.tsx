@@ -39,7 +39,7 @@ export default function HomePage() {
                 key={i}
                 className="rounded-lg border border-white/5 bg-white/[0.02] p-4"
               >
-                <p className="text-sm italic text-white/30">&quot;{thought}&quot;</p>
+                <p className="text-sm italic text-white/55">&quot;{thought}&quot;</p>
               </div>
             ))}
           </div>
