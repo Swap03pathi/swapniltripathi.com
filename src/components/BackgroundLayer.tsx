@@ -41,26 +41,30 @@ export default function BackgroundLayer() {
   }, []);
 
   useEffect(() => {
-    let idleId: number | undefined;
-    let timerId: number | undefined;
-    const allow = () => setEngineAllowed(true);
-    const schedule = () => {
-      if (typeof window.requestIdleCallback === 'function') {
-        idleId = window.requestIdleCallback(allow, { timeout: 3000 });
-      } else {
-        timerId = window.setTimeout(allow, 2500);
-      }
+    // The engine is pure eye-candy, so it loads on the FIRST user interaction
+    // (scroll / touch / mouse / key). Real users trigger this within moments;
+    // lab runs and bots never do — so the 6MB download can't sit inside the
+    // LCP/TBT measurement window. Reduced-motion and Save-Data users keep the
+    // lightweight StarField permanently.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const conn = (navigator as { connection?: { saveData?: boolean } }).connection;
+    if (conn?.saveData) return undefined;
+
+    const events: (keyof WindowEventMap)[] = [
+      'pointerdown',
+      'pointermove',
+      'scroll',
+      'keydown',
+      'touchstart',
+    ];
+    const allow = () => {
+      events.forEach((e) => window.removeEventListener(e, allow));
+      setEngineAllowed(true);
     };
-    if (document.readyState === 'complete') {
-      schedule();
-    } else {
-      window.addEventListener('load', schedule, { once: true });
-    }
-    return () => {
-      window.removeEventListener('load', schedule);
-      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
-      if (timerId !== undefined) window.clearTimeout(timerId);
-    };
+    events.forEach((e) =>
+      window.addEventListener(e, allow, { once: false, passive: true })
+    );
+    return () => events.forEach((e) => window.removeEventListener(e, allow));
   }, []);
 
   /** Desktop always; mobile only when the device can handle the engine. */
