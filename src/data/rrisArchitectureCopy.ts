@@ -110,6 +110,7 @@ SL 15 TGT 85,100`;
 
 export const rrisMessageJson = `{
   "ticker": "NIFTY23600PE",
+  "expiry": "12-05-2026",
   "category": "Index Options",
   "position": "Buy",
   "entry": 45.2,

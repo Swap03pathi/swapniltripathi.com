@@ -35,7 +35,7 @@ export const systemGatewayCards: SystemGatewayCard[] = [
     label: 'Apple Experience',
   },
   {
-    title: 'PCI Classification Workflows',
+    title: 'Social Listening Classification',
     description:
       'Operational ML pipelines for classifying product issues, feature-level signals, and social conversations at scale.',
     href: '/experience/apple#core-systems',

@@ -1,7 +1,7 @@
 import { SARAS_SECTION_IDS, SARAS_SYSTEM_ROUTES } from '../constants/sarasExperience';
 
 export const sarasHero = {
-  label: 'Saras Experience',
+  label: 'CTO & Co-Founder · Sept 2024 – Present',
   title: 'A Trust Layer for',
   titleAccent: 'Smarter Trading Decisions',
   description:

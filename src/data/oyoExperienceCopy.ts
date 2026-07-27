@@ -1,6 +1,6 @@
 
 export const oyoHero = {
-  eyebrow: 'OYO Internship Experience',
+  eyebrow: 'OYO · Summer Analyst · Jun – Jul 2019',
   title: 'Discovering Analytics Through Experimentation',
   description:
     'Worked on exploratory data analysis and web scraping experiments during an early internship experience in the travel-tech space, which later shaped my interest in analytics engineering and data systems.',

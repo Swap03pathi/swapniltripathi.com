@@ -1,7 +1,7 @@
 import type { Tool } from './types';
 
 export const testbookHero = {
-  eyebrow: 'Testbook Experience',
+  eyebrow: 'Testbook · Analyst · Aug 2020 – Jan 2022',
   title: 'Building Analytics & Operational Foundations at Testbook',
   description:
     'My first job out of college, on a five-person analytics team. Worked across analytics, reporting, product instrumentation, and operational automation workflows supporting product, sales, and growth teams within a fast-moving edtech startup environment.',

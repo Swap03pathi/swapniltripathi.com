@@ -9,7 +9,7 @@ export const experiences: Experience[] = [
     role: 'CTO, Co-Founder',
     period: 'Sept 2024 — Present',
     shortDescription:
-    'Built a signal intelligence platform that captures, parses, and virtually executes trading recommendations across multiple sources. 150K+ downloads, 200K+ daily messages received, 98% uptime.',
+    'Built a signal intelligence platform that captures, parses, and virtually executes trading recommendations across multiple sources. 150K+ downloads, 200K+ daily messages received, <500ms execution latency, 20K concurrent users, 600+ APIs, 98% uptime.',
     logoUrl: '/logos/saras.png',
     projectSlugs: [
       'signal-ingestion-system',
@@ -28,7 +28,7 @@ export const experiences: Experience[] = [
     role: 'Consulting Data Engineer → Data Scientist',
     period: 'Jan 2022 — July 2024',
     shortDescription:
-      'Worked across Data Engineering and Data Science, building systems that handled production-scale data workflows.',
+      'Sole data engineer for an AppleCare analytics org — ~20 production pipelines, ML-based KPI anomaly detection, and an NLP classification pipeline processing 400K+ items daily with a 68% runtime cut.',
     logoUrl: 'https://cdn.simpleicons.org/apple/ffffff',
     projectSlugs: [],
   },
@@ -38,7 +38,7 @@ export const experiences: Experience[] = [
     role: 'Analyst',
     period: 'Aug 2020 — Jan 2022',
     shortDescription:
-      'Data analysis and building internal tools to support product decisions at scale.',
+      'Owned event instrumentation for 6M+ monthly active users — Redash dashboards on MongoDB, and self-taught automation powering sales operations.',
     logoUrl: '/logos/testbook.png',
     projectSlugs: [],
   },

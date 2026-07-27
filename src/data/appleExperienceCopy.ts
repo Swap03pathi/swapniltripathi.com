@@ -1,5 +1,4 @@
 import type { Tool } from './types';
-import { APPLE_SECTION_IDS } from '../constants/appleExperience';
 
 export const appleHero = {
   eyebrow: 'Apple Experience',
@@ -70,7 +69,7 @@ export const appleCoreSystems = [
     id: 'pci',
     number: '3',
     icon: 'classify' as const,
-    title: 'PCI Classification System',
+    title: 'Social Listening Classification System',
     highlight: false,
     description:
       'Operational ML workflows for classifying product-related discussions, issues, and feature-level signals from social media and support interactions to improve visibility and proactive response workflows.',
@@ -153,15 +152,10 @@ export const appleTooling: Tool[] = [
 export const appleOperationalStats = [
   { label: 'Production Pipelines', value: '~20', icon: 'pipeline' as const },
   { label: 'Social Listening Workflows', value: 'Multi-source', icon: 'listening' as const },
-  { label: 'Monitoring Systems', value: 'KPI + PCI', icon: 'monitor' as const },
+  { label: 'Monitoring Systems', value: 'KPI + Classification', icon: 'monitor' as const },
   { label: 'Automation Workflows', value: 'DAG + Cron', icon: 'automation' as const },
 ] as const;
 
 export const appleClosing =
-  'My experience at Apple strengthened my approach toward operational reliability, scalable automation, and building production-grade analytics workflows that support large-scale reporting and monitoring systems.';
+  'My rule at Apple was simple: never do the same task twice. Anything manual I inherited got automated — so an entire analytics org\'s reporting, alerting, and data workflows kept running without needing someone to babysit them.';
 
-export const appleSectionNav = [
-  { id: APPLE_SECTION_IDS.hero, label: 'Overview' },
-  { id: APPLE_SECTION_IDS.coreSystems, label: 'Systems' },
-  { id: APPLE_SECTION_IDS.scale, label: 'Tooling' },
-] as const;
