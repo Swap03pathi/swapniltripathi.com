@@ -16,7 +16,7 @@ export default function SarasSectionNav() {
             key={item.id}
             type="button"
             onClick={() => scrollToSection(item.id)}
-            className="shrink-0 rounded-md px-2.5 py-1.5 text-xs font-medium text-white/40 transition-colors hover:bg-white/[0.04] hover:text-white/80 sm:text-sm"
+            className="shrink-0 rounded-md px-2.5 py-1.5 text-xs font-medium text-white/55 transition-colors hover:bg-white/[0.04] hover:text-white/85 sm:text-sm"
           >
             {item.label}
           </button>

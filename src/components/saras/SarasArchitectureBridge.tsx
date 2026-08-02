@@ -21,7 +21,7 @@ export default function SarasArchitectureBridge({ system }: { system: SarasSyste
   return (
     <header className="border-b border-white/[0.06] bg-dark pb-8 pt-6 md:pb-10 md:pt-8">
       <div className="mx-auto max-w-[1200px] px-5 sm:px-6 lg:px-8">
-        <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/35" aria-label="Breadcrumb">
+        <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/50" aria-label="Breadcrumb">
           <Link
             to={SARAS_EXPERIENCE_PATH}
             className="transition-colors hover:text-accent/80"
@@ -45,7 +45,7 @@ export default function SarasArchitectureBridge({ system }: { system: SarasSyste
           <span className="text-white/55">{core.title}</span>
         </nav>
 
-        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-accent/55">
+        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-accent/75">
           Architecture deep-dive
         </p>
         <h1 className="mt-2 max-w-3xl text-2xl font-bold tracking-tight text-white md:text-3xl">

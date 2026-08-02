@@ -1,10 +1,9 @@
-import { motion } from 'framer-motion';
 import { resolveAssetUrl } from '../../utils/assetUrl';
 
 const HERO_SCREENSHOTS = {
-  left: '/saras/hero/hero-left.jpg',
-  center: '/saras/hero/hero-center.jpg',
-  right: '/saras/hero/hero-right.jpg',
+  left: '/saras/hero/hero-left',
+  center: '/saras/hero/hero-center',
+  right: '/saras/hero/hero-right',
 } as const;
 
 function PhoneFrame({
@@ -19,21 +18,21 @@ function PhoneFrame({
   delay?: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.5 }}
-      className={`relative w-[140px] shrink-0 rounded-[1.25rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-1.5 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.75)] sm:w-[156px] ${className}`}
+    <div
+      style={delay ? { animationDelay: `${delay}s` } : undefined}
+      className={`animate-rise relative w-[140px] shrink-0 rounded-[1.25rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-1.5 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.75)] sm:w-[156px] ${className}`}
     >
       <div className="aspect-[9/19] overflow-hidden rounded-[1rem] border border-white/[0.06] bg-[#0a0a0a]">
         <img
-          src={resolveAssetUrl(src)}
+          src={resolveAssetUrl(`${src}-256.webp`)}
+          srcSet={`${resolveAssetUrl(`${src}-256.webp`)} 256w, ${resolveAssetUrl(`${src}-384.webp`)} 384w`}
+          sizes="(min-width: 640px) 144px, 128px"
           alt={alt}
           className="h-full w-full object-contain object-top"
           loading="eager"
         />
       </div>
-    </motion.div>
+    </div>
   );
 }
 

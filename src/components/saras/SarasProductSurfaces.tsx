@@ -53,7 +53,7 @@ function SurfaceFrame({
         </div>
       </div>
       <p className="mt-4 text-center text-sm font-semibold text-white/75">{label}</p>
-      <p className="mt-1 max-w-[240px] text-center text-xs leading-snug text-white/35">{caption}</p>
+      <p className="mt-1 max-w-[240px] text-center text-xs leading-snug text-white/50">{caption}</p>
     </div>
   );
 }
@@ -160,7 +160,7 @@ export default function SarasProductSurfaces() {
             </div>
           </div>
         ) : (
-          <p className="mx-auto mt-6 max-w-xl text-sm text-white/40">
+          <p className="mx-auto mt-6 max-w-xl text-sm text-white/55">
             Add your YouTube URL in{' '}
             <code className="rounded bg-white/[0.06] px-1.5 py-0.5 text-xs text-accent/80">
               sarasTutorialVideoUrl

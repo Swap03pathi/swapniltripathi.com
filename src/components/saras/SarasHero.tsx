@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Tv, Users, Wallet } from 'lucide-react';
 import { SARAS_SECTION_IDS } from '../../constants/sarasExperience';
 import { sarasHero } from '../../data/sarasExperienceCopy';
@@ -23,12 +22,7 @@ export default function SarasHero() {
       className="scroll-mt-28 min-h-[calc(100vh-3.5rem)] border-b border-white/[0.06]"
     >
       <div className="mx-auto grid max-w-[1200px] grid-cols-12 items-center gap-10 px-5 py-16 sm:px-6 lg:gap-14 lg:px-8 lg:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-          className="col-span-12 lg:col-span-6"
-        >
+        <div className="animate-rise col-span-12 lg:col-span-6">
           <div className="flex items-center gap-3">
             <img
               src={resolveAssetUrl('/logos/saras.png')}
@@ -37,7 +31,7 @@ export default function SarasHero() {
             />
             <span className="text-sm font-semibold tracking-wide text-white/90">saras</span>
           </div>
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-accent/60">
+          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-accent/75">
             {sarasHero.label}
           </p>
           <h1 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
@@ -66,7 +60,7 @@ export default function SarasHero() {
             {sarasHero.metrics.map((m) => (
               <div key={m.label}>
                 <p className="text-xl font-bold text-white md:text-2xl">{m.value}</p>
-                <p className="mt-0.5 text-xs text-white/35">{m.label}</p>
+                <p className="mt-0.5 text-xs text-white/50">{m.label}</p>
               </div>
             ))}
           </div>
@@ -87,7 +81,7 @@ export default function SarasHero() {
               Explore Product ↓
             </button>
           </div>
-        </motion.div>
+        </div>
 
         <div className="col-span-12 lg:col-span-6">
           <SarasDeviceMockups />

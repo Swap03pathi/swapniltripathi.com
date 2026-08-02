@@ -28,7 +28,7 @@ export default function SarasExperiencePage() {
         <div className="mx-auto flex max-w-[1200px] items-center justify-between">
           <Link
             to="/experience"
-            className="inline-flex items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-accent"
+            className="inline-flex items-center gap-1.5 text-sm text-white/55 transition-colors hover:text-accent"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path d="M15 19l-7-7 7-7" />

@@ -29,7 +29,7 @@ function EvolutionMilestone({
       <p className="font-mono text-[11px] font-medium tracking-widest text-accent/45">
         Phase {phase}
       </p>
-      <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.16em] text-white/35">
+      <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.16em] text-white/50">
         {label}
       </p>
       <h3 className="mt-3 text-lg font-semibold tracking-tight text-white md:text-xl">{title}</h3>

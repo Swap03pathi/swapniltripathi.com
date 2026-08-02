@@ -43,7 +43,7 @@ export function SarasSection({
     >
       <div className="relative mx-auto max-w-[1200px] px-5 sm:px-6 lg:px-8">
         {eyebrow ? (
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/55">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/75">{eyebrow}</p>
         ) : null}
         <h2 className="mt-2 text-2xl font-bold tracking-tight text-white md:text-3xl lg:text-4xl">{title}</h2>
         {description ? (

@@ -14,8 +14,8 @@ export const appleHero = {
   metrics: [
     { value: '~20', label: 'Production Pipelines', icon: 'pipeline' as const },
     { value: '100k+', label: 'Social Posts / Day', icon: 'posts' as const },
-    { value: 'Tableau + Snowflake + Python', label: 'Core Stack', icon: 'stack' as const },
-    { value: 'Operational', label: 'Analytics Workflows', icon: 'workflow' as const },
+    { value: '400K+', label: 'Items Classified / Day', icon: 'stack' as const },
+    { value: '68%', label: 'Pipeline Runtime Cut', icon: 'workflow' as const },
   ],
 };
 
@@ -33,7 +33,7 @@ export const appleCoreSystems = [
       'Temporary launch workflows for NPI & WWDC support',
       'Social listening ingestion pipelines from Sprinklr',
     ],
-    tools: ['Python', 'SQL', 'Snowflake', 'Teradata', 'MySQL'],
+    tools: ['Python', 'Snowflake', 'Teradata', 'MySQL'],
     flow: [
       'Data Ingestion',
       'Processing',
@@ -49,11 +49,11 @@ export const appleCoreSystems = [
     title: 'KPI Anomaly Detection System',
     highlight: true,
     bullets: [
-      'ML-based KPI prediction using historical data',
-      'Expected range calculation using standard deviation thresholds',
-      'Automated P1 / P2 / P3 anomaly prioritization',
-      'Stakeholder email alert workflows',
-      'Centralized monitoring dashboard integrations',
+      'Forecasts each KPI from its own recent history',
+      'Scores daily values against expected deviation bands',
+      'Distance from the band sets severity — P1, P2, or P3',
+      'Anomalies emailed to the stakeholder who owns that KPI',
+      'Backed by a centralized monitoring dashboard',
     ],
     tools: ['Python', 'SQL', 'Snowflake', 'Tableau'],
     flow: [
@@ -101,11 +101,6 @@ export const appleTooling: Tool[] = [
     homepageUrl: 'https://python.org',
   },
   {
-    name: 'SQL',
-    logoUrl: 'https://cdn.simpleicons.org/mysql/4479A1',
-    homepageUrl: 'https://www.mysql.com/',
-  },
-  {
     name: 'Snowflake',
     logoUrl: 'https://cdn.simpleicons.org/snowflake/29B5E8',
     homepageUrl: 'https://www.snowflake.com/',
@@ -131,9 +126,9 @@ export const appleTooling: Tool[] = [
     homepageUrl: 'https://airflow.apache.org/',
   },
   {
-    name: 'SIMCloud',
+    name: 'SimCloud',
     logoUrl: 'https://cdn.simpleicons.org/apple/ffffff',
-    homepageUrl: 'https://www.apple.com/',
+    homepageUrl: '',
     logoImgClassName: 'h-6 w-6',
   },
   {
@@ -141,11 +136,6 @@ export const appleTooling: Tool[] = [
     logoUrl: 'https://cdn.simpleicons.org/nvidia/76B900',
     homepageUrl: 'https://developer.nvidia.com/cuda-zone',
     logoImgClassName: 'h-7 w-7',
-  },
-  {
-    name: 'DAG Workflows',
-    logoUrl: 'https://cdn.simpleicons.org/apacheairflow/017CEE',
-    homepageUrl: 'https://airflow.apache.org/',
   },
 ];
 

@@ -40,8 +40,8 @@ function PressCardContent({
         <span
           className={`inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] ${
             isRecognition
-              ? 'border-white/10 bg-white/[0.04] text-white/40'
-              : 'border-white/[0.08] bg-white/[0.03] text-white/35'
+              ? 'border-white/10 bg-white/[0.04] text-white/55'
+              : 'border-white/[0.08] bg-white/[0.03] text-white/55'
           }`}
         >
           {item.type}
@@ -59,7 +59,7 @@ function PressCardContent({
         className={`mt-5 flex h-11 w-11 items-center justify-center rounded-xl border bg-white/[0.02] transition-colors ${
           isRecognition
             ? 'border-white/[0.08] text-white/45'
-            : 'border-white/[0.07] text-white/40 group-hover:border-accent/20 group-hover:text-accent/55'
+            : 'border-white/[0.07] text-white/55 group-hover:border-accent/20 group-hover:text-accent/55'
         }`}
       >
         <Icon className="h-5 w-5" strokeWidth={1.35} aria-hidden />
@@ -72,7 +72,7 @@ function PressCardContent({
       >
         {item.outlet}
       </h3>
-      <p className="mt-2 text-sm leading-relaxed text-white/40">{item.supportLine}</p>
+      <p className="mt-2 text-sm leading-relaxed text-white/55">{item.supportLine}</p>
     </>
   );
 }

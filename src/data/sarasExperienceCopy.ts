@@ -128,10 +128,10 @@ export const sarasPlatformCards = {
     {
       id: 'reliability',
       title: 'Reliability & Infrastructure',
-      items: ['ECS Migration', 'Redis Optimization', 'Monitoring Systems', 'Security Recovery'],
+      items: ['ECS on Fargate', 'Redis Sorted Sets', '~45% Compute Reduction', 'Security Hardening'],
       paragraphs: [
-        'The platform infrastructure evolved significantly as operational complexity increased, including migrations from PM2-based services to ECS-managed deployments and large-scale Redis optimization for realtime filtering workflows.',
-        'Monitoring, observability, recovery procedures, and security hardening became increasingly important as the platform scaled operationally.',
+        'Services moved from PM2-managed processes to containerized deployments — ECS on Fargate, images in ECR, GitHub Actions running CI/CD — migrated without downtime.',
+        'Compute spend came down roughly 45%, mostly on ECS Fargate and EC2. The main lever was Redis sorted sets: instead of re-running full queries and recomputing results on the server for every request, ranking and filtering read from incrementally maintained sets kept current with ZADD.',
       ],
     },
     {
@@ -218,9 +218,9 @@ export const sarasEvolutionPhases = [
   {
     phase: '03',
     label: 'Realtime Infrastructure',
-    title: 'Building the Execution Engine',
+    title: 'Rebuilding the Execution Engine',
     description:
-      'Saras moved from interval-based trade matching into a realtime execution architecture powered by Redis state management, websocket market feeds, and event-driven processing.',
+      'The first execution engine ran on cron jobs and Lambda functions — matching trades on an interval, minutes behind the market, and breaking in ways that were hard to trace. It was rebuilt as a persistent realtime engine: Redis state management, websocket market feeds, and event-driven processing.',
     themes: ['Redis State', 'Websocket Feeds', 'Event Processing', 'Realtime Matching'],
   },
   {
@@ -318,6 +318,7 @@ export const sarasTutorialVideoUrl = 'https://youtu.be/5OG9ehGXGNg';
 
 export const sarasOwned = [
   'System architecture across ingestion, execution, and intelligence',
+  'Hiring and leading the five-person permanent tech team',
   'Backend engineering and API design',
   'Infrastructure, ECS, and deployment pipelines',
   'Redis strategy — streams, sorted sets, and ranking layers',
