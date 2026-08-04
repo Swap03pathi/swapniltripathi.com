@@ -20,5 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  /* Test files are typechecked by the worker workspace, which owns vitest. */
+  "exclude": ["src/**/__tests__/**"]
 }

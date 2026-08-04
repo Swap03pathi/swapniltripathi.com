@@ -1,5 +1,3 @@
-/* eslint-disable react-refresh/only-export-components -- ABILITY_ICON is a
-   trivial icon lookup that belongs beside the card visuals it styles. */
 import { ArrowLeftRight, Eye, Search } from 'lucide-react';
 import type { Card } from '../../game/engine/types';
 

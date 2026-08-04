@@ -4,12 +4,26 @@
     "module": "ES2022",
     "moduleResolution": "bundler",
     "lib": ["ES2022"],
-    "types": ["@cloudflare/workers-types"],
+    "types": ["@cloudflare/workers-types", "vitest/globals"],
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
     "isolatedModules": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    /* Test files live in the site tree but vitest is installed here, so point
+       TypeScript at this workspace's copy when they import it. */
+    "baseUrl": ".",
+    "paths": {
+      "vitest": ["./node_modules/vitest"],
+      "vitest/*": ["./node_modules/vitest/*"]
+    }
   },
-  "include": ["src/**/*.ts", "../../src/game/engine/**/*.ts", "../../src/game/protocol.ts"]
+  "include": [
+    "src/**/*.ts",
+    "vitest.config.ts",
+    "../../src/game/engine/**/*.ts",
+    "../../src/game/protocol.ts",
+    "../../src/game/client/events.ts",
+    "../../src/game/client/__tests__/**/*.ts"
+  ]
 }
