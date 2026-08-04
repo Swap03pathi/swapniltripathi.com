@@ -98,6 +98,11 @@ describe('setup', () => {
     expect(() => createMatch(['a', 'a'], 1)).toThrow();
   });
 
+  it('rejects a deck too small to deal the table', () => {
+    // 3 values × 2 copies = 6 cards < 2 players × 4 + 1 flip
+    expect(() => createMatch(['a', 'b'], 1, { maxValue: 2, copies: 2 })).toThrow(/Deck too small/);
+  });
+
   it('deals 4 per player, one discard, rest in draw pile', () => {
     const s = newGame(3);
     expect(s.phase).toBe('memorize');

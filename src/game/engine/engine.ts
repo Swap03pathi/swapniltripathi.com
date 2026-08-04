@@ -23,6 +23,12 @@ export function createMatch(playerIds: string[], seed: number, rules: Partial<Ru
     throw new Error('Duplicate player ids');
   }
   const fullRules = { ...DEFAULT_RULES, ...rules };
+  // Guard the API even though server-side rule clamping makes this unreachable:
+  // a short deck would deal partial hands and flip an undefined discard.
+  const deckSize = (fullRules.maxValue + 1) * fullRules.copies;
+  if (deckSize < playerIds.length * fullRules.cardsPerPlayer + 1) {
+    throw new Error('Deck too small for this table');
+  }
   const players: PlayerState[] = playerIds.map((id, seat) => ({
     id,
     seat,
