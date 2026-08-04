@@ -35,6 +35,7 @@ export default function Footer() {
         <nav className="mt-8 flex items-center justify-center gap-5 text-xs text-white/55">
           <Link to="/about" className="hover:text-white/85 transition-colors">About</Link>
           <Link to="/contact" className="hover:text-white/85 transition-colors">Contact</Link>
+          <Link to="/game/foursight" className="hover:text-white/85 transition-colors">Foursight</Link>
           <Link to="/privacy" className="hover:text-white/85 transition-colors">Privacy</Link>
         </nav>
 

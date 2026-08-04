@@ -130,6 +130,41 @@ export default function MePage() {
               </div>
             </a>
             <Link
+              to="/game/foursight"
+              className="group block h-full rounded-lg border border-white/5 bg-white/[0.02] p-5 transition-all duration-300 ease-out hover:border-accent/20 hover:bg-white/[0.04] hover:shadow-[0_12px_36px_-18px_rgba(0,212,255,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/40"
+            >
+              <div className="flex h-full min-h-[120px] flex-col">
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-accent/45">
+                    Live · Multiplayer Game
+                  </span>
+                  <svg
+                    className="h-4 w-4 shrink-0 text-white/10 transition-colors group-hover:text-accent/55"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                <h3 className="mt-3 text-sm font-semibold leading-snug text-white transition-colors group-hover:text-accent">
+                  Foursight — a card game you can play right here
+                </h3>
+                <p className="mt-2 flex-1 text-xs leading-relaxed text-white/45 transition-colors group-hover:text-white/55">
+                  A memory &amp; deduction card game for 2–5 players, built into this site:
+                  room codes, realtime WebSocket play on Cloudflare Durable Objects, and a
+                  fully unit-tested rules engine. Grab friends, share a code, go lowest.
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent/70 transition-colors group-hover:text-accent">
+                  Play Foursight
+                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </Link>
+            <Link
               to="/project/finman"
               className="group block h-full rounded-lg border border-white/5 bg-white/[0.02] p-5 transition-all duration-300 ease-out hover:border-accent/20 hover:bg-white/[0.04] hover:shadow-[0_12px_36px_-18px_rgba(0,212,255,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/40"
             >

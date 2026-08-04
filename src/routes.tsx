@@ -60,6 +60,8 @@ export const routes: RouteRecord[] = [
         getStaticPaths: () => getAllBlogPosts().map((p) => `blogs/${p.slug}`),
       },
 
+      { path: 'game/foursight', lazy: page(() => import('./pages/FoursightPage')) },
+
       { path: 'about', lazy: page(() => import('./pages/AboutPage')) },
       { path: 'contact', lazy: page(() => import('./pages/ContactPage')) },
       { path: 'privacy', lazy: page(() => import('./pages/PrivacyPage')) },
