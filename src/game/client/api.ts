@@ -2,14 +2,13 @@
  * Network configuration + seat-token storage for the Foursight client.
  *
  * Local play: `npx wrangler dev` inside game/worker serves localhost:8787.
- * Production REQUIRES VITE_FOURSIGHT_API (the deployed Worker URL) at build
- * time — no guessed fallback: shipping a wrong host would fail with confusing
- * network errors instead of the honest message below.
+ * Production default is the deployed Worker (verified live 2026-08-05);
+ * VITE_FOURSIGHT_API overrides it at build time if the backend ever moves.
  */
 
 export const HTTP_BASE: string | null =
   (import.meta.env.VITE_FOURSIGHT_API as string | undefined) ??
-  (import.meta.env.DEV ? 'http://localhost:8787' : null);
+  (import.meta.env.DEV ? 'http://localhost:8787' : 'https://foursight-api.swapniltripathi2905.workers.dev');
 
 export const WS_BASE = HTTP_BASE?.replace(/^http/, 'ws') ?? null;
 
