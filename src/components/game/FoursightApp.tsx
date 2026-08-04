@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Check, Copy, Crown, History, Link2, LogOut, Play, Wifi, WifiOff } from 'lucide-react';
+import { Check, Copy, Crown, History, Link2, LogOut, Play, RotateCcw, Wifi, WifiOff } from 'lucide-react';
+import { getResumableTable } from '../../game/client/api';
 import { getHistory } from '../../game/client/identity';
 import { Eyebrow } from './bits';
 import { useFoursight } from '../../game/client/useFoursight';
@@ -65,6 +66,8 @@ function Entry({ game, initialCode = '' }: { game: Game; initialCode?: string })
     if (initialCode) setCode(initialCode);
   }, [initialCode]);
   const history = getHistory();
+  // A table this browser was recently seated at — the fix for a stray back tap.
+  const [resumable] = useState(getResumableTable);
 
   const saveNameIfSet = () => {
     if (name.trim()) game.rename(name);
@@ -73,6 +76,24 @@ function Entry({ game, initialCode = '' }: { game: Game; initialCode?: string })
   return (
     <div className="grid gap-8 md:grid-cols-2">
       <div>
+        {resumable && (
+          <button
+            type="button"
+            onClick={() => {
+              saveNameIfSet();
+              game.connect(resumable.code);
+            }}
+            className="mb-5 flex w-full items-center gap-3 rounded-xl border border-accent/25 bg-accent/[0.08] p-3.5 text-left transition-colors hover:bg-accent/15"
+          >
+            <RotateCcw className="h-4 w-4 shrink-0 text-accent" />
+            <span className="min-w-0">
+              <span className="block text-sm font-semibold text-accent">Back to table {resumable.code}</span>
+              <span className="block text-xs text-white/55">
+                You were playing here — pick up exactly where you left off.
+              </span>
+            </span>
+          </button>
+        )}
         <label htmlFor="foursight-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.2em] text-accent/75">
           Display name
         </label>

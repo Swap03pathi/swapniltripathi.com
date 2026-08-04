@@ -17,6 +17,17 @@ export interface RoomSettings {
   rules: RuleConfig;
 }
 
+/** An open vote on whether to drop an inactive player for the rest of the round. */
+export interface AfkVoteView {
+  targetId: string;
+  /** Epoch ms when the vote resolves on its own (drop, unless wait has a majority). */
+  endsAt: number;
+  /** Player ids eligible to vote (connected, not the target, not dropped). */
+  eligible: string[];
+  /** How each voter has voted so far. */
+  votes: Record<string, 'drop' | 'wait'>;
+}
+
 export interface RoomMember {
   playerId: string;
   name: string;
@@ -51,7 +62,11 @@ export type ClientMsg =
   | { t: 'configure'; variant?: VariantKey; maxPlayers?: number; turnTimerSec?: number; rules?: Partial<RuleConfig> }
   | { t: 'start' }
   | { t: 'action'; action: PlayerActionInput }
-  | { t: 'playAgain' };
+  | { t: 'playAgain' }
+  /** Vote on an open AFK drop. */
+  | { t: 'afkVote'; vote: 'drop' | 'wait' }
+  /** The AFK player proving they are back, without making a move. */
+  | { t: 'imHere' };
 
 export type ServerMsg =
   /**
@@ -65,7 +80,9 @@ export type ServerMsg =
   | { t: 'state'; view: ClientView; deadline: number | null }
   /** Public events plus only the recipient's own private events. */
   | { t: 'events'; events: EngineEvent[] }
-  | { t: 'error'; message: string };
+  | { t: 'error'; message: string }
+  /** Open AFK vote, or null when none is running. */
+  | { t: 'afk'; vote: AfkVoteView | null };
 
 /** Room codes: 5 chars, no ambiguous glyphs (0/O, 1/I/L). */
 export const ROOM_CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';

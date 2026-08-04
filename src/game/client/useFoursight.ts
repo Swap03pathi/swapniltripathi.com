@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { EngineEvent } from '../engine/types';
 import type { ClientView } from '../engine/view';
+import type { AfkVoteView } from '../protocol';
 import {
   WS_CLOSE_NOT_FOUND,
   WS_CLOSE_REJECTED,
@@ -10,7 +11,15 @@ import {
   type RoomView,
   type ServerMsg,
 } from '../protocol';
-import { HTTP_BASE, NO_SERVER_MSG, WS_BASE, getRoomToken, saveRoomToken } from './api';
+import {
+  HTTP_BASE,
+  NO_SERVER_MSG,
+  WS_BASE,
+  forgetTable,
+  getRoomToken,
+  rememberTable,
+  saveRoomToken,
+} from './api';
 import { EMPTY_DIGEST, expireReveals, reduceEvents, type EventDigest } from './events';
 import { addHistory, getIdentity, saveName } from './identity';
 
@@ -26,6 +35,8 @@ export interface FoursightState extends EventDigest {
   deadline: number | null;
   error: string | null;
   connectionLost: boolean;
+  /** Open vote to drop an inactive player, or null. */
+  afk: AfkVoteView | null;
 }
 
 const INITIAL: Omit<FoursightState, 'you' | 'name'> = {
@@ -36,6 +47,7 @@ const INITIAL: Omit<FoursightState, 'you' | 'name'> = {
   deadline: null,
   error: null,
   connectionLost: false,
+  afk: null,
   ...EMPTY_DIGEST,
 };
 
@@ -97,6 +109,9 @@ export function useFoursight() {
         }
         switch (msg.t) {
           case 'welcome':
+            // Seat secured — remember this table so an accidental back button
+            // can walk straight back in.
+            rememberTable(code);
             return saveRoomToken(code, msg.token);
           case 'room':
             return setSt((p) => {
@@ -108,7 +123,7 @@ export function useFoursight() {
                   msg.room.status === 'playing' && p.view ? 'table' : msg.room.status === 'playing' ? p.screen : 'lobby',
                 // A fresh lobby (e.g. after playAgain) must not drag the previous
                 // match's table, overlays, or log into the next game.
-                ...(backToLobby ? { view: null, deadline: null, ...EMPTY_DIGEST } : {}),
+                ...(backToLobby ? { view: null, deadline: null, afk: null, ...EMPTY_DIGEST } : {}),
                 error: null,
               };
             });
@@ -122,6 +137,8 @@ export function useFoursight() {
             }));
           case 'events':
             return handleEvents(msg.events);
+          case 'afk':
+            return setSt((p) => ({ ...p, afk: msg.vote }));
           case 'error':
             return setSt((p) => ({ ...p, error: msg.message }));
         }
@@ -171,6 +188,7 @@ export function useFoursight() {
   }, [connect]);
 
   const leave = useCallback(() => {
+    forgetTable();
     closingRef.current = true;
     wsRef.current?.close();
     wsRef.current = null;
@@ -187,6 +205,8 @@ export function useFoursight() {
   );
 
   const act = useCallback((action: PlayerActionInput) => send({ t: 'action', action }), [send]);
+  const voteAfk = useCallback((vote: 'drop' | 'wait') => send({ t: 'afkVote', vote }), [send]);
+  const imHere = useCallback(() => send({ t: 'imHere' }), [send]);
 
   // Expire timed reveals.
   useEffect(() => {
@@ -202,7 +222,7 @@ export function useFoursight() {
 
   useEffect(() => () => wsRef.current?.close(), []);
 
-  return { st, createRoom, connect, leave, rename, act, send };
+  return { st, createRoom, connect, leave, rename, act, send, voteAfk, imHere };
 }
 
 /**

@@ -16,7 +16,7 @@ export function ActionBtn({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center gap-1.5 rounded-lg border px-3.5 py-2 text-xs font-semibold transition-colors disabled:opacity-40 ${
+      className={`inline-flex min-h-11 touch-manipulation items-center gap-1.5 rounded-lg border px-4 py-2.5 text-[13px] font-semibold transition-colors disabled:opacity-40 sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-xs ${
         accent
           ? 'border-accent/25 bg-accent/15 text-accent enabled:hover:bg-accent/25'
           : 'border-white/10 text-white/65 enabled:hover:border-white/25 enabled:hover:text-white'
@@ -57,8 +57,8 @@ export function Eyebrow({ children, className = '' }: { children: React.ReactNod
 
 export function Overlay({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-      <div className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-white/10 bg-dark-light p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-sm">
+      <div className="max-h-[85dvh] w-full max-w-lg overflow-y-auto overscroll-contain rounded-2xl border border-white/10 bg-dark-light p-4 sm:p-6">
         <h3 className="mb-4 text-center text-xl font-bold text-white">{title}</h3>
         {children}
       </div>

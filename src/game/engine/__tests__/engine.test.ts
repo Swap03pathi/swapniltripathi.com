@@ -493,6 +493,107 @@ describe('variants and redaction', () => {
   });
 });
 
+describe('dropping an inactive player', () => {
+  function setHands(s: GameState, values: Record<string, number[]>): GameState {
+    const st = structuredClone(s);
+    let n = 500;
+    for (const p of st.players) p.hand = values[p.id].map((v) => ({ id: `d${n++}`, value: v }));
+    return st;
+  }
+
+  it('a dropped player ties the round s highest score (owner rule)', () => {
+    let s = memorizeAll(newGame(3, 401));
+    s = setHands(s, { anna: [9, 9, 9, 9], bob: [1, 1, 0, 0], chris: [3, 3, 3, 3] });
+    while (cur(s) !== 'anna') s = ok(s, { type: 'TIMEOUT' });
+    const events: EngineEvent[] = [];
+    s = ok(s, { type: 'DROP_PLAYER', playerId: 'anna' }, events);
+    expect(events.some((e) => e.type === 'PLAYER_DROPPED')).toBe(true);
+    expect(s.players.find((p) => p.id === 'anna')!.droppedForRound).toBe(true);
+    // Play out: bob calls, chris takes his final turn.
+    while (cur(s) !== 'bob') s = ok(s, { type: 'TIMEOUT' });
+    s = ok(s, { type: 'CALL', playerId: 'bob' }, events);
+    s = ok(s, { type: 'TIMEOUT' }, events);
+    const reveal = events.find((e) => e.type === 'ROUND_REVEALED');
+    expect(reveal && reveal.type === 'ROUND_REVEALED').toBe(true);
+    if (reveal && reveal.type === 'ROUND_REVEALED') {
+      const byId = Object.fromEntries(reveal.hands.map((h) => [h.playerId, h]));
+      // bob wins (2), chris scores his 12, anna (dropped) matches the highest.
+      expect(byId.bob.roundScore).toBe(0);
+      expect(byId.chris.roundScore).toBe(12);
+      expect(byId.anna.roundScore).toBe(12);
+      expect(byId.anna.dropped).toBe(true);
+      // last and second-last share the round score, exactly as specified
+      expect(byId.anna.roundScore).toBe(byId.chris.roundScore);
+      // anna's own hand (36) is irrelevant
+      expect(byId.anna.total).toBe(36);
+    }
+  });
+
+  it('a dropped hand cannot win the round nor make a call false', () => {
+    let s = memorizeAll(newGame(2, 402));
+    // anna would have the lowest hand, but she is dropped: bob's call stands.
+    s = setHands(s, { anna: [0, 0, 0, 0], bob: [4, 4, 0, 0] });
+    while (cur(s) !== 'bob') s = ok(s, { type: 'TIMEOUT' });
+    const events: EngineEvent[] = [];
+    s = ok(s, { type: 'CALL', playerId: 'bob' }, events);
+    // anna is the only other player: dropping her ends the round immediately.
+    s = ok(s, { type: 'DROP_PLAYER', playerId: 'anna' }, events);
+    const reveal = events.find((e) => e.type === 'ROUND_REVEALED');
+    if (reveal && reveal.type === 'ROUND_REVEALED') {
+      expect(reveal.falseCall).toBe(false);
+      expect(reveal.roundWinnerIds).toEqual(['bob']);
+      const anna = reveal.hands.find((h) => h.playerId === 'anna')!;
+      expect(anna.roundScore).toBe(8); // bob's total — a drop is never free
+    }
+  });
+
+  it('dropping leaves the table playable: seats are skipped, actions rejected', () => {
+    let s = memorizeAll(newGame(3, 403));
+    const victim = cur(s);
+    s = ok(s, { type: 'DROP_PLAYER', playerId: victim });
+    expect(cur(s)).not.toBe(victim);
+    expect(fail(s, { type: 'DRAW', playerId: victim })).toMatch(/Not your turn/);
+    // a full lap never lands on the dropped seat
+    for (let i = 0; i < 6; i++) {
+      s = ok(s, { type: 'TIMEOUT' });
+      if (s.phase !== 'turn') break;
+      expect(cur(s)).not.toBe(victim);
+    }
+  });
+
+  it('dropped players cannot be spied on or swapped with', () => {
+    let s = memorizeAll(newGame(3, 404));
+    const victim = s.players[1].id;
+    s = ok(s, { type: 'DROP_PLAYER', playerId: victim });
+    const actor = cur(s);
+    s = rigTopCard(s, 9);
+    s = ok(s, { type: 'DRAW', playerId: actor });
+    expect(fail(s, { type: 'USE_ABILITY', playerId: actor, targetPlayerId: victim, targetSlot: 0 })).toMatch(/dropped/);
+  });
+
+  it('a held card returns to the discard when its holder is dropped', () => {
+    let s = memorizeAll(newGame(3, 405));
+    const actor = cur(s);
+    s = ok(s, { type: 'DRAW', playerId: actor });
+    const held = s.heldCard as Card;
+    const before = s.discardPile.length;
+    s = ok(s, { type: 'DROP_PLAYER', playerId: actor });
+    expect(s.heldCard).toBeNull();
+    expect(s.discardPile.length).toBe(before + 1);
+    expect(s.discardPile[s.discardPile.length - 1].id).toBe(held.id);
+    expect(allCards(s)).toHaveLength(52);
+  });
+
+  it('drops are round-scoped — the next deal brings everyone back', () => {
+    let s = memorizeAll(newGame(3, 406));
+    s = ok(s, { type: 'DROP_PLAYER', playerId: cur(s) });
+    while (s.phase === 'turn' || s.phase === 'finalTurns') s = ok(s, { type: 'TIMEOUT' });
+    if (s.phase === 'roundEnd') s = ok(s, { type: 'NEXT_ROUND' });
+    expect(s.players.every((p) => !p.droppedForRound)).toBe(true);
+    expect(s.players.every((p) => p.hand.length === 4)).toBe(true);
+  });
+});
+
 describe('timeouts', () => {
   it('an abandoned table force-reveals after players×3 consecutive timeouts', () => {
     let s = memorizeAll(newGame(2, 71));

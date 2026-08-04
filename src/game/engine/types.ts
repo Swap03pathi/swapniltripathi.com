@@ -104,6 +104,12 @@ export interface PlayerState {
   matchClaimedThisTurn: boolean;
   /** Set during finalTurns once this player has had their last turn. */
   tookFinalTurn: boolean;
+  /**
+   * Dropped by table vote after going inactive. Round-scoped: their hand sits
+   * inert (unspyable, unswappable), their seat is skipped, and at reveal they
+   * score the round's highest score instead of their hand. Cleared on deal.
+   */
+  droppedForRound: boolean;
 }
 
 export interface GameState {
@@ -159,6 +165,8 @@ export type Action =
   | { type: 'CALL'; playerId: string }
   /** Server-issued when the acting player's timer expires. */
   | { type: 'TIMEOUT' }
+  /** Server-issued when the table votes to drop an inactive player. */
+  | { type: 'DROP_PLAYER'; playerId: string }
   /** Server-issued to begin the next round after roundEnd. */
   | { type: 'NEXT_ROUND' };
 
@@ -200,12 +208,13 @@ export type EngineEvent =
       cards?: Card[];
     }
   | { scope: 'public'; type: 'CALLED'; playerId: string }
+  | { scope: 'public'; type: 'PLAYER_DROPPED'; playerId: string }
   | { scope: 'public'; type: 'DECK_RESHUFFLED'; deckRemaining: number }
   | { scope: 'public'; type: 'TIMED_OUT'; playerId: string }
   | {
       scope: 'public';
       type: 'ROUND_REVEALED';
-      hands: { playerId: string; cards: (Card | null)[]; total: number; roundScore: number }[];
+      hands: { playerId: string; cards: (Card | null)[]; total: number; roundScore: number; dropped: boolean }[];
       callerId: string | null;
       falseCall: boolean;
       roundWinnerIds: string[];

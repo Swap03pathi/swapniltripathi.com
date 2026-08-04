@@ -37,6 +37,7 @@ export function createMatch(playerIds: string[], seed: number, rules: Partial<Ru
     memorized: false,
     matchClaimedThisTurn: false,
     tookFinalTurn: false,
+    droppedForRound: false,
   }));
   const state: GameState = {
     rules: fullRules,
@@ -70,6 +71,7 @@ function dealRound(state: GameState): void {
     p.memorized = false;
     p.matchClaimedThisTurn = false;
     p.tookFinalTurn = false;
+    p.droppedForRound = false;
   }
   state.discardPile = [deck.pop() as Card];
   state.drawPile = deck;
@@ -134,6 +136,9 @@ export function applyAction(prev: GameState, action: Action): ActionResult {
       case 'TIMEOUT':
         doTimeout(state, events);
         break;
+      case 'DROP_PLAYER':
+        doDropPlayer(state, events, action.playerId);
+        break;
       case 'NEXT_ROUND':
         doNextRound(state, events);
         break;
@@ -164,7 +169,9 @@ function currentPlayer(state: GameState): PlayerState {
 
 function requireTurn(state: GameState, playerId: string, ...stages: GameState['turnStage'][]): void {
   if (state.phase !== 'turn' && state.phase !== 'finalTurns') throw new Error('Not in a turn phase');
-  if (currentPlayer(state).id !== playerId) throw new Error('Not your turn');
+  const actor = currentPlayer(state);
+  if (actor.id !== playerId) throw new Error('Not your turn');
+  if (actor.droppedForRound) throw new Error('You were dropped for this round');
   if (!stages.includes(state.turnStage)) throw new Error(`Invalid at stage ${state.turnStage}`);
 }
 
@@ -301,6 +308,7 @@ function doUseAbility(
   } else if (ability === 'spy') {
     if (!action.targetPlayerId || action.targetPlayerId === p.id) throw new Error('Spy targets an opponent');
     const target = player(state, action.targetPlayerId);
+    if (target.droppedForRound) throw new Error('That player was dropped this round');
     requireSlot(target, action.targetSlot);
     events.push({
       scope: 'public',
@@ -323,6 +331,7 @@ function doUseAbility(
     // swap — blind: neither card is revealed to anyone.
     if (!action.targetPlayerId || action.targetPlayerId === p.id) throw new Error('Swap targets an opponent');
     const target = player(state, action.targetPlayerId);
+    if (target.droppedForRound) throw new Error('That player was dropped this round');
     requireSlot(p, action.ownSlot);
     requireSlot(target, action.targetSlot);
     const mine = p.hand[action.ownSlot] as Card;
@@ -393,7 +402,7 @@ function endTurn(state: GameState, events: EngineEvent[]): void {
     const n = state.players.length;
     for (let step = 1; step <= n; step++) {
       const candidate = state.players[(state.currentSeat + step) % n];
-      if (!candidate.tookFinalTurn) {
+      if (!candidate.tookFinalTurn && !candidate.droppedForRound) {
         state.currentSeat = candidate.seat;
         events.push({ scope: 'public', type: 'TURN_STARTED', playerId: candidate.id, phase: state.phase });
         return;
@@ -403,8 +412,52 @@ function endTurn(state: GameState, events: EngineEvent[]): void {
     return;
   }
 
-  state.currentSeat = (state.currentSeat + 1) % state.players.length;
-  events.push({ scope: 'public', type: 'TURN_STARTED', playerId: currentPlayer(state).id, phase: state.phase });
+  const n = state.players.length;
+  for (let step = 1; step <= n; step++) {
+    const candidate = state.players[(state.currentSeat + step) % n];
+    if (!candidate.droppedForRound) {
+      state.currentSeat = candidate.seat;
+      events.push({ scope: 'public', type: 'TURN_STARTED', playerId: candidate.id, phase: state.phase });
+      return;
+    }
+  }
+  // Everyone dropped (unreachable: a drop that leaves <2 active reveals first).
+  revealRound(state, events);
+}
+
+/**
+ * Remove an inactive player from the rest of this round. Their hand stays on
+ * the table but is inert; at reveal they take the round's highest score.
+ */
+function doDropPlayer(state: GameState, events: EngineEvent[], playerId: string): void {
+  if (state.phase !== 'turn' && state.phase !== 'finalTurns') throw new Error('Nothing to drop from');
+  const target = player(state, playerId);
+  if (target.droppedForRound) throw new Error('Already dropped');
+
+  const wasActor = currentPlayer(state).id === target.id;
+  if (wasActor && state.heldCard) {
+    // They froze holding a card — it goes to the discard (already public).
+    state.discardPile.push(state.heldCard);
+    state.heldCard = null;
+    state.turnStage = 'awaitingMain';
+  }
+  target.droppedForRound = true;
+  if (state.phase === 'finalTurns') target.tookFinalTurn = true;
+  events.push({ scope: 'public', type: 'PLAYER_DROPPED', playerId: target.id });
+
+  const active = state.players.filter((p) => !p.droppedForRound);
+  if (active.length < 2) {
+    revealRound(state, events);
+    return;
+  }
+  if (state.phase === 'finalTurns' && active.every((p) => p.tookFinalTurn)) {
+    revealRound(state, events);
+    return;
+  }
+  if (wasActor) {
+    state.consecutiveTimeouts = 0;
+    endTurn(state, events);
+  }
 }
 
 function revealRound(state: GameState, events: EngineEvent[]): void {
@@ -412,21 +465,39 @@ function revealRound(state: GameState, events: EngineEvent[]): void {
     p,
     total: p.hand.reduce((sum, c) => sum + (c ? c.value : 0), 0),
   }));
-  const minTotal = Math.min(...totals.map((t) => t.total));
-  const caller = state.callerId ? totals.find((t) => t.p.id === state.callerId) : undefined;
+  // Dropped players are scored separately: they can neither win the round nor
+  // make a caller's call false, so every comparison runs over active hands only.
+  const active = totals.filter((t) => !t.p.droppedForRound);
+  const minTotal = Math.min(...active.map((t) => t.total));
+  const caller =
+    state.callerId && !player(state, state.callerId).droppedForRound
+      ? active.find((t) => t.p.id === state.callerId)
+      : undefined;
   const falseCall = caller !== undefined && caller.total > minTotal;
 
   // Caller wins ties; otherwise everyone at the minimum shares the win.
   const roundWinnerIds =
-    caller && !falseCall ? [caller.p.id] : totals.filter((t) => t.total === minTotal).map((t) => t.p.id);
+    caller && !falseCall ? [caller.p.id] : active.filter((t) => t.total === minTotal).map((t) => t.p.id);
+
+  const activeScores = active.map(({ p, total }) => {
+    if (roundWinnerIds.includes(p.id)) return 0;
+    if (falseCall && caller && p.id === caller.p.id) return total + state.rules.callPenalty;
+    return total;
+  });
+  // A dropped player takes the round's highest score, so they tie whoever
+  // finished last. Falling back to hand totals keeps a drop from scoring 0
+  // when everyone still playing happened to win the round.
+  const droppedScore = Math.max(
+    0,
+    ...activeScores,
+    ...active.map((t) => t.total),
+  );
 
   const hands = totals.map(({ p, total }) => {
-    let roundScore: number;
-    if (roundWinnerIds.includes(p.id)) roundScore = 0;
-    else if (falseCall && caller && p.id === caller.p.id) roundScore = total + state.rules.callPenalty;
-    else roundScore = total;
+    const activeIndex = active.findIndex((a) => a.p.id === p.id);
+    const roundScore = p.droppedForRound ? droppedScore : activeScores[activeIndex];
     p.score += roundScore;
-    return { playerId: p.id, cards: p.hand, total, roundScore };
+    return { playerId: p.id, cards: p.hand, total, roundScore, dropped: p.droppedForRound };
   });
 
   state.phase = 'roundEnd';

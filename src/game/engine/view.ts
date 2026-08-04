@@ -19,6 +19,8 @@ export interface ClientPlayerView {
   tookFinalTurn: boolean;
   /** Public knowledge (claims are announced) — lets the UI hide a spent button. */
   matchClaimedThisTurn: boolean;
+  /** Dropped by table vote for the rest of this round. */
+  droppedForRound: boolean;
 }
 
 export interface ClientView {
@@ -53,6 +55,7 @@ export function redactFor(state: GameState, viewerId: string | null): ClientView
       memorized: p.memorized,
       tookFinalTurn: p.tookFinalTurn,
       matchClaimedThisTurn: p.matchClaimedThisTurn,
+      droppedForRound: p.droppedForRound,
     })),
     drawCount: state.drawPile.length,
     discardPile: state.discardPile,

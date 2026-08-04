@@ -2,7 +2,7 @@ import { ArrowLeftRight, Eye, Search } from 'lucide-react';
 import type { Card } from '../../game/engine/types';
 
 /** The one place card dimensions live — shared by faces, backs, and piles. */
-export const CARD_SIZE = { sm: 'h-14 w-10', lg: 'h-24 w-[4.25rem]' } as const;
+export const CARD_SIZE = { sm: 'h-14 w-10', lg: 'h-20 w-14 sm:h-24 sm:w-[4.25rem]' } as const;
 
 export function EmptySlot({ small }: { small?: boolean }) {
   return <div className={`rounded-lg border border-dashed border-white/10 ${small ? CARD_SIZE.sm : CARD_SIZE.lg}`} />;
@@ -120,7 +120,11 @@ export function CardBack({
       disabled={!onClick}
       aria-label={label}
       aria-pressed={selected ?? false}
-      className={`group/card relative rounded-lg border transition-all ${small ? CARD_SIZE.sm : CARD_SIZE.lg} ${
+      className={`group/card relative touch-manipulation select-none rounded-lg border transition-all ${
+        // Extended hit area on targetable cards: a slightly-off thumb lands on
+        // dead space instead of spying/swapping the wrong slot (no undo).
+        highlight ? 'after:absolute after:-inset-1 after:content-[""]' : ''
+      } ${small ? CARD_SIZE.sm : CARD_SIZE.lg} ${
         reveal
           ? 'border-transparent p-0'
           : `bg-[radial-gradient(circle_at_30%_20%,rgba(0,212,255,0.12),transparent_60%),linear-gradient(to_bottom,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] ${

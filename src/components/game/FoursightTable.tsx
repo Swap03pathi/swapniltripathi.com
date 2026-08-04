@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { LogOut, Megaphone } from 'lucide-react';
+import { LogOut, Megaphone, ScrollText } from 'lucide-react';
 import type { useFoursight } from '../../game/client/useFoursight';
 import { abilityForValue, type Ability, type Card } from '../../game/engine/types';
 import { ActionBtn, Eyebrow, Overlay, TimerBar } from './bits';
 import { ABILITY_ICON, CARD_SIZE, CardBack, CardFace, EmptySlot } from './cards';
+import AfkVote from './AfkVote';
 import RevealTable from './RevealTable';
 
 type Game = ReturnType<typeof useFoursight>;
@@ -20,6 +21,7 @@ export default function FoursightTable({ game }: { game: Game }) {
   const [mode, setMode] = useState<Mode>('idle');
   const [picked, setPicked] = useState<number[]>([]);
   const [swapOwnSlot, setSwapOwnSlot] = useState<number | null>(null);
+  const [showLog, setShowLog] = useState(false);
 
   // Reset interaction mode whenever the actionable situation changes.
   const situation = `${view?.phase}:${view?.turnStage}:${view?.currentSeat}:${view?.round}`;
@@ -115,24 +117,44 @@ export default function FoursightTable({ game }: { game: Game }) {
           <span className="font-mono tracking-[0.2em] text-white/70">{st.room.code}</span>
           <span>Round {view.round}</span>
           {view.callerId && (
-            <span className="rounded-md bg-accent/15 px-2 py-0.5 font-semibold text-accent">
+            <span className="min-w-0 basis-full truncate rounded-md bg-accent/15 px-2 py-0.5 font-semibold text-accent sm:basis-auto">
               {nameOf(view.callerId)} called — final turns!
             </span>
           )}
         </div>
-        <div className="flex items-center gap-3">
-          <TimerBar deadline={st.deadline} />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="hidden lg:inline-flex">
+            <TimerBar deadline={st.deadline} />
+          </span>
+          <button
+            type="button"
+            onClick={() => setShowLog(true)}
+            aria-label="Show table log"
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-white/50 transition-colors hover:border-white/25 hover:text-white lg:hidden"
+          >
+            <ScrollText className="h-4 w-4" />
+          </button>
           <button
             type="button"
             onClick={game.leave}
             title="Leave the table"
             aria-label="Leave the table"
-            className="rounded-lg border border-white/10 p-2 text-white/50 transition-colors hover:border-white/25 hover:text-white"
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-white/50 transition-colors hover:border-white/25 hover:text-white sm:h-auto sm:w-auto sm:p-2"
           >
             <LogOut className="h-3.5 w-3.5" />
           </button>
         </div>
       </div>
+
+      {st.afk && (
+        <AfkVote
+          vote={st.afk}
+          you={st.you}
+          nameOf={nameOf}
+          onVote={game.voteAfk}
+          onImHere={game.imHere}
+        />
+      )}
 
       <div className="grid gap-5 lg:grid-cols-[1fr_240px]">
         <div>
@@ -140,19 +162,29 @@ export default function FoursightTable({ game }: { game: Game }) {
           <div className="grid gap-3 sm:grid-cols-2">
             {opponents.map((p) => {
               const theirTurn = view.players[view.currentSeat]?.id === p.id;
-              const targetable = mode === 'spy' || mode === 'swapTheir';
+              const targetable = (mode === 'spy' || mode === 'swapTheir') && !p.droppedForRound;
               return (
                 <div
                   key={p.id}
-                  className={`rounded-xl border p-3 transition-colors ${
-                    theirTurn ? 'border-accent/30 bg-accent/[0.06]' : 'border-white/[0.06] bg-white/[0.02]'
+                  className={`flex items-center gap-2 rounded-lg border p-2 transition-colors sm:block sm:rounded-xl sm:p-3 ${
+                    p.droppedForRound
+                      ? 'border-white/[0.06] bg-white/[0.01] opacity-50'
+                      : theirTurn
+                        ? 'border-accent/30 bg-accent/[0.06]'
+                        : 'border-white/[0.06] bg-white/[0.02]'
                   }`}
                 >
-                  <div className="mb-2 flex items-center justify-between text-xs">
-                    <span className={theirTurn ? 'font-semibold text-accent' : 'text-white/70'}>{nameOf(p.id)}</span>
-                    <span className="text-white/50">{p.score} pts</span>
+                  <div className="flex min-w-0 flex-1 flex-col sm:mb-2 sm:flex-row sm:items-center sm:justify-between">
+                    <span
+                      className={`truncate text-xs ${theirTurn ? 'font-semibold text-accent' : 'text-white/70'}`}
+                    >
+                      {nameOf(p.id)}
+                    </span>
+                    <span className="shrink-0 text-[10px] text-white/50 sm:text-xs">
+                      {p.droppedForRound ? 'dropped' : `${p.score} pts`}
+                    </span>
                   </div>
-                  <div className="flex gap-1.5">
+                  <div className="flex shrink-0 gap-2 sm:gap-1.5">
                     {p.handSlots.map((present, slot) => (
                       <CardBack
                         key={slot}
@@ -173,12 +205,12 @@ export default function FoursightTable({ game }: { game: Game }) {
           </div>
 
           {/* Piles */}
-          <div className="my-5 flex items-center justify-center gap-6">
+          <div className="my-4 flex items-center justify-center gap-3 sm:my-5 sm:gap-6">
             <button
               type="button"
               disabled={!myTurn || view.turnStage !== 'awaitingMain' || mode !== 'idle'}
               onClick={() => game.act({ type: 'DRAW' })}
-              className={`group relative ${CARD_SIZE.lg} rounded-lg border border-white/15 bg-gradient-to-b from-white/[0.08] to-white/[0.03] text-center transition-colors enabled:hover:border-accent/40 disabled:opacity-60`}
+              className={`group relative touch-manipulation ${CARD_SIZE.lg} rounded-lg border border-white/15 bg-gradient-to-b from-white/[0.08] to-white/[0.03] text-center transition-colors enabled:hover:border-accent/40 disabled:opacity-60`}
               title="Draw from the deck"
             >
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/50 group-enabled:group-hover:text-accent">
@@ -196,7 +228,7 @@ export default function FoursightTable({ game }: { game: Game }) {
                 type="button"
                 disabled={!myTurn || view.turnStage !== 'awaitingMain' || mode !== 'idle' || !discardTop}
                 onClick={() => game.act({ type: 'TAKE_DISCARD' })}
-                className="mt-1.5 rounded-md px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/50 transition-colors enabled:hover:text-accent disabled:opacity-50"
+                className="mt-1.5 min-h-11 touch-manipulation rounded-md px-3 text-[11px] font-semibold uppercase tracking-wider text-white/50 transition-colors enabled:hover:text-accent disabled:opacity-50 sm:min-h-0 sm:py-1 sm:text-[10px]"
               >
                 Take discard
               </button>
@@ -209,23 +241,17 @@ export default function FoursightTable({ game }: { game: Game }) {
             )}
           </div>
 
-          {/* Hint banner */}
-          {hint && (
-            <p className="mb-3 rounded-lg border border-accent/20 bg-accent/[0.07] px-3.5 py-2 text-center text-xs font-medium text-accent">
-              {hint}
-            </p>
-          )}
 
           {/* My hand */}
           {me && (
-            <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-4">
+            <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3 sm:p-4">
               <div className="mb-2 flex items-center justify-between text-xs">
                 <span className={myTurn ? 'font-semibold text-accent' : 'text-white/70'}>
                   {myTurn ? 'Your turn' : 'You'}
                 </span>
                 <span className="text-white/50">{me.score} pts</span>
               </div>
-              <div className="flex justify-center gap-2.5">
+              <div className="flex justify-center gap-2 sm:gap-2.5">
                 {me.handSlots.map((present, slot) => (
                   <CardBack
                     key={slot}
@@ -241,8 +267,18 @@ export default function FoursightTable({ game }: { game: Game }) {
                 ))}
               </div>
 
-              {/* Action bar */}
-              <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {/* Action dock — docked to the bottom of the viewport on phones so
+                  the turn actions and countdown are always in thumb reach. */}
+              <div className="sticky bottom-0 z-30 -mx-3 mt-3 border-t border-white/10 bg-dark/95 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur lg:static lg:mx-0 lg:mt-4 lg:border-0 lg:bg-transparent lg:p-0">
+                {/* Reserved height: the hint appearing must not shove buttons
+                    under a descending thumb. */}
+                <div className="mb-1.5 flex min-h-5 items-center justify-center gap-2">
+                  <p className="truncate text-center text-xs font-medium text-accent">{hint ?? '\u00a0'}</p>
+                  <span className="lg:hidden">
+                    <TimerBar deadline={st.deadline} />
+                  </span>
+                </div>
+              <div className="flex flex-wrap justify-center gap-2">
                 {myTurn && view.turnStage === 'awaitingMain' && mode === 'idle' && (
                   <>
                     {view.phase === 'turn' && (
@@ -311,12 +347,13 @@ export default function FoursightTable({ game }: { game: Game }) {
                   </ActionBtn>
                 )}
               </div>
+              </div>
             </div>
           )}
         </div>
 
         {/* Log */}
-        <aside className="max-h-[420px] overflow-y-auto rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+        <aside className="hidden max-h-[420px] overflow-y-auto overscroll-contain rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 lg:block">
           <Eyebrow className="mb-2 text-[10px]">Table talk</Eyebrow>
           <ul className="space-y-1 text-xs leading-relaxed text-white/55">
             {[...st.log].reverse().map((line, i) => (
@@ -327,6 +364,21 @@ export default function FoursightTable({ game }: { game: Game }) {
           </ul>
         </aside>
       </div>
+
+      {showLog && (
+        <Overlay title="Table talk">
+          <ul className="space-y-1 text-xs leading-relaxed text-white/60">
+            {[...st.log].reverse().map((line, i) => (
+              <li key={`${i}-${line}`} className={line.startsWith('—') ? 'pt-1 font-semibold text-white/80' : ''}>
+                {line}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 flex justify-center">
+            <ActionBtn onClick={() => setShowLog(false)}>Close</ActionBtn>
+          </div>
+        </Overlay>
+      )}
 
       {/* Round reveal */}
       {view.phase === 'roundEnd' && st.lastReveal && (

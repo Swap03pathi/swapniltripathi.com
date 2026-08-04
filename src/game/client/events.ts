@@ -117,6 +117,9 @@ export function reduceEvents(prev: EventDigest, events: EngineEvent[], ctx: Dige
       case 'CALLED':
         push(`${nameOf(e.playerId)} called FOURSIGHT!`);
         break;
+      case 'PLAYER_DROPPED':
+        push(`${nameOf(e.playerId)} was dropped for this round — they score the round's highest total`);
+        break;
       case 'DECK_RESHUFFLED':
         push('Discards shuffled into a fresh draw pile');
         break;

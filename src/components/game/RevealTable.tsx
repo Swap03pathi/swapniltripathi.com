@@ -19,6 +19,11 @@ export default function RevealTable({
             <span className={reveal.roundWinnerIds.includes(h.playerId) ? 'font-semibold text-accent' : 'text-white/70'}>
               {nameOf(h.playerId)}
               {reveal.callerId === h.playerId && ' · called'}
+              {h.dropped && (
+                <span className="ml-1.5 rounded bg-white/[0.06] px-1.5 py-0.5 text-[10px] font-medium text-white/60">
+                  dropped — scores round high
+                </span>
+              )}
             </span>
             <span className="text-white/60">
               {h.total} on the table → +{h.roundScore}
