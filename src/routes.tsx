@@ -2,16 +2,20 @@ import type { ComponentType } from 'react';
 import type { RouteRecord } from 'vite-react-ssg';
 import Layout from './Layout';
 import RouteErrorPage from './pages/RouteErrorPage';
-import { getAllBlogPosts } from './lib/blogPosts';
-import { projects } from './data/projects';
+import { blogSlugs } from './lib/blogSlugs';
+import { projectSlugs } from './data/projectSlugs';
 
 // Adapts a default-export page to react-router's lazy() { Component } convention.
 const page =
   (loader: () => Promise<{ default: ComponentType }>) =>
   async () => ({ Component: (await loader()).default });
 
+// ENTRY-CHUNK CONSTRAINT: this module rides in the client entry chunk served on
+// every page. Import only slug-list modules here — importing blogPosts.ts (raw
+// markdown of every post) or projects.ts (full project data) would inline that
+// content into the entry. getStaticPaths only runs during the Node build.
 // All entries are real (post-purge), so enumerating them for prerender is safe.
-const projectPaths = projects.map((p) => `project/${p.slug}`);
+const projectPaths = projectSlugs.map((slug) => `project/${slug}`);
 const architecturePaths = [
   'project/real-time-virtual-execution-system/architecture',
   'project/realtime-recommendation-ingestion-system/architecture',
@@ -56,8 +60,8 @@ export const routes: RouteRecord[] = [
       {
         path: 'blogs/:slug',
         lazy: page(() => import('./pages/BlogPostPage')),
-        // Runs at build time in Node; import.meta.glob in blogPosts.ts works there.
-        getStaticPaths: () => getAllBlogPosts().map((p) => `blogs/${p.slug}`),
+        // Runs at build time in Node; blogSlugs is populated only in the SSR build.
+        getStaticPaths: () => blogSlugs.map((slug) => `blogs/${slug}`),
       },
 
       { path: 'game/foursight', lazy: page(() => import('./pages/FoursightPage')) },

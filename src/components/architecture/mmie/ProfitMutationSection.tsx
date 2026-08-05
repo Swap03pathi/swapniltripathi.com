@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Activity } from 'lucide-react';
 import { mmieProfitExplain, mmieProfitQuote, mmieProfitSteps } from '../../../data/mmieArchitectureCopy';
 import { MmieGlassPanel, MmieSectionShell } from './MmiePrimitives';
@@ -12,14 +12,14 @@ export function ProfitMutationSection() {
           {mmieProfitSteps.map((s, i) => (
             <Fragment key={s}>
               {i > 0 ? (
-                <motion.span
+                <m.span
                   className="hidden px-1.5 text-sm text-amber-600/45 md:inline"
                   animate={{ opacity: [0.35, 0.8, 0.35] }}
                   transition={{ duration: 2, delay: i * 0.1, repeat: Infinity }}
                   aria-hidden
                 >
                   ↓
-                </motion.span>
+                </m.span>
               ) : null}
               <span className="rounded-lg border border-amber-500/10 bg-amber-950/15 px-3 py-2 text-sm font-medium text-amber-100/90 md:border-0 md:bg-transparent md:px-2 md:text-base">
                 {s}
@@ -35,7 +35,7 @@ export function ProfitMutationSection() {
 
       <ul className="mt-4 space-y-2">
         {mmieProfitExplain.map((e, i) => (
-          <motion.li
+          <m.li
             key={e}
             initial={{ opacity: 0, x: -4 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -45,7 +45,7 @@ export function ProfitMutationSection() {
           >
             <span className="mr-2 text-amber-500/30">—</span>
             {e}
-          </motion.li>
+          </m.li>
         ))}
       </ul>
     </MmieSectionShell>

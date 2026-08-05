@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { EY_SECTION_IDS } from '../../constants/eyExperience';
 import { eyClosing } from '../../data/eyExperienceCopy';
 import { EyCard } from './EyPrimitives';
@@ -7,7 +7,7 @@ export default function EyClosing() {
   return (
     <section id={EY_SECTION_IDS.closing} className="scroll-mt-28 py-12 md:py-14">
       <div className="mx-auto max-w-[1000px] px-5 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -21,7 +21,7 @@ export default function EyClosing() {
               {eyClosing}
             </p>
           </EyCard>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ClientOnly } from 'vite-react-ssg';
+import MotionProvider from './components/MotionProvider';
 import Navbar from './components/Navbar';
 import { hasPendingSarasScrollRestore } from './utils/sarasScrollRestore';
 
@@ -34,19 +35,21 @@ function ScrollHandler() {
 
 export default function Layout() {
   return (
-    <div className="min-h-screen bg-dark text-white font-sans">
-      <ClientOnly>
-        {() => (
-          <Suspense fallback={null}>
-            <BackgroundLayer />
-          </Suspense>
-        )}
-      </ClientOnly>
-      <Navbar />
-      <ScrollHandler />
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
-    </div>
+    <MotionProvider>
+      <div className="min-h-screen bg-dark text-white font-sans">
+        <ClientOnly>
+          {() => (
+            <Suspense fallback={null}>
+              <BackgroundLayer />
+            </Suspense>
+          )}
+        </ClientOnly>
+        <Navbar />
+        <ScrollHandler />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
+      </div>
+    </MotionProvider>
   );
 }

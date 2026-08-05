@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 export function EyBackdrop() {
@@ -35,7 +35,7 @@ export function EySection({
         {title ? (
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/55">{title}</h2>
         ) : null}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-40px' }}
@@ -43,7 +43,7 @@ export function EySection({
           className={title ? 'mt-7 md:mt-8' : ''}
         >
           {children}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

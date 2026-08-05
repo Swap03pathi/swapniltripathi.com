@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { RteIconName } from './RteIcons';
 import { RteIcon } from './RteIcons';
 import {
@@ -84,14 +84,14 @@ function Mini({
           {open ? 'Tap to collapse' : 'Tap for detail'}
         </p>
         {open ? (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
             className="mt-3 border-t border-white/[0.08] pt-3 text-sm leading-relaxed text-white/55"
           >
             {detail}
-          </motion.div>
+          </m.div>
         ) : null}
       </RteGlassPanel>
     </button>
@@ -213,7 +213,7 @@ export function RteExecutionLayer({ expand }: Props) {
       <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
         {['Matching Worker 1', 'Matching Worker 2', 'Matching Worker N'].map(
           (label) => (
-            <motion.div
+            <m.div
               key={label}
               whileHover={{ scale: 1.01 }}
               className="text-left"
@@ -232,7 +232,7 @@ export function RteExecutionLayer({ expand }: Props) {
                   {MATCHING_WORKER_BODY}
                 </p>
               </RteGlassPanel>
-            </motion.div>
+            </m.div>
           ),
         )}
       </div>
@@ -341,14 +341,14 @@ export function RteInputSources({ expand }: Props) {
                       {open ? 'Tap to collapse' : 'Tap for detail'}
                     </p>
                     {open ? (
-                      <motion.p
+                      <m.p
                         initial={{ opacity: 0, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2 }}
                         className="mt-3 border-t border-white/[0.08] pt-3 text-sm leading-relaxed text-white/55"
                       >
                         {it.body}
-                      </motion.p>
+                      </m.p>
                     ) : null}
                   </RteGlassPanel>
                 </button>

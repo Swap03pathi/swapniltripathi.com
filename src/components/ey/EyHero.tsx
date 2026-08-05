@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { EY_SECTION_IDS } from '../../constants/eyExperience';
 import { eyHero } from '../../data/eyExperienceCopy';
 import { resolveAssetUrl } from '../../utils/assetUrl';
@@ -13,7 +13,7 @@ export default function EyHero() {
       className="scroll-mt-28 border-b border-white/[0.05] py-12 md:py-14"
     >
       <div className="mx-auto max-w-[1000px] px-5 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -23,6 +23,8 @@ export default function EyHero() {
             <img
               src={resolveAssetUrl('/logos/ey.png')}
               alt="Ernst & Young"
+              width={95}
+              height={96}
               className="h-8 w-auto object-contain opacity-90"
             />
             <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-accent/55">
@@ -47,7 +49,7 @@ export default function EyHero() {
             </div>
           </div>
           <EyConsultingVisual />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

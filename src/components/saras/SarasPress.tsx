@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import {
   ArrowUpRight,
   Award,
@@ -94,16 +94,16 @@ function PressCard({ item, index }: { item: (typeof sarasPress)[number]; index: 
 
   if (!clickable) {
     return (
-      <motion.div {...motionProps}>
+      <m.div {...motionProps}>
         <SarasCard className={cardClass}>
           <PressCardContent item={item} showExternal={false} />
         </SarasCard>
-      </motion.div>
+      </m.div>
     );
   }
 
   return (
-    <motion.a
+    <m.a
       {...motionProps}
       href={item.href}
       target="_blank"
@@ -118,7 +118,7 @@ function PressCard({ item, index }: { item: (typeof sarasPress)[number]; index: 
       >
         <PressCardContent item={item} showExternal />
       </SarasCard>
-    </motion.a>
+    </m.a>
   );
 }
 

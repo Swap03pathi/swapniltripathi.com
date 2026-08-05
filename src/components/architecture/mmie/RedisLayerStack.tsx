@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { mmieRedisLayers } from '../../../data/mmieArchitectureCopy';
 import { MmieGlassPanel, MmieSectionShell } from './MmiePrimitives';
 
@@ -19,7 +19,7 @@ export function RedisLayerStack() {
       </p>
       <div className="space-y-2.5">
         {mmieRedisLayers.map((layer, i) => (
-          <motion.div
+          <m.div
             key={layer.n}
             initial={{ opacity: 0, x: -6 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -60,7 +60,7 @@ export function RedisLayerStack() {
                 </div>
               </div>
             </MmieGlassPanel>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </MmieSectionShell>

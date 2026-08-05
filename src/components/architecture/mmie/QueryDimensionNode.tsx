@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { MmieGlassPanel } from './MmiePrimitives';
 
 export function QueryDimensionNode({
@@ -11,7 +11,7 @@ export function QueryDimensionNode({
   delay?: number;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 6 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -23,6 +23,6 @@ export function QueryDimensionNode({
         <p className="text-sm font-semibold leading-tight text-slate-200 md:text-base">{label}</p>
         <p className="mt-1.5 text-sm leading-snug text-slate-500 line-clamp-3 md:line-clamp-4">{values.join(' · ')}</p>
       </MmieGlassPanel>
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { rrisTechStack } from '../../../data/rrisArchitectureCopy';
 
 export function RrisTechStackBar() {
@@ -9,7 +9,7 @@ export function RrisTechStackBar() {
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
         {rrisTechStack.map((t, i) => (
-          <motion.a
+          <m.a
             key={t.name}
             href={t.homepageUrl}
             target="_blank"
@@ -31,7 +31,7 @@ export function RrisTechStackBar() {
                   : 'h-7 w-7 object-contain opacity-90'
               }
             />
-          </motion.a>
+          </m.a>
         ))}
       </div>
     </div>

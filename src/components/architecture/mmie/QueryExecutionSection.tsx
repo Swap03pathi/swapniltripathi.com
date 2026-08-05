@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { mmieQueryExecutionSteps } from '../../../data/mmieArchitectureCopy';
 import { MmieGlassPanel, MmieSectionShell } from './MmiePrimitives';
 
@@ -13,7 +13,7 @@ function StepBlock({
   i: number;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 4 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -24,7 +24,7 @@ function StepBlock({
         <p className="font-mono text-sm font-semibold leading-tight text-cyan-200/95 md:text-base">{cmd}</p>
         <p className="mt-1.5 text-sm leading-snug text-slate-500">{desc}</p>
       </MmieGlassPanel>
-    </motion.div>
+    </m.div>
   );
 }
 

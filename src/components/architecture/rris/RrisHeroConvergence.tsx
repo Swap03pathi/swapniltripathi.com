@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import {
   Activity,
   ArrowRightLeft,
@@ -111,7 +111,7 @@ function OpsColumn({ className = '' }: { className?: string }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       {ops.map((op, i) => (
-        <motion.div
+        <m.div
           key={op.title}
           initial={{ opacity: 0, x: 10 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -129,7 +129,7 @@ function OpsColumn({ className = '' }: { className?: string }) {
               ) : null}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       ))}
     </div>
   );
@@ -186,7 +186,7 @@ export function RrisHeroConvergence() {
             <div className="relative z-10 flex shrink-0 flex-row flex-wrap justify-center gap-3 lg:w-[4.75rem] lg:flex-col lg:flex-nowrap lg:justify-between lg:gap-3 lg:py-1">
               <ConvergenceFlowSvg className="pointer-events-none absolute left-full top-2 z-0 hidden h-[280px] w-[5.5rem] -translate-x-2 overflow-visible lg:block" />
               {rrisPreviewSources.map((s, i) => (
-                <motion.div
+                <m.div
                   key={s.id}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -196,13 +196,13 @@ export function RrisHeroConvergence() {
                   title={s.label}
                 >
                   <RrisIcon name={s.icon as RrisIconName} className="h-4 w-4 text-white/95" />
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
             <div className="relative z-10 mx-auto flex w-full max-w-[300px] flex-1 flex-col justify-center gap-0 lg:mx-0 lg:max-w-none lg:px-4">
               {layers.map((L, i) => (
-                <motion.div
+                <m.div
                   key={L.label}
                   initial={{ opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -224,9 +224,9 @@ export function RrisHeroConvergence() {
                       <div className="h-3 w-px bg-gradient-to-b from-white/25 to-white/5" />
                     </div>
                   ) : null}
-                </motion.div>
+                </m.div>
               ))}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -238,7 +238,7 @@ export function RrisHeroConvergence() {
                     Unified Trade State
                   </span>
                 </div>
-              </motion.div>
+              </m.div>
             </div>
 
             <div className="hidden shrink-0 lg:flex">

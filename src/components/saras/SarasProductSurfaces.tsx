@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { SARAS_SECTION_IDS } from '../../constants/sarasExperience';
 import { sarasProductSurfaces, sarasTutorialVideoUrl } from '../../data/sarasExperienceCopy';
 import { resolveAssetUrl } from '../../utils/assetUrl';
@@ -78,7 +78,7 @@ function SurfaceImageLightbox({
   }, [onClose]);
 
   return (
-    <motion.button
+    <m.button
       type="button"
       className="fixed inset-0 z-[100] flex cursor-zoom-out items-center justify-center bg-black/85 p-4 backdrop-blur-sm sm:p-8"
       initial={{ opacity: 0 }}
@@ -93,7 +93,7 @@ function SurfaceImageLightbox({
         alt={image.label}
         className="max-h-[92vh] max-w-full rounded-2xl border border-white/10 object-contain shadow-2xl"
       />
-    </motion.button>
+    </m.button>
   );
 }
 

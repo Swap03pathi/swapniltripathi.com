@@ -2,7 +2,18 @@ import { Link, useParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import rehypeHighlight from 'rehype-highlight';
+import { createLowlight } from 'lowlight';
+import type { Element, ElementContent, Root } from 'hast';
+// Register ONLY the grammars the posts actually use instead of highlight.js's
+// ~37-language "common" set. We deliberately do NOT use rehype-highlight: its
+// `languages` option changes runtime registration only — the plugin statically
+// references lowlight's `common` set as a fallback, so all ~37 grammars stay
+// in the bundle regardless (~146KB min). `bash` also registers its `sh`
+// alias, `javascript` registers `js`. If a future post fences a new language,
+// its grammar MUST be imported and registered here, or that code block
+// silently renders unhighlighted.
+import langBash from 'highlight.js/lib/languages/bash';
+import langJavascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/github-dark.css';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
@@ -10,6 +21,65 @@ import NotFoundPage from './NotFoundPage';
 import { getBlogPost } from '../lib/blogPosts';
 
 const SITE = 'https://swapniltripathi.com';
+
+// Keys are the canonical grammar names — fence-language aliases (sh, js) come
+// from the grammar definitions themselves.
+const lowlight = createLowlight({ bash: langBash, javascript: langJavascript });
+
+const textContent = (node: Element): string =>
+  node.children
+    .map((child) =>
+      child.type === 'text' ? child.value : child.type === 'element' ? textContent(child) : '',
+    )
+    .join('');
+
+const languageOf = (node: Element): string | undefined => {
+  const list = node.properties.className;
+  if (!Array.isArray(list)) return undefined;
+  let name: string | undefined;
+  for (const item of list) {
+    const value = String(item);
+    if (value === 'no-highlight' || value === 'nohighlight') return undefined;
+    if (!name && value.startsWith('lang-')) name = value.slice(5);
+    if (!name && value.startsWith('language-')) name = value.slice(9);
+  }
+  return name;
+};
+
+// Minimal drop-in for rehype-highlight (same classes, same hast output) that
+// only bundles the grammars registered above.
+function rehypeHighlightLite() {
+  return (tree: Root) => {
+    const visit = (node: Root | Element) => {
+      for (const child of node.children) {
+        if (child.type !== 'element') continue;
+        if (
+          child.tagName === 'code' &&
+          node.type === 'element' &&
+          node.tagName === 'pre'
+        ) {
+          const lang = languageOf(child);
+          if (lang) {
+            if (!Array.isArray(child.properties.className)) child.properties.className = [];
+            if (!child.properties.className.includes('hljs')) {
+              child.properties.className.unshift('hljs');
+            }
+            // Unregistered grammar: keep the themed block but no token spans —
+            // the same degradation rehype-highlight has for unknown languages.
+            if (lowlight.registered(lang)) {
+              const result = lowlight.highlight(lang, textContent(child), { prefix: 'hljs-' });
+              if (result.children.length > 0) {
+                child.children = result.children as ElementContent[];
+              }
+            }
+          }
+        }
+        visit(child);
+      }
+    };
+    visit(tree);
+  };
+}
 
 // FAQ structured data for posts that answer common questions (wins People-Also-Ask /
 // AI-overview slots). Answers are faithful summaries of the post content.
@@ -99,7 +169,8 @@ export default function BlogPostPage() {
         <div className="post-content prose prose-invert mt-10 max-w-none">
           <Markdown
             remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw, rehypeHighlight]}
+            // rehype-raw stays: posts rely on raw HTML (<figure>, <details>).
+            rehypePlugins={[rehypeRaw, rehypeHighlightLite]}
             components={{
               // Article images live below the fold — lazy-load them all.
               // (react-markdown passes a `node` prop that must not reach the DOM.)

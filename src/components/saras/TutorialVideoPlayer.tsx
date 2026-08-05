@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { Play, X } from 'lucide-react';
 import { youtubeEmbedSrc } from '../../utils/youtubeEmbed';
 
@@ -41,6 +41,8 @@ export default function TutorialVideoPlayer({ videoId, title = 'Saras product tu
           <img loading="lazy" decoding="async"
             src={thumbSrc}
             alt=""
+            width={480}
+            height={360}
             className="h-full w-full object-cover opacity-[0.82] transition-all duration-300 group-hover:scale-[1.015] group-hover:opacity-95"
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/32 transition-colors duration-300 group-hover:bg-black/22">
@@ -54,7 +56,7 @@ export default function TutorialVideoPlayer({ videoId, title = 'Saras product tu
 
       <AnimatePresence>
         {expanded ? (
-          <motion.div
+          <m.div
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -67,7 +69,7 @@ export default function TutorialVideoPlayer({ videoId, title = 'Saras product tu
               aria-label="Close video"
               onClick={close}
             />
-            <motion.div
+            <m.div
               role="dialog"
               aria-modal="true"
               aria-label={title}
@@ -98,8 +100,8 @@ export default function TutorialVideoPlayer({ videoId, title = 'Saras product tu
                   />
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         ) : null}
       </AnimatePresence>
     </>

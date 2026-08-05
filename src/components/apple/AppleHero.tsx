@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { APPLE_SECTION_IDS } from '../../constants/appleExperience';
 import { appleHero } from '../../data/appleExperienceCopy';
 import { resolveAssetUrl } from '../../utils/assetUrl';
@@ -13,7 +13,7 @@ export default function AppleHero() {
       className="scroll-mt-28 border-b border-white/[0.06] py-16 md:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-[1200px] px-5 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
@@ -24,6 +24,8 @@ export default function AppleHero() {
               <img
                 src={resolveAssetUrl('https://cdn.simpleicons.org/apple/ffffff')}
                 alt="Apple"
+                width={24}
+                height={24}
                 className="h-9 w-9 object-contain opacity-90"
               />
             </div>
@@ -68,7 +70,7 @@ export default function AppleHero() {
           </div>
 
           <AppleHeroFlowDiagram />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

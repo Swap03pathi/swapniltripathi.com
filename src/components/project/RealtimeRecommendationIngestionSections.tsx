@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { rrisArchitecturePath } from '../../constants/realtimeRecommendationIngestion';
 import {
   rrisChallenges,
@@ -10,7 +10,7 @@ import { RrisIcon, type RrisIconName } from '../architecture/rris/RrisIcons';
 
 function SourcePreviewCard({ label, icon }: { label: string; icon: RrisIconName }) {
   return (
-    <motion.div
+    <m.div
       whileHover={{ y: -3, transition: { duration: 0.2 } }}
       className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-br from-violet-500/[0.06] via-white/[0.03] to-transparent p-4 text-left shadow-[0_0_0_1px_rgba(139,92,246,0.06)] transition-shadow hover:border-violet-400/25 hover:shadow-[0_0_28px_-10px_rgba(139,92,246,0.2)]"
     >
@@ -23,7 +23,7 @@ function SourcePreviewCard({ label, icon }: { label: string; icon: RrisIconName 
           {label}
         </span>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -64,7 +64,7 @@ export default function RealtimeRecommendationIngestionSections() {
             </div>
           </div>
           <div className="mt-5 flex justify-center sm:justify-start">
-            <motion.button
+            <m.button
               type="button"
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
@@ -72,7 +72,7 @@ export default function RealtimeRecommendationIngestionSections() {
               className="inline-flex items-center justify-center rounded-xl border border-violet-400/35 bg-violet-500/[0.12] px-5 py-2.5 text-xs font-semibold tracking-wide text-violet-200 transition-colors hover:border-violet-300/50 hover:bg-violet-500/[0.18]"
             >
               Open architecture
-            </motion.button>
+            </m.button>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ export default function RealtimeRecommendationIngestionSections() {
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {rrisChallenges.map((ch, i) => (
-            <motion.div
+            <m.div
               key={ch.title}
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -95,7 +95,7 @@ export default function RealtimeRecommendationIngestionSections() {
               <p className="relative text-xs leading-relaxed text-white/55 transition-colors group-hover:text-white/70">
                 {ch.title}
               </p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </section>

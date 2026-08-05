@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { SARAS_SECTION_IDS } from '../../constants/sarasExperience';
 import { sarasEvolutionConclusion, sarasEvolutionPhases } from '../../data/sarasExperienceCopy';
 import { SarasCard, SarasPill, SarasSection } from './SarasPrimitives';
@@ -19,7 +19,7 @@ function EvolutionMilestone({
   index: number;
 }) {
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-48px' }}
@@ -44,7 +44,7 @@ function EvolutionMilestone({
           ))}
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 
@@ -56,7 +56,7 @@ export default function SarasPlatformEvolution() {
       title="How Saras Evolved Into a Production Ecosystem"
       description="Saras evolved from a lightweight Telegram recommendation tracker into a realtime multi-source platform focused on advisor transparency, execution realism, and operational reliability."
     >
-      <motion.div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-y-12 lg:gap-x-10">
+      <m.div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-y-12 lg:gap-x-10">
         {sarasEvolutionPhases.map((item, i) => (
           <EvolutionMilestone
             key={item.phase}
@@ -68,9 +68,9 @@ export default function SarasPlatformEvolution() {
             index={i}
           />
         ))}
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
@@ -86,7 +86,7 @@ export default function SarasPlatformEvolution() {
             {sarasEvolutionConclusion.description}
           </p>
         </SarasCard>
-      </motion.div>
+      </m.div>
     </SarasSection>
   );
 }

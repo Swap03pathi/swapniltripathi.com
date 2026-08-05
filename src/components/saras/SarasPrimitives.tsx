@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 export function SarasBackdrop() {
   return (
-    <motion.div
+    <m.div
       className="pointer-events-none fixed inset-0 -z-[5] opacity-40"
       aria-hidden
       animate={{ opacity: [0.32, 0.42, 0.32] }}
@@ -49,7 +49,7 @@ export function SarasSection({
         {description ? (
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/45 md:text-base">{description}</p>
         ) : null}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-40px' }}
@@ -57,7 +57,7 @@ export function SarasSection({
           className="relative mt-10 md:mt-12"
         >
           {children}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

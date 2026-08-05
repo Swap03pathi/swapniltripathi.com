@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 export type RteExpandApi = {
@@ -42,7 +42,7 @@ export function RteGlassPanel({
   glow?: 'subtle' | 'accent';
 }) {
   return (
-    <motion.div
+    <m.div
       whileHover={{ y: -1, transition: { duration: 0.2 } }}
       className={`relative overflow-hidden rounded-xl border bg-white/[0.02] backdrop-blur-sm ${
         glow === 'accent'
@@ -52,7 +52,7 @@ export function RteGlassPanel({
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-70" />
       <div className="relative">{children}</div>
-    </motion.div>
+    </m.div>
   );
 }
 

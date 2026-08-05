@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 export function MmieSectionShell({
@@ -74,13 +74,13 @@ export function MmieGlassPanel({
         : 'border-white/[0.07] shadow-none';
 
   return (
-    <motion.div
+    <m.div
       whileHover={{ transition: { duration: 0.18 } }}
       className={`relative overflow-hidden rounded-xl border bg-slate-950/50 backdrop-blur-sm ${glowCls} ${className}`}
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/[0.02] via-transparent to-violet-500/[0.02]" />
       <div className="relative">{children}</div>
-    </motion.div>
+    </m.div>
   );
 }
 

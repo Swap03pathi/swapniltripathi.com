@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { OYO_SECTION_IDS } from '../../constants/oyoExperience';
 import { oyoHero } from '../../data/oyoExperienceCopy';
 import { resolveAssetUrl } from '../../utils/assetUrl';
@@ -13,7 +13,7 @@ export default function OyoHero() {
       className="scroll-mt-28 border-b border-white/[0.05] py-12 md:py-14 lg:py-16"
     >
       <div className="mx-auto max-w-[1040px] px-5 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -24,6 +24,8 @@ export default function OyoHero() {
               <img
                 src={resolveAssetUrl('https://cdn.simpleicons.org/oyo/EE2E24')}
                 alt="OYO"
+                width={24}
+                height={24}
                 className="h-6 w-auto object-contain"
               />
             </div>
@@ -49,7 +51,7 @@ export default function OyoHero() {
             </div>
           </div>
           <OyoExploratoryVisual />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

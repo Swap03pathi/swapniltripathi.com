@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Calendar, Cog, Database, LineChart } from 'lucide-react';
 import {
   mmieIncrementalNotes,
@@ -20,14 +20,14 @@ export function IncrementalRecomputationSection() {
             return (
               <Fragment key={s}>
                 {i > 0 ? (
-                  <motion.span
+                  <m.span
                     className="hidden px-1 text-center text-sm text-slate-600 md:inline"
                     animate={{ opacity: [0.35, 0.7, 0.35] }}
                     transition={{ duration: 2.4, delay: i * 0.12, repeat: Infinity }}
                     aria-hidden
                   >
                     →
-                  </motion.span>
+                  </m.span>
                 ) : null}
                 <div className="flex items-center gap-2.5 rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2 md:border-0 md:bg-transparent md:px-2">
                   <Icon className="h-4 w-4 shrink-0 text-cyan-400/65" strokeWidth={1.35} />
@@ -42,7 +42,7 @@ export function IncrementalRecomputationSection() {
         </p>
         <ul className="mt-4 grid gap-2 sm:grid-cols-3">
           {mmieIncrementalNotes.map((n, i) => (
-            <motion.li
+            <m.li
               key={n}
               initial={{ opacity: 0, y: 3 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -51,7 +51,7 @@ export function IncrementalRecomputationSection() {
               className="text-center text-sm leading-snug text-slate-500"
             >
               {n}
-            </motion.li>
+            </m.li>
           ))}
         </ul>
       </MmieGlassPanel>

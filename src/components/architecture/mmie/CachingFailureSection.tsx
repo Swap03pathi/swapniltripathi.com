@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import {
   mmieCachingFilterFlow,
   mmieCachingImpacts,
@@ -52,7 +52,7 @@ export function CachingFailureSection() {
         </div>
         <ul className="mt-8 grid gap-2 border-t border-white/[0.06] pt-6 sm:grid-cols-2">
           {mmieCachingImpacts.map((t, i) => (
-            <motion.li
+            <m.li
               key={t}
               initial={{ opacity: 0, y: 4 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export function CachingFailureSection() {
             >
               <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-amber-500/50" />
               {t}
-            </motion.li>
+            </m.li>
           ))}
         </ul>
       </MmieGlassPanel>

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { RteIcon } from './RteIcons';
 import { RteGlassPanel, RteSectionShell } from './RtePrimitives';
@@ -43,7 +43,7 @@ export function RteTickProcessing() {
       <RteGlassPanel className="p-5 sm:p-6">
         <ol className="space-y-3">
           {tickSteps.map((s, i) => (
-            <motion.li
+            <m.li
               key={s}
               initial={{ opacity: 0, x: -6 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -55,7 +55,7 @@ export function RteTickProcessing() {
                 {i + 1}
               </span>
               <span className="pt-0.5">{s}</span>
-            </motion.li>
+            </m.li>
           ))}
         </ol>
       </RteGlassPanel>
@@ -80,7 +80,7 @@ export function RteRecoveryFlow() {
       <RteGlassPanel className="relative p-5 sm:p-6">
         <div className="space-y-2">
           {recoverySteps.map((s, i) => (
-            <motion.div
+            <m.div
               key={s}
               animate={{
                 opacity: pulse === i ? 1 : 0.55,
@@ -98,7 +98,7 @@ export function RteRecoveryFlow() {
               <span className="flex-1 text-sm leading-relaxed text-white/60">
                 {s}
               </span>
-            </motion.div>
+            </m.div>
           ))}
         </div>
         <div className="mt-4 flex flex-wrap gap-2">

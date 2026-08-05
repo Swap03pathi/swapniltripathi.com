@@ -28,6 +28,8 @@ function PhoneFrame({
           srcSet={`${resolveAssetUrl(`${src}-256.webp`)} 256w, ${resolveAssetUrl(`${src}-384.webp`)} 384w`}
           sizes="(min-width: 640px) 144px, 128px"
           alt={alt}
+          width={256}
+          height={570}
           className="h-full w-full object-contain object-top"
           loading="eager"
         />

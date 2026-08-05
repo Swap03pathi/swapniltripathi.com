@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 export function RrisSectionShell({
@@ -37,7 +37,7 @@ export function RrisGlassPanel({
   glow?: 'subtle' | 'violet';
 }) {
   return (
-    <motion.div
+    <m.div
       whileHover={{ y: -1, transition: { duration: 0.2 } }}
       className={`relative overflow-hidden rounded-xl border bg-white/[0.02] backdrop-blur-sm ${
         glow === 'violet'
@@ -47,6 +47,6 @@ export function RrisGlassPanel({
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-violet-500/[0.03] via-transparent to-accent/[0.02] opacity-80" />
       <div className="relative">{children}</div>
-    </motion.div>
+    </m.div>
   );
 }

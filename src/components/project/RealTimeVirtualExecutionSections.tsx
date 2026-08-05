@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { rteArchitecturePath } from '../../constants/realTimeVirtualExecution';
 import {
   rteChallenges,
@@ -10,7 +10,7 @@ import { RteIcon, type RteIconName } from '../architecture/rte/RteIcons';
 
 function PreviewCard({ label, icon }: { label: string; icon: RteIconName }) {
   return (
-    <motion.div
+    <m.div
       whileHover={{ y: -3, transition: { duration: 0.2 } }}
       className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-br from-white/[0.05] to-transparent p-4 text-left shadow-[0_0_0_1px_rgba(0,212,255,0.04)] transition-shadow hover:border-accent/25 hover:shadow-[0_0_28px_-10px_rgba(0,212,255,0.18)]"
     >
@@ -23,7 +23,7 @@ function PreviewCard({ label, icon }: { label: string; icon: RteIconName }) {
           {label}
         </span>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -75,7 +75,7 @@ export default function RealTimeVirtualExecutionSections() {
             </div>
           </div>
           <div className="mt-5 flex justify-center sm:justify-start">
-            <motion.button
+            <m.button
               type="button"
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
@@ -83,7 +83,7 @@ export default function RealTimeVirtualExecutionSections() {
               className="inline-flex items-center justify-center rounded-xl border border-accent/35 bg-accent/[0.1] px-5 py-2.5 text-xs font-semibold tracking-wide text-accent transition-colors hover:border-accent/50 hover:bg-accent/[0.14]"
             >
               Open architecture
-            </motion.button>
+            </m.button>
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function RealTimeVirtualExecutionSections() {
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {rteChallenges.map((ch, i) => (
-            <motion.div
+            <m.div
               key={ch.title}
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ export default function RealTimeVirtualExecutionSections() {
                   {ch.title}
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </section>

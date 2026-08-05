@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { RrisGlassPanel } from './RrisPrimitives';
 
 export function AiExtractionCard({
@@ -18,7 +18,7 @@ export function AiExtractionCard({
   compact?: boolean;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
@@ -56,6 +56,6 @@ export function AiExtractionCard({
           ))}
         </ul>
       </RrisGlassPanel>
-    </motion.div>
+    </m.div>
   );
 }

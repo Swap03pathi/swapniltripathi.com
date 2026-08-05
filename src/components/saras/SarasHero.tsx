@@ -27,6 +27,8 @@ export default function SarasHero() {
             <img
               src={resolveAssetUrl('/logos/saras.png')}
               alt="Saras"
+              width={96}
+              height={96}
               className="h-9 w-9 rounded-md object-contain"
             />
             <span className="text-sm font-semibold tracking-wide text-white/90">saras</span>

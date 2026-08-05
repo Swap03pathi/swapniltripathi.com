@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { APPLE_SECTION_IDS } from '../../constants/appleExperience';
 import { appleCoreSystems } from '../../data/appleExperienceCopy';
 import { appleSystemIcons } from './AppleIconMap';
@@ -13,7 +13,7 @@ export default function AppleCoreSystems() {
         {appleCoreSystems.map((system, i) => {
           const Icon = appleSystemIcons[system.icon];
           return (
-            <motion.div
+            <m.div
               key={system.id}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +80,7 @@ export default function AppleCoreSystems() {
                   ) : null}
                 </div>
               </AppleCard>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

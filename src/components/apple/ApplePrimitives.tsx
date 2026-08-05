@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 /** Subtle grid — calmer than Saras backdrop. */
 export function AppleBackdrop() {
   return (
-    <motion.div
+    <m.div
       className="pointer-events-none fixed inset-0 -z-[5] opacity-30"
       aria-hidden
       style={{
@@ -72,7 +72,7 @@ export function AppleSection({
             ) : null}
           </>
         ) : null}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-40px' }}
@@ -80,7 +80,7 @@ export function AppleSection({
           className={hasHeader && !centered ? 'mt-10 md:mt-12' : ''}
         >
           {children}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );
@@ -105,7 +105,7 @@ export function AppleCard({
           : 'border-white/[0.07]'
       } ${hover ? 'hover:border-white/[0.1] hover:bg-white/[0.03]' : ''} ${className}`}
     >
-      <motion.div
+      <m.div
         className={`pointer-events-none absolute inset-0 bg-gradient-to-br via-transparent ${
           highlight ? 'from-accent/[0.03] to-transparent' : 'from-accent/[0.015] to-transparent'
         }`}

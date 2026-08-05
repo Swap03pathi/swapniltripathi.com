@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 export function TestbookBackdrop() {
   return (
-    <motion.div
+    <m.div
       className="pointer-events-none fixed inset-0 -z-[5] opacity-25"
       aria-hidden
       style={{
@@ -32,7 +32,7 @@ export function TestbookSection({
         {title ? (
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/60">{title}</h2>
         ) : null}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-40px' }}
@@ -40,7 +40,7 @@ export function TestbookSection({
           className={title ? 'mt-8 md:mt-10' : ''}
         >
           {children}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

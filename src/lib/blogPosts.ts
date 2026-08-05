@@ -27,6 +27,10 @@ export type BlogPost = {
 //
 //   Post body in markdown (raw HTML like <details>/<figure> is supported)…
 //
+// Fenced code blocks: only registered grammars highlight (currently bash/sh and
+// js). A new fence language needs its grammar registered in BlogPostPage.tsx —
+// see the rehypeHighlightLite comment there.
+//
 // query:'?raw' inlines the files at build time — no fetch, no backend.
 const files = import.meta.glob('../content/blogs/*.{md,mdx}', {
   query: '?raw',

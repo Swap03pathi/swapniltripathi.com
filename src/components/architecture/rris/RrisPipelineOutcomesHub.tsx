@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Check, Server } from 'lucide-react';
 import { rrisPipelineOutcomes, rrisPreviewSources } from '../../../data/rrisArchitectureCopy';
 import { RrisIcon } from './RrisIcons';
@@ -12,7 +12,7 @@ export function RrisPipelineOutcomesHub() {
     <div className="flex flex-col gap-8">
       <ul className="space-y-2">
         {rrisPipelineOutcomes.map((t, i) => (
-          <motion.li
+          <m.li
             key={t}
             initial={{ opacity: 0, x: -8 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -24,7 +24,7 @@ export function RrisPipelineOutcomesHub() {
               <Check className="h-2.5 w-2.5 text-emerald-300" strokeWidth={3} />
             </span>
             <span className="text-[12px] leading-snug text-slate-300">{t}</span>
-          </motion.li>
+          </m.li>
         ))}
       </ul>
 
@@ -32,7 +32,7 @@ export function RrisPipelineOutcomesHub() {
         <div className="pointer-events-none absolute inset-6 rounded-full border border-sky-500/15" />
         <div className="pointer-events-none absolute inset-3 rounded-full border border-dashed border-white/[0.07]" />
 
-        <motion.div
+        <m.div
           className="absolute inset-0"
           animate={{ rotate: 360 }}
           transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
@@ -47,19 +47,19 @@ export function RrisPipelineOutcomesHub() {
                   transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-${r}px)`,
                 }}
               >
-                <motion.span
+                <m.span
                   className="flex h-full w-full items-center justify-center rounded-lg border border-white/10 bg-[#070b14]/95 text-violet-200/90 shadow-[0_0_16px_-6px_rgba(56,189,248,0.35)]"
                   animate={{ rotate: -360 }}
                   transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
                 >
                   <RrisIcon name={s.icon as RrisIconName} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                </motion.span>
+                </m.span>
               </div>
             );
           })}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="relative z-[1] flex flex-col items-center gap-1.5 rounded-2xl border border-sky-400/25 bg-sky-500/[0.08] px-5 py-4 shadow-[0_0_36px_-10px_rgba(56,189,248,0.45)]"
           animate={{
             boxShadow: [
@@ -76,7 +76,7 @@ export function RrisPipelineOutcomesHub() {
             <br />
             core
           </span>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

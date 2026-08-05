@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Database } from 'lucide-react';
 import { mmieQueryDimensions } from '../../../data/mmieArchitectureCopy';
 import { QueryDimensionNode } from './QueryDimensionNode';
@@ -27,13 +27,13 @@ export function QueryExplosionGraph() {
 
         <div className="col-span-12 mt-8 flex flex-col items-center gap-3">
           <div className="relative flex h-7 w-px overflow-visible bg-gradient-to-b from-cyan-500/15 to-violet-500/15">
-            <motion.span
+            <m.span
               className="absolute left-1/2 top-0 h-1 w-1 -translate-x-1/2 rounded-full bg-cyan-400/70"
               animate={{ y: [0, 22, 0], opacity: [0.35, 0.85, 0.35] }}
               transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
             />
           </div>
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 6 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -44,15 +44,15 @@ export function QueryExplosionGraph() {
                 Millions of possible query paths
               </p>
             </MmieGlassPanel>
-          </motion.div>
+          </m.div>
           <div className="relative flex h-6 w-px bg-gradient-to-b from-violet-500/15 to-cyan-500/15">
-            <motion.span
+            <m.span
               className="absolute bottom-0 left-1/2 h-0.5 w-0.5 -translate-x-1/2 rounded-full bg-violet-400/60"
               animate={{ opacity: [0.25, 0.7, 0.25] }}
               transition={{ duration: 2.4, repeat: Infinity }}
             />
           </div>
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 6 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -62,7 +62,7 @@ export function QueryExplosionGraph() {
               <Database className="h-5 w-5 shrink-0 text-cyan-200/90" strokeWidth={1.25} />
               <span className="text-sm font-semibold text-cyan-50 md:text-base">Redis query orchestrator</span>
             </MmieGlassPanel>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </div>

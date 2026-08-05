@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { rrisEngineeringPriorities, rrisTradeoffQuote } from '../../../data/rrisArchitectureCopy';
 
 const accentRing: Record<
@@ -31,7 +31,7 @@ export function RrisEngineeringPriorities({ variant = 'standalone' }: { variant?
         const py = p.title === 'Accuracy' ? 'py-5' : 'py-4';
         const num = i + 1;
         return (
-          <motion.div
+          <m.div
             key={p.title}
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ export function RrisEngineeringPriorities({ variant = 'standalone' }: { variant?
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </m.div>
         );
       })}
       <p

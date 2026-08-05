@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { OYO_SECTION_IDS } from '../../constants/oyoExperience';
 import { oyoClosing } from '../../data/oyoExperienceCopy';
 import { OyoCard } from './OyoPrimitives';
@@ -7,7 +7,7 @@ export default function OyoClosing() {
   return (
     <section id={OYO_SECTION_IDS.closing} className="scroll-mt-28 py-12 md:py-14 lg:py-16">
       <div className="mx-auto max-w-[1040px] px-5 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -21,7 +21,7 @@ export default function OyoClosing() {
               {oyoClosing}
             </p>
           </OyoCard>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

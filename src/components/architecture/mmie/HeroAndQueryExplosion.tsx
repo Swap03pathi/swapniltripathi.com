@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Activity, Database, Target, Zap } from 'lucide-react';
 import { mmieHero, mmieHeroKpis } from '../../../data/mmieArchitectureCopy';
 import { MmieGlassPanel } from './MmiePrimitives';
@@ -34,7 +34,7 @@ function HeroBackdrop() {
           backgroundSize: '44px 44px',
         }}
       />
-      <motion.div
+      <m.div
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
         aria-hidden
         animate={{ opacity: [0.08, 0.14, 0.08] }}

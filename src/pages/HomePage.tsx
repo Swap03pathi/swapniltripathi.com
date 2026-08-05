@@ -24,7 +24,7 @@ export default function HomePage() {
       {/* Thoughts Preview — commented out for now; restore when ready */}
       {/*
       <section className="py-24 px-6">
-        <motion.div className="mx-auto max-w-2xl">
+        <m.div className="mx-auto max-w-2xl">
           <div className="mb-8 flex items-center gap-3">
             <h2 className="text-xs font-medium uppercase tracking-widest text-accent/60">
               Thoughts

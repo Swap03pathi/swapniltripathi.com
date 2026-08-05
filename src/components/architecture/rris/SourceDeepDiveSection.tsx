@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { RrisSectionShell } from './RrisPrimitives';
 import { RrisIcon } from './RrisIcons';
 import type { RrisIconName } from './RrisIcons';
@@ -83,7 +83,7 @@ export function SourceDeepDiveSection() {
     <RrisSectionShell eyebrow="Ingestion" title="Source deep dive">
       <div className="-mx-1 flex gap-3 overflow-x-auto pb-2 pt-1 sm:mx-0 sm:flex-wrap sm:overflow-visible">
         {sources.map((s, i) => (
-          <motion.div
+          <m.div
             key={s.id}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export function SourceDeepDiveSection() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </RrisSectionShell>

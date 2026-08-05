@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { mmieTechStack } from '../../../data/mmieArchitectureCopy';
 import { MmieSectionShell } from './MmiePrimitives';
 
@@ -7,7 +7,7 @@ export function MmieTechStackBar() {
     <MmieSectionShell number="10" eyebrow="Stack" title="Technology stack" compact>
       <div className="flex flex-wrap justify-center gap-2 md:gap-2.5">
         {mmieTechStack.map((t, i) => (
-          <motion.a
+          <m.a
             key={t.name}
             href={t.homepageUrl}
             target="_blank"
@@ -21,7 +21,7 @@ export function MmieTechStackBar() {
           >
             <img loading="lazy" decoding="async" src={t.logoUrl} alt="" className="h-4 w-4 object-contain opacity-90 md:h-5 md:w-5" />
             <span className="font-medium">{t.name}</span>
-          </motion.a>
+          </m.a>
         ))}
       </div>
     </MmieSectionShell>

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { TESTBOOK_SECTION_IDS } from '../../constants/testbookExperience';
 import { testbookClosing } from '../../data/testbookExperienceCopy';
 import { TestbookCard } from './TestbookPrimitives';
@@ -7,7 +7,7 @@ export default function TestbookClosing() {
   return (
     <section id={TESTBOOK_SECTION_IDS.closing} className="scroll-mt-28 py-14 md:py-16 lg:py-20">
       <div className="mx-auto max-w-[1200px] px-5 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -21,7 +21,7 @@ export default function TestbookClosing() {
               {testbookClosing}
             </p>
           </TestbookCard>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

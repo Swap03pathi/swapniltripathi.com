@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { OYO_SECTION_IDS } from '../../constants/oyoExperience';
 import { oyoExplorationCards } from '../../data/oyoExperienceCopy';
 import { oyoCardIcons, oyoNoteIcons, oyoSectionIcons } from './OyoIconMap';
@@ -20,7 +20,7 @@ export default function OyoExplorationWork() {
           const NoteIcon = oyoNoteIcons[card.note.icon];
 
           return (
-            <motion.div
+            <m.div
               key={card.id}
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function OyoExplorationWork() {
                 </ul>
                 <OyoNoteBox icon={NoteIcon}>{card.note.text}</OyoNoteBox>
               </OyoCard>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { TESTBOOK_SECTION_IDS } from '../../constants/testbookExperience';
 import { testbookWorkAreas } from '../../data/testbookExperienceCopy';
 import { testbookWorkIcons } from './TestbookIconMap';
@@ -19,7 +19,7 @@ export default function TestbookWorkAreas() {
             const pillTone = area.accent;
 
             return (
-            <motion.div
+            <m.div
               id={area.id}
               key={area.id}
               initial={{ opacity: 0, y: 10 }}
@@ -67,7 +67,7 @@ export default function TestbookWorkAreas() {
                     </div>
                   </div>
                 </TestbookCard>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

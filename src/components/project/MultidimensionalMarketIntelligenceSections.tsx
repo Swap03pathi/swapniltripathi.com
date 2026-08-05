@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { mmieArchitecturePath } from '../../constants/multidimensionalMarketIntelligence';
 import {
   mmieChallenges,
@@ -14,7 +14,7 @@ function RedisPreviewStrip() {
   return (
     <div className="space-y-2">
       {mmieRedisPreviewCards.map((c, i) => (
-        <motion.div
+        <m.div
           key={c.id}
           initial={{ opacity: 0, x: -6 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -24,7 +24,7 @@ function RedisPreviewStrip() {
           <MmieGlassPanel className="px-3 py-2.5" glow="subtle">
             <span className="text-[11px] font-medium text-white/75">{c.label}</span>
           </MmieGlassPanel>
-        </motion.div>
+        </m.div>
       ))}
     </div>
   );
@@ -76,7 +76,7 @@ export default function MultidimensionalMarketIntelligenceSections() {
           </h2>
           <RedisPreviewStrip />
           <div className="mt-5 flex justify-center sm:justify-start">
-            <motion.button
+            <m.button
               type="button"
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
@@ -84,7 +84,7 @@ export default function MultidimensionalMarketIntelligenceSections() {
               className="inline-flex items-center justify-center rounded-xl border border-cyan-500/35 bg-cyan-500/[0.1] px-5 py-2.5 text-xs font-semibold tracking-wide text-cyan-200 transition-colors hover:border-cyan-400/50 hover:bg-cyan-500/[0.14]"
             >
               Open architecture
-            </motion.button>
+            </m.button>
           </div>
         </div>
 
@@ -94,7 +94,7 @@ export default function MultidimensionalMarketIntelligenceSections() {
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {mmieChallenges.map((title, i) => (
-              <motion.div
+              <m.div
                 key={title}
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -103,14 +103,14 @@ export default function MultidimensionalMarketIntelligenceSections() {
                 className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 backdrop-blur-sm transition-shadow hover:shadow-[0_0_28px_-12px_rgba(34,211,238,0.12)]"
               >
                 <p className="text-xs leading-relaxed text-white/55">{title}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
       </div>
 
       <div className="flex justify-center border-t border-white/[0.06] pt-10">
-        <motion.button
+        <m.button
           type="button"
           whileHover={{ y: -1 }}
           whileTap={{ scale: 0.98 }}
@@ -118,7 +118,7 @@ export default function MultidimensionalMarketIntelligenceSections() {
           className="inline-flex items-center justify-center rounded-xl border border-cyan-500/40 bg-cyan-500/[0.12] px-8 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-cyan-100 transition-colors hover:border-cyan-400/55 hover:bg-cyan-500/[0.18]"
         >
           Architecture deep-dive
-        </motion.button>
+        </m.button>
       </div>
     </div>
   );

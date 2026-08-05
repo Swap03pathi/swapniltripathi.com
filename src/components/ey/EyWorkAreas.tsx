@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { EY_SECTION_IDS } from '../../constants/eyExperience';
 import { eyWorkAreas } from '../../data/eyExperienceCopy';
 import { eyWorkIcons } from './EyIconMap';
@@ -11,7 +11,7 @@ export default function EyWorkAreas() {
         {eyWorkAreas.map((area, i) => {
           const Icon = eyWorkIcons[area.icon];
           return (
-            <motion.div
+            <m.div
               key={area.id}
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ export default function EyWorkAreas() {
                   </div>
                 </div>
               </EyCard>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { RrisGlassPanel } from './RrisPrimitives';
 import {
   rrisMessageJson,
@@ -9,7 +9,7 @@ import {
 export function MessageTransformFlow() {
   return (
     <div className="mx-auto w-full max-w-6xl grid gap-4 lg:grid-cols-3 lg:gap-0">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -23,9 +23,9 @@ export function MessageTransformFlow() {
             {rrisMessageRaw}
           </pre>
         </RrisGlassPanel>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -40,9 +40,9 @@ export function MessageTransformFlow() {
             {rrisMessageJson}
           </pre>
         </RrisGlassPanel>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -63,7 +63,7 @@ export function MessageTransformFlow() {
             ))}
           </ul>
         </RrisGlassPanel>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

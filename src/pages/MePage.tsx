@@ -18,7 +18,8 @@ const SHEETS_WEBAPP_URL: string =
 
 type SendStatus = 'idle' | 'sending' | 'sent' | 'error';
 
-export default function MePage() {
+// Form state lives here so keystrokes re-render only the form, not the whole page.
+function FeedbackForm() {
   const [feedback, setFeedback] = useState('');
   const [senderEmail, setSenderEmail] = useState('');
   const [status, setStatus] = useState<SendStatus>('idle');
@@ -45,6 +46,45 @@ export default function MePage() {
     }
   };
 
+  return (
+    <div className="rounded-lg border border-white/5 bg-white/[0.02] p-5">
+      <input
+        type="email"
+        value={senderEmail}
+        onChange={(e) => setSenderEmail(e.target.value)}
+        placeholder="Your email (optional — only if you'd like a reply)"
+        className="mb-3 w-full rounded-md border border-white/10 bg-dark/40 px-3 py-2.5 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-accent/40"
+      />
+      <textarea
+        value={feedback}
+        onChange={(e) => setFeedback(e.target.value)}
+        rows={4}
+        placeholder="What did you think?"
+        className="w-full resize-y rounded-md border border-white/10 bg-dark/40 px-3 py-2.5 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-accent/40"
+      />
+      <div className="mt-3 flex items-center justify-end gap-4">
+        {status === 'sent' ? (
+          <span className="text-xs text-accent/70">Sent — thank you!</span>
+        ) : null}
+        {status === 'error' ? (
+          <span className="text-xs text-white/40">
+            Couldn&apos;t send — please email me instead.
+          </span>
+        ) : null}
+        <button
+          type="button"
+          onClick={sendFeedback}
+          disabled={!feedback.trim() || status === 'sending'}
+          className="rounded-md border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-all hover:border-accent/40 hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {status === 'sending' ? 'Sending…' : 'Send feedback'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function MePage() {
   return (
     <div className="relative z-10 pt-24 pb-16 px-6">
       <Seo
@@ -259,40 +299,7 @@ export default function MePage() {
             Tried something here? Tell me what you think — good, bad, or broken.
           </p>
           {SHEETS_WEBAPP_URL ? (
-          <div className="rounded-lg border border-white/5 bg-white/[0.02] p-5">
-            <input
-              type="email"
-              value={senderEmail}
-              onChange={(e) => setSenderEmail(e.target.value)}
-              placeholder="Your email (optional — only if you'd like a reply)"
-              className="mb-3 w-full rounded-md border border-white/10 bg-dark/40 px-3 py-2.5 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-accent/40"
-            />
-            <textarea
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
-              rows={4}
-              placeholder="What did you think?"
-              className="w-full resize-y rounded-md border border-white/10 bg-dark/40 px-3 py-2.5 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-accent/40"
-            />
-            <div className="mt-3 flex items-center justify-end gap-4">
-              {status === 'sent' ? (
-                <span className="text-xs text-accent/70">Sent — thank you!</span>
-              ) : null}
-              {status === 'error' ? (
-                <span className="text-xs text-white/40">
-                  Couldn&apos;t send — please email me instead.
-                </span>
-              ) : null}
-              <button
-                type="button"
-                onClick={sendFeedback}
-                disabled={!feedback.trim() || status === 'sending'}
-                className="rounded-md border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-all hover:border-accent/40 hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {status === 'sending' ? 'Sending…' : 'Send feedback'}
-              </button>
-            </div>
-          </div>
+          <FeedbackForm />
           ) : (
           <div className="rounded-lg border border-white/5 bg-white/[0.02] p-5 text-sm text-white/45">
             The feedback box is being wired up — meanwhile, tell me what you think via the{' '}

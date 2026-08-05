@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Coins, Shield, Zap, GitBranch } from 'lucide-react';
 import { AiExtractionCard } from './AiExtractionCard';
 import { MessageTransformFlow } from './MessageTransformFlow';
@@ -83,7 +83,7 @@ export function RrisMidBand() {
 
           <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-4">
             {tiles.map((T, i) => (
-              <motion.div
+              <m.div
                 key={T.label}
                 initial={{ opacity: 0, y: 6 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ export function RrisMidBand() {
                   {T.label}
                 </p>
                 <p className="mt-1 text-[9px] leading-snug text-white/38">{T.text}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>

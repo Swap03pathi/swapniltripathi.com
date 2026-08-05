@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { TESTBOOK_SECTION_IDS } from '../../constants/testbookExperience';
 import { testbookHero } from '../../data/testbookExperienceCopy';
 import { resolveAssetUrl } from '../../utils/assetUrl';
@@ -13,7 +13,7 @@ export default function TestbookHero() {
       className="scroll-mt-28 border-b border-white/[0.06] py-14 md:py-16 lg:py-20"
     >
       <div className="mx-auto max-w-[1200px] px-5 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
@@ -24,6 +24,8 @@ export default function TestbookHero() {
               <img
                 src={resolveAssetUrl('/logos/testbook.png')}
                 alt="Testbook"
+                width={96}
+                height={96}
                 className="h-9 w-9 rounded-md object-contain"
               />
               <span className="text-lg font-semibold text-white/90">Testbook</span>
@@ -50,7 +52,7 @@ export default function TestbookHero() {
             </div>
           </div>
           <TestbookHeroHubDiagram />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

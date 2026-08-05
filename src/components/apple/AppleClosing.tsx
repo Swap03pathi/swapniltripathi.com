@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { APPLE_SECTION_IDS } from '../../constants/appleExperience';
 import { appleClosing } from '../../data/appleExperienceCopy';
 import { AppleCard } from './ApplePrimitives';
@@ -7,7 +7,7 @@ export default function AppleClosing() {
   return (
     <section id={APPLE_SECTION_IDS.closing} className="scroll-mt-28 py-16 md:py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-5 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -21,7 +21,7 @@ export default function AppleClosing() {
               {appleClosing}
             </p>
           </AppleCard>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

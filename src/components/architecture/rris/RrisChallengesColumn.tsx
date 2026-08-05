@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Activity, Cpu, Layers, ShieldAlert, Timer, type LucideIcon } from 'lucide-react';
 import { rrisArchitectureChallengesDetailed } from '../../../data/rrisArchitectureCopy';
 
@@ -16,7 +16,7 @@ export function RrisChallengesColumn() {
       {rrisArchitectureChallengesDetailed.map((c, i) => {
         const Icon = iconMap[c.icon];
         return (
-          <motion.li
+          <m.li
             key={c.title}
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export function RrisChallengesColumn() {
               <Icon className="h-4 w-4" strokeWidth={1.35} />
             </span>
             <p className="text-[13px] leading-relaxed text-slate-400">{c.title}</p>
-          </motion.li>
+          </m.li>
         );
       })}
     </ul>

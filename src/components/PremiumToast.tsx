@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { useEffect } from 'react';
 
 export default function PremiumToast({
@@ -21,7 +21,7 @@ export default function PremiumToast({
   return (
     <AnimatePresence>
       {visible ? (
-        <motion.div
+        <m.div
           role="status"
           aria-live="polite"
           initial={{ opacity: 0, y: 10 }}
@@ -35,7 +35,7 @@ export default function PremiumToast({
               {message}
             </p>
           </div>
-        </motion.div>
+        </m.div>
       ) : null}
     </AnimatePresence>
   );

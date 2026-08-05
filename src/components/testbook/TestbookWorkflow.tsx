@@ -1,5 +1,5 @@
 import { ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { TESTBOOK_SECTION_IDS } from '../../constants/testbookExperience';
 import { testbookWorkflowSteps } from '../../data/testbookExperienceCopy';
 import { testbookWorkflowIcons } from './TestbookIconMap';
@@ -17,7 +17,7 @@ export default function TestbookWorkflow() {
           const Icon = testbookWorkflowIcons[step.icon];
           return (
             <div key={step.id} className="flex min-w-[168px] flex-1 items-stretch md:min-w-0">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -29,7 +29,7 @@ export default function TestbookWorkflow() {
                 </span>
                 <h3 className="mt-3 text-sm font-semibold text-white/85">{step.title}</h3>
                 <p className="mt-2 text-xs leading-relaxed text-white/40">{step.description}</p>
-              </motion.div>
+              </m.div>
               {i < testbookWorkflowSteps.length - 1 ? (
                 <div className="hidden shrink-0 items-center px-1 text-accent/30 md:flex">
                   <ChevronRight className="h-4 w-4" strokeWidth={1.5} />

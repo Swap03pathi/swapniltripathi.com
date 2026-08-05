@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Frown, Sparkles } from 'lucide-react';
 import {
   mmieAdvisorCategories,
@@ -13,7 +13,7 @@ export function AdvisorIntelligenceSection() {
   return (
     <MmieSectionShell number="05" eyebrow="Scoring" title="Realtime advisor intelligence engine">
       <div className="grid gap-4 lg:grid-cols-2">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -35,9 +35,9 @@ export function AdvisorIntelligenceSection() {
               ))}
             </ul>
           </MmieGlassPanel>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -57,7 +57,7 @@ export function AdvisorIntelligenceSection() {
               ))}
             </ul>
           </MmieGlassPanel>
-        </motion.div>
+        </m.div>
       </div>
 
       <MmieGlassPanel className="mt-4 p-4 md:p-5" glow="subtle">

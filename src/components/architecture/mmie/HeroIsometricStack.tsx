@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const LAYERS = [
   { label: 'Live prices', from: 'from-emerald-400/35', to: 'to-emerald-950/30', border: 'border-emerald-500/20' },
@@ -17,7 +17,7 @@ export function HeroIsometricStack() {
         style={{ transformStyle: 'preserve-3d' }}
       >
         {LAYERS.map((layer, i) => (
-          <motion.div
+          <m.div
             key={layer.label}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export function HeroIsometricStack() {
             {i < LAYERS.length - 1 ? (
               <div className="pointer-events-none absolute -top-2.5 left-1/2 h-2.5 w-px -translate-x-1/2 bg-gradient-to-t from-white/10 to-transparent" />
             ) : null}
-          </motion.div>
+          </m.div>
         ))}
       </div>
       <div className="pointer-events-none absolute -inset-6 rounded-full bg-cyan-500/[0.03] blur-2xl" aria-hidden />

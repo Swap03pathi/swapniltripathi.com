@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { SARAS_SECTION_IDS } from '../../constants/sarasExperience';
 import { sarasCoreSystems } from '../../data/sarasExperienceCopy';
 import { saveSarasReturnSection } from '../../utils/sarasScrollRestore';
@@ -17,7 +17,7 @@ export default function SarasCoreSystems() {
     >
       <div className="space-y-8 md:space-y-10">
         {sarasCoreSystems.map((system, i) => (
-          <motion.div
+          <m.div
             key={system.href}
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function SarasCoreSystems() {
                 </p>
               </SarasCard>
             </Link>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </SarasSection>

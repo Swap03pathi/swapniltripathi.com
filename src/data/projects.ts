@@ -1,7 +1,10 @@
 import type { Project } from './types';
+import { projectSlugs } from './projectSlugs';
 
 // Detailed projects are separated from experience sections so you can
 // edit and reorder projects without touching page/component code.
+// NOTE: when adding/renaming a project, update projectSlugs.ts too — the
+// guard at the bottom of this file fails the build if the lists drift.
 export const projects: Project[] = [
   {
     slug: 'signal-ingestion-system',
@@ -278,3 +281,11 @@ description:
     ],
   }
 ];
+
+// Drift guard: routes.tsx prerenders /project/* purely from projectSlugs.ts (so the
+// entry chunk never pulls in this file). This runs at module scope during the SSG
+// build's Node evaluation and fails the build if the slug lists diverge.
+const declaredSlugs = new Set<string>(projectSlugs);
+if (projects.length !== declaredSlugs.size || projects.some((p) => !declaredSlugs.has(p.slug))) {
+  throw new Error('src/data/projectSlugs.ts is out of sync with src/data/projects.ts');
+}

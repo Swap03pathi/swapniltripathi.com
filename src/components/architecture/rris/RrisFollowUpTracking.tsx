@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Bell, Cog, RefreshCw } from 'lucide-react';
 import { rrisFollowUpDetection } from '../../../data/rrisArchitectureCopy';
 import { RrisGlassPanel } from './RrisPrimitives';
@@ -18,13 +18,13 @@ function OperationalConnector() {
   return (
     <div className="relative flex h-7 shrink-0 justify-center py-0.5" aria-hidden>
       <div className="relative h-full w-px overflow-visible bg-gradient-to-b from-cyan-400/25 via-violet-400/35 to-teal-400/20">
-        <motion.div
+        <m.div
           className="absolute inset-x-0 top-0 h-1/2 w-full bg-gradient-to-b from-cyan-300/50 to-transparent"
           animate={{ top: ['-50%', '100%'] }}
           transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }}
         />
       </div>
-      <motion.span
+      <m.span
         className="absolute top-1/2 h-1 w-1 -translate-y-1/2 rounded-full bg-cyan-300/80 shadow-[0_0_8px_2px_rgba(34,211,238,0.35)]"
         animate={{ y: [-10, 10, -10], opacity: [0.35, 1, 0.35] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
@@ -39,13 +39,13 @@ function ColumnSignalBridge({ orientation }: { orientation: 'vertical' | 'horizo
     return (
       <div className="relative flex h-8 w-full shrink-0 items-center lg:hidden" aria-hidden>
         <div className="relative h-px w-full overflow-hidden rounded-full bg-gradient-to-r from-transparent via-cyan-400/35 to-transparent">
-          <motion.div
+          <m.div
             className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent"
             animate={{ x: ['-30%', '130%'] }}
             transition={{ duration: 2.8, repeat: Infinity, ease: 'linear' }}
           />
         </div>
-        <motion.span
+        <m.span
           className="absolute left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-cyan-300/75"
           animate={{ x: [-48, 48, -48], opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
@@ -61,13 +61,13 @@ function ColumnSignalBridge({ orientation }: { orientation: 'vertical' | 'horizo
     >
       <div className="absolute inset-y-6 w-px bg-gradient-to-b from-transparent via-white/12 to-transparent" />
       <div className="relative h-full min-h-[120px] w-px overflow-visible bg-gradient-to-b from-cyan-400/20 via-violet-400/30 to-teal-400/20">
-        <motion.div
+        <m.div
           className="absolute inset-x-0 top-0 h-1/3 w-full bg-gradient-to-b from-cyan-400/45 to-transparent"
           animate={{ top: ['-20%', '100%'] }}
           transition={{ duration: 3.2, repeat: Infinity, ease: 'linear' }}
         />
       </div>
-      <motion.span
+      <m.span
         className="absolute h-1.5 w-1.5 rounded-full bg-cyan-300/85 shadow-[0_0_10px_2px_rgba(34,211,238,0.25)]"
         style={{ top: '18%' }}
         animate={{ top: ['18%', '82%', '18%'], opacity: [0.5, 1, 0.5] }}
@@ -82,13 +82,13 @@ const operationalSteps = [
   {
     label: 'Execution engine sync',
     icon: (
-      <motion.span
+      <m.span
         className="inline-flex text-teal-300/90"
         animate={{ rotate: 360 }}
         transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
       >
         <RefreshCw className="h-4 w-4" strokeWidth={1.35} />
-      </motion.span>
+      </m.span>
     ),
   },
   {
@@ -116,7 +116,7 @@ export function RrisFollowUpTracking() {
 
       <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-0">
         {/* LEFT — Follow-up Detection Engine */}
-        <motion.div
+        <m.div
           className="min-w-0 flex-1 lg:max-w-none"
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,13 +127,13 @@ export function RrisFollowUpTracking() {
             <div className="pointer-events-none absolute -inset-px rounded-xl bg-gradient-to-br from-cyan-500/10 via-transparent to-violet-500/10 opacity-70" />
             <div className="relative">
               <div className="flex items-start gap-3">
-                <motion.span
+                <m.span
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-400/30 bg-cyan-500/[0.1] text-cyan-200/90 shadow-[0_0_20px_-8px_rgba(34,211,238,0.35)]"
                   animate={{ opacity: [0.85, 1, 0.85] }}
                   transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
                 >
                   <Cog className="h-4 w-4" strokeWidth={1.35} />
-                </motion.span>
+                </m.span>
                 <div className="min-w-0">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/88">
                     Follow-up Detection Engine
@@ -148,7 +148,7 @@ export function RrisFollowUpTracking() {
                 {SIGNAL_GRID_ORDER.map((idx, i) => {
                   const t = rrisFollowUpDetection[idx];
                   return (
-                  <motion.div
+                  <m.div
                     key={t}
                     initial={{ opacity: 0, y: 4 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -161,19 +161,19 @@ export function RrisFollowUpTracking() {
                     className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-1.5 text-center text-[9px] font-medium leading-tight text-white/65 sm:text-[10px]"
                   >
                     {titleCaseSignal(t)}
-                  </motion.div>
+                  </m.div>
                   );
                 })}
               </div>
             </div>
           </RrisGlassPanel>
-        </motion.div>
+        </m.div>
 
         <ColumnSignalBridge orientation="horizontal" />
         <ColumnSignalBridge orientation="vertical" />
 
         {/* RIGHT — Operational Update Flow */}
-        <motion.div
+        <m.div
           className="min-w-0 flex-1 lg:max-w-none"
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -194,7 +194,7 @@ export function RrisFollowUpTracking() {
                 {operationalSteps.map((row, idx) => (
                   <div key={row.label}>
                     {idx > 0 ? <OperationalConnector /> : null}
-                    <motion.div
+                    <m.div
                       whileHover={{ y: -1 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -211,13 +211,13 @@ export function RrisFollowUpTracking() {
                           </p>
                         </div>
                       </RrisGlassPanel>
-                    </motion.div>
+                    </m.div>
                   </div>
                 ))}
               </div>
             </div>
           </RrisGlassPanel>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

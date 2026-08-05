@@ -26,9 +26,8 @@ export default function StarField() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
+    const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let reduceMotion = motionMedia.matches;
 
     let animationId = 0;
     let stars: Star[] = [];
@@ -77,23 +76,57 @@ export default function StarField() {
           }
         }
       }
+    };
 
-      animationId = requestAnimationFrame(draw);
+    const loop = (time: number) => {
+      draw(time);
+      animationId = requestAnimationFrame(loop);
+    };
+
+    // Under reduced motion the field is a single static frame — no rAF loop.
+    const start = () => {
+      cancelAnimationFrame(animationId);
+      if (reduceMotion) {
+        draw(performance.now());
+      } else {
+        animationId = requestAnimationFrame(loop);
+      }
     };
 
     const handleResize = () => {
       resize();
       initStars();
+      // Resizing the canvas clears it; repaint even when no loop is running.
+      start();
+    };
+
+    // rAF is already throttled in background tabs, but cancel outright so
+    // hidden tabs do zero canvas work.
+    const handleVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationId);
+      } else {
+        start();
+      }
+    };
+
+    const handleMotionChange = (event: MediaQueryListEvent) => {
+      reduceMotion = event.matches;
+      start();
     };
 
     resize();
     initStars();
-    animationId = requestAnimationFrame(draw);
+    start();
     window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', handleVisibility);
+    motionMedia.addEventListener('change', handleMotionChange);
 
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      motionMedia.removeEventListener('change', handleMotionChange);
     };
   }, []);
 
