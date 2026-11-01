@@ -1,5 +1,6 @@
 /** Dedicated experience pages vs generic detail template. */
 const DEDICATED_EXPERIENCE_PATHS: Record<string, string> = {
+  mpokket: '/experience/mpokket',
   saras: '/experience/saras',
   apple: '/experience/apple',
   testbook: '/experience/testbook',

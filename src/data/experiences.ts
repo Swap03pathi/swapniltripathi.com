@@ -4,10 +4,24 @@ import type { Experience } from './types';
 // Keep this file focused on company/role data only.
 export const experiences: Experience[] = [
   {
+    slug: 'mpokket',
+    title: 'mPokket',
+    role: 'Tech Lead, Data Platform',
+    period: 'Sept 2026 — Present',
+    shortDescription:
+      'Leading the data platform team at a consumer-lending fintech — Databricks lakehouse and AWS DMS replication feeding every analytics, data-science, and business team, plus compliance and audit data. Cut Databricks cost ~20% (about $187K annualised) and reclaimed 20 TB from S3 in month one.',
+    logoUrl: '/logos/mpokket.png',
+    projectSlugs: [
+      'mpokket-databricks-cost-optimization',
+      'mpokket-delta-storage-reclamation',
+      'mpokket-lakehouse-reporting-platform',
+    ],
+  },
+  {
     slug: 'saras',
     title: 'Saras',
     role: 'CTO, Co-Founder',
-    period: 'Sept 2024 — Present',
+    period: 'Sept 2024 — Aug 2026',
     shortDescription:
     'Built a signal intelligence platform that captures, parses, and virtually executes trading recommendations across multiple sources. 150K+ downloads, 200K+ daily messages received, <500ms execution latency, 20K concurrent users, 600+ APIs, 98% uptime.',
     logoUrl: '/logos/saras.png',

@@ -41,7 +41,7 @@ export default function Hero() {
             className="animate-fade-in-up mt-3 text-xs tracking-wide text-white/50"
             style={{ animationDelay: '0.5s' }}
           >
-            CTO @ Saras &bull; Apple &bull; IIT Bombay
+            Tech Lead, Data Platform @ mPokket &bull; ex-Founder &bull; ex-Apple &bull; IIT Bombay
           </p>
 
           <div

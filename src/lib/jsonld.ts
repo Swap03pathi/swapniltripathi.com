@@ -1,12 +1,16 @@
 // Structured data for the site owner. Approved fields only — no phone, no personal
-// email. jobTitle is deliberately neutral ("Systems Builder") until the /about page
-// lands and settles the current-role framing.
+// email. jobTitle/worksFor track the current role (mPokket, Sept 2026 →).
 export const PERSON = {
   '@type': 'Person',
   '@id': 'https://swapniltripathi.com/#person',
   name: 'Swapnil Tripathi',
   url: 'https://swapniltripathi.com/',
-  jobTitle: 'Systems Builder',
+  jobTitle: 'Tech Lead, Data Platform',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'mPokket',
+    url: 'https://www.mpokket.in/',
+  },
   alumniOf: {
     '@type': 'CollegeOrUniversity',
     name: 'Indian Institute of Technology Bombay',
@@ -15,6 +19,7 @@ export const PERSON = {
   knowsAbout: [
     'Real-time data systems',
     'Data engineering',
+    'Databricks',
     'Redis',
     'MongoDB',
     'AWS',

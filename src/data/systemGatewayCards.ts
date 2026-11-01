@@ -28,6 +28,13 @@ export const systemGatewayCards: SystemGatewayCard[] = [
     label: 'Saras Architecture',
   },
   {
+    title: 'Databricks Cost & Storage Optimisation',
+    description:
+      'Spend attribution from Databricks system tables, right-sizing, and Delta maintenance that cut Databricks cost ~20% and reclaimed 20 TB from S3.',
+    href: '/experience/mpokket#core-systems',
+    label: 'mPokket Experience',
+  },
+  {
     title: 'KPI Anomaly Detection',
     description:
       'ML-assisted anomaly detection workflows for operational KPI monitoring and automated stakeholder alerting.',

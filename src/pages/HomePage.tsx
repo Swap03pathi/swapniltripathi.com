@@ -12,7 +12,7 @@ export default function HomePage() {
     <div className="relative z-10">
       <Seo
         title="Swapnil Tripathi — Systems Builder"
-        description="Systems builder across data, infrastructure, and realtime platforms — Saras, Apple, IIT Bombay. Writing about the architecture behind real production systems."
+        description="Systems builder across data, infrastructure, and realtime platforms — mPokket, Saras, Apple, IIT Bombay. Writing about the architecture behind real production systems."
         path="/"
         jsonLd={PROFILE_PAGE}
       />

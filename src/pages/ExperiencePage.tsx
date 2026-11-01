@@ -8,7 +8,7 @@ export default function ExperiencePage() {
     <div className="relative z-10 pt-24 pb-16 px-6">
       <Seo
         title="Experience — Swapnil Tripathi"
-        description="Career timeline: Saras (CTO & co-founder), Apple, Testbook, OYO, EY — with the real systems built at each stop."
+        description="Career timeline: mPokket (Tech Lead, Data Platform), Saras (CTO & co-founder), Apple, Testbook, OYO, EY — with the real systems built at each stop."
         path="/experience"
       />
       <div className="max-w-2xl mx-auto">

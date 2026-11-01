@@ -30,6 +30,7 @@ export const routes: RouteRecord[] = [
     children: [
       { index: true, lazy: page(() => import('./pages/HomePage')) },
       { path: 'experience', lazy: page(() => import('./pages/ExperiencePage')) },
+      { path: 'experience/mpokket', lazy: page(() => import('./pages/MpokketExperiencePage')) },
       { path: 'experience/saras', lazy: page(() => import('./pages/SarasExperiencePage')) },
       { path: 'experience/apple', lazy: page(() => import('./pages/AppleExperiencePage')) },
       { path: 'experience/testbook', lazy: page(() => import('./pages/TestbookExperiencePage')) },

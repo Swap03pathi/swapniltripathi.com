@@ -4,6 +4,9 @@
 // projects.ts imports this list and throws at module scope on any mismatch,
 // so the SSG build fails loudly if the two files ever drift.
 export const projectSlugs = [
+  'mpokket-databricks-cost-optimization',
+  'mpokket-delta-storage-reclamation',
+  'mpokket-lakehouse-reporting-platform',
   'signal-ingestion-system',
   'signal-processing-pipeline',
   'realtime-recommendation-ingestion-system',
