@@ -6,6 +6,10 @@ const PREFIX = '/learning/practice';
 
 export async function onRequest({ request }) {
   const url = new URL(request.url);
+  // Bare /learning/practice would break the app's relative URLs: send it to the slash form.
+  if (url.pathname === PREFIX) {
+    return Response.redirect(`${url.origin}${PREFIX}/${url.search}`, 301);
+  }
   const target = new URL(url.pathname.slice(PREFIX.length) || '/', ORIGIN);
   target.search = url.search;
 
