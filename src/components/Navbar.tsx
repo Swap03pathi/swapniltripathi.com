@@ -20,12 +20,15 @@ export default function Navbar() {
   const navItems: {
     label: string;
     to?: string;
+    // full page load: for paths served outside the React app (e.g. the Stack Underflow quiz behind a Pages Function)
+    href?: string;
     action?: () => void;
     disabled?: boolean;
   }[] = [
     { label: 'Experience', to: '/experience' },
     { label: 'Timeline', action: scrollToTimeline },
     { label: 'Blog', to: '/blogs' },
+    { label: 'Stack Underflow', href: '/learning/practice/' },
     { label: 'Me', to: '/me' },
   ];
 
@@ -53,6 +56,15 @@ export default function Navbar() {
                 {item.label}
                 <span className="ml-1.5 text-[10px] font-medium text-accent/50">Soon</span>
               </span>
+            ) : item.href ? (
+              <a
+                key={item.label}
+                href={item.href}
+                className="group relative text-sm text-white/60 transition-colors hover:text-white"
+              >
+                {item.label}
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent/50 transition-all group-hover:w-full" />
+              </a>
             ) : item.action ? (
               <button
                 key={item.label}
@@ -107,6 +119,15 @@ export default function Navbar() {
               <div key={item.label} className="py-2 text-sm text-white/30">
                 {item.label} <span className="text-[10px] text-accent/50">Soon</span>
               </div>
+            ) : item.href ? (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="block py-2 text-sm text-white/60 hover:text-white"
+              >
+                {item.label}
+              </a>
             ) : item.action ? (
               <button
                 key={item.label}
